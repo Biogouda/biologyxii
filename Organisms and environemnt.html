@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organisms and Environment MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Organisms and Environment MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is a habitat?",
+                options: [
+                    "The role of an organism in its ecosystem",
+                    "The physical location where an organism lives",
+                    "The interactions between species",
+                    "The population size of a species"
+                ],
+                correct: 1,
+                answer: "A habitat is the physical location where an organism lives, providing resources for survival."
+            },
+            {
+                question: "What does the term 'niche' refer to?",
+                options: [
+                    "The physical environment of an organism",
+                    "The role and position of a species in its ecosystem",
+                    "The total population of a species",
+                    "The genetic variation in a population"
+                ],
+                correct: 1,
+                answer: "A niche describes the role and position of a species, including its interactions and resource use."
+            },
+            {
+                question: "How does a habitat differ from a niche?",
+                options: [
+                    "Habitat is the role, niche is the location",
+                    "Habitat is the location, niche is the role",
+                    "Both are the same",
+                    "Habitat is temporary, niche is permanent"
+                ],
+                correct: 1,
+                answer: "Habitat is the physical location, while niche is the ecological role of a species."
+            },
+            {
+                question: "Which of the following is an example of a habitat?",
+                options: [
+                    "A lion hunting prey",
+                    "A coral reef",
+                    "A bird’s mating behavior",
+                    "Photosynthesis in plants"
+                ],
+                correct: 1,
+                answer: "A coral reef is a habitat, providing a physical environment for marine organisms."
+            },
+            {
+                question: "What is an example of a niche?",
+                options: [
+                    "A desert",
+                    "A bee pollinating flowers",
+                    "A river",
+                    "A mountain"
+                ],
+                correct: 1,
+                answer: "A bee pollinating flowers describes its ecological role, which is its niche."
+            },
+            {
+                question: "What is an ecological adaptation?",
+                options: [
+                    "A genetic mutation",
+                    "A trait that enhances survival in a specific environment",
+                    "A random behavior",
+                    "A decrease in population size"
+                ],
+                correct: 1,
+                answer: "Ecological adaptations are traits that improve an organism’s survival in its environment."
+            },
+            {
+                question: "Which is an adaptation of desert plants?",
+                options: [
+                    "Broad leaves",
+                    "Thick waxy cuticles",
+                    "Shallow roots",
+                    "High water storage"
+                ],
+                correct: 1,
+                answer: "Thick waxy cuticles reduce water loss in desert plants."
+            },
+            {
+                question: "What adaptation do polar bears have for cold environments?",
+                options: [
+                    "Thin fur",
+                    "Thick blubber layer",
+                    "Small body size",
+                    "No hibernation"
+                ],
+                correct: 1,
+                answer: "A thick blubber layer insulates polar bears against cold environments."
+            },
+            {
+                question: "Which adaptation helps cacti survive in arid regions?",
+                options: [
+                    "Spines instead of leaves",
+                    "Large broad leaves",
+                    "Thin stems",
+                    "Shallow roots"
+                ],
+                correct: 0,
+                answer: "Spines reduce water loss and protect cacti in arid regions."
+            },
+            {
+                question: "What is a population in ecology?",
+                options: [
+                    "All species in an ecosystem",
+                    "A group of individuals of the same species in an area",
+                    "All organisms in a habitat",
+                    "A single organism"
+                ],
+                correct: 1,
+                answer: "A population is a group of individuals of the same species living in a specific area."
+            },
+            {
+                question: "What is mutualism?",
+                options: [
+                    "One species benefits, the other is harmed",
+                    "Both species benefit",
+                    "One species benefits, the other is unaffected",
+                    "Both species are harmed"
+                ],
+                correct: 1,
+                answer: "Mutualism is a population interaction where both species benefit."
+            },
+            {
+                question: "Which is an example of mutualism?",
+                options: [
+                    "A lion eating a zebra",
+                    "Bees pollinating flowers",
+                    "A tick on a dog",
+                    "A hawk catching a mouse"
+                ],
+                correct: 1,
+                answer: "Bees pollinating flowers is mutualism, benefiting both bees and plants."
+            },
+            {
+                question: "What is competition in ecology?",
+                options: [
+                    "Species sharing resources",
+                    "Species fighting for limited resources",
+                    "One species preying on another",
+                    "One species living on another"
+                ],
+                correct: 1,
+                answer: "Competition occurs when species vie for limited resources like food or space."
+            },
+            {
+                question: "Which is an example of interspecific competition?",
+                options: [
+                    "Two lions fighting for territory",
+                    "A lion and hyena competing for food",
+                    "A bee pollinating a flower",
+                    "A parasite in a host"
+                ],
+                correct: 1,
+                answer: "A lion and hyena competing for food is interspecific competition between species."
+            },
+            {
+                question: "What is predation?",
+                options: [
+                    "One species benefits, the other is harmed",
+                    "Both species benefit",
+                    "One species lives on another",
+                    "Both species compete"
+                ],
+                correct: 0,
+                answer: "Predation involves one species (predator) benefiting by harming another (prey)."
+            },
+            {
+                question: "Which is an example of predation?",
+                options: [
+                    "A clownfish living in an anemone",
+                    "A wolf eating a deer",
+                    "A lichen on a rock",
+                    "A bee pollinating a flower"
+                ],
+                correct: 1,
+                answer: "A wolf eating a deer is an example of predation."
+            },
+            {
+                question: "What is parasitism?",
+                options: [
+                    "Both species benefit",
+                    "One species benefits, the other is harmed",
+                    "Both species compete",
+                    "One species preys on another"
+                ],
+                correct: 1,
+                answer: "Parasitism involves one species benefiting while harming the host."
+            },
+            {
+                question: "Which is an example of parasitism?",
+                options: [
+                    "A tapeworm in a human intestine",
+                    "A bird eating seeds",
+                    "A flower pollinated by a butterfly",
+                    "A fish cleaning a shark"
+                ],
+                correct: 0,
+                answer: "A tapeworm in a human intestine is parasitism, harming the host."
+            },
+            {
+                question: "What is commensalism?",
+                options: [
+                    "One species benefits, the other is unaffected",
+                    "Both species benefit",
+                    "One species harms the other",
+                    "Both species compete"
+                ],
+                correct: 0,
+                answer: "Commensalism is when one species benefits and the other is unaffected."
+            },
+            {
+                question: "Which is an example of commensalism?",
+                options: [
+                    "A tick on a deer",
+                    "A remora fish on a shark",
+                    "A lion eating a gazelle",
+                    "Bees and flowers"
+                ],
+                correct: 1,
+                answer: "A remora fish on a shark is commensalism, benefiting the remora without affecting the shark."
+            },
+            {
+                question: "What is population growth rate?",
+                options: [
+                    "Birth rate minus death rate",
+                    "Total population size",
+                    "Number of species in an area",
+                    "Age distribution"
+                ],
+                correct: 0,
+                answer: "Population growth rate is the birth rate minus the death rate, adjusted for migration."
+            },
+            {
+                question: "What is the birth rate of a population?",
+                options: [
+                    "Number of deaths per unit time",
+                    "Number of births per unit time",
+                    "Total population size",
+                    "Average age of individuals"
+                ],
+                correct: 1,
+                answer: "Birth rate is the number of births per unit time in a population."
+            },
+            {
+                question: "What is the death rate of a population?",
+                options: [
+                    "Number of births per unit time",
+                    "Number of deaths per unit time",
+                    "Total population size",
+                    "Migration rate"
+                ],
+                correct: 1,
+                answer: "Death rate is the number of deaths per unit time in a population."
+            },
+            {
+                question: "What does age distribution indicate in a population?",
+                options: [
+                    "Total population size",
+                    "Proportion of individuals in different age groups",
+                    "Birth rate",
+                    "Death rate"
+                ],
+                correct: 1,
+                answer: "Age distribution shows the proportion of individuals in different age groups."
+            },
+            {
+                question: "What is an exponential growth curve?",
+                options: [
+                    "Slow, steady population increase",
+                    "Rapid population increase without limits",
+                    "Population decline",
+                    "Stable population size"
+                ],
+                correct: 1,
+                answer: "Exponential growth is a rapid population increase when resources are unlimited."
+            },
+            {
+                question: "What is a logistic growth curve?",
+                options: [
+                    "Unlimited population growth",
+                    "Growth limited by carrying capacity",
+                    "Population decline",
+                    "No growth"
+                ],
+                correct: 1,
+                answer: "Logistic growth is limited by the carrying capacity of the environment."
+            },
+            {
+                question: "What is carrying capacity?",
+                options: [
+                    "Maximum population size an environment can support",
+                    "Total number of species",
+                    "Birth rate of a population",
+                    "Age distribution"
+                ],
+                correct: 0,
+                answer: "Carrying capacity is the maximum population size an environment can sustain."
+            },
+            {
+                question: "Which factor influences population growth?",
+                options: [
+                    "Availability of resources",
+                    "Color of organisms",
+                    "Shape of habitat",
+                    "Size of ecosystem"
+                ],
+                correct: 0,
+                answer: "Availability of resources like food and space influences population growth."
+            },
+            {
+                question: "What is an adaptation of aquatic animals?",
+                options: [
+                    "Thick fur",
+                    "Streamlined body",
+                    "Broad leaves",
+                    "Spiny skin"
+                ],
+                correct: 1,
+                answer: "A streamlined body reduces water resistance in aquatic animals."
+            },
+            {
+                question: "Which is an example of intraspecific competition?",
+                options: [
+                    "Two deer competing for food",
+                    "A lion and tiger competing",
+                    "A bird eating a worm",
+                    "A parasite in a host"
+                ],
+                correct: 0,
+                answer: "Two deer competing for food is intraspecific competition within a species."
+            },
+            {
+                question: "What is a characteristic of a stable age distribution?",
+                options: [
+                    "High birth and death rates",
+                    "Equal proportion in all age groups",
+                    "Only young individuals",
+                    "Only old individuals"
+                ],
+                correct: 1,
+                answer: "A stable age distribution has a balanced proportion of individuals across age groups."
+            },
+            {
+                question: "Which interaction benefits one species and harms another?",
+                options: [
+                    "Mutualism",
+                    "Commensalism",
+                    "Parasitism",
+                    "Competition"
+                ],
+                correct: 2,
+                answer: "Parasitism benefits one species while harming the other."
+            },
+            {
+                question: "What is an example of a predator-prey interaction?",
+                options: [
+                    "A hawk eating a snake",
+                    "A bee pollinating a flower",
+                    "A lichen on a tree",
+                    "A fish cleaning a turtle"
+                ],
+                correct: 0,
+                answer: "A hawk eating a snake is a predator-prey interaction."
+            },
+            {
+                question: "What is a density-dependent factor affecting population growth?",
+                options: [
+                    "Temperature",
+                    "Competition for food",
+                    "Earthquakes",
+                    "Floods"
+                ],
+                correct: 1,
+                answer: "Competition for food is a density-dependent factor affecting population growth."
+            },
+            {
+                question: "What is a density-independent factor affecting population growth?",
+                options: [
+                    "Predation",
+                    "Disease",
+                    "Natural disasters",
+                    "Competition"
+                ],
+                correct: 2,
+                answer: "Natural disasters like floods affect population growth regardless of density."
+            },
+            {
+                question: "Which adaptation helps birds in flight?",
+                options: [
+                    "Heavy bones",
+                    "Hollow bones",
+                    "Thick fur",
+                    "Large tails"
+                ],
+                correct: 1,
+                answer: "Hollow bones reduce weight, aiding birds in flight."
+            },
+            {
+                question: "What is the role of camouflage in ecological adaptations?",
+                options: [
+                    "Increases visibility",
+                    "Hides organisms from predators",
+                    "Enhances reproduction",
+                    "Reduces competition"
+                ],
+                correct: 1,
+                answer: "Camouflage hides organisms from predators or prey."
+            },
+            {
+                question: "Which is an example of mutualism in marine ecosystems?",
+                options: [
+                    "A shark eating a fish",
+                    "A clownfish living in an anemone",
+                    "A parasite in a fish",
+                    "A crab competing with a shrimp"
+                ],
+                correct: 1,
+                answer: "A clownfish living in an anemone is mutualism, benefiting both."
+            },
+            {
+                question: "What is the shape of an exponential growth curve?",
+                options: [
+                    "S-shaped",
+                    "J-shaped",
+                    "Linear",
+                    "U-shaped"
+                ],
+                correct: 1,
+                answer: "An exponential growth curve is J-shaped due to rapid population increase."
+            },
+            {
+                question: "What is the shape of a logistic growth curve?",
+                options: [
+                    "J-shaped",
+                    "S-shaped",
+                    "Linear",
+                    "U-shaped"
+                ],
+                correct: 1,
+                answer: "A logistic growth curve is S-shaped, leveling off at carrying capacity."
+            },
+            {
+                question: "Which factor increases birth rate in a population?",
+                options: [
+                    "Limited food",
+                    "Abundant resources",
+                    "High predation",
+                    "Disease outbreaks"
+                ],
+                correct: 1,
+                answer: "Abundant resources increase birth rate by supporting reproduction."
+            },
+            {
+                question: "Which factor increases death rate in a population?",
+                options: [
+                    "Plenty of food",
+                    "Predation",
+                    "Clean water",
+                    "Safe habitat"
+                ],
+                correct: 1,
+                answer: "Predation increases death rate by reducing population size."
+            },
+            {
+                question: "What does a pyramid-shaped age distribution indicate?",
+                options: [
+                    "Stable population",
+                    "Growing population",
+                    "Declining population",
+                    "No reproduction"
+                ],
+                correct: 1,
+                answer: "A pyramid-shaped age distribution indicates a growing population with high birth rates."
+            },
+            {
+                question: "What is an example of a terrestrial habitat?",
+                options: [
+                    "A coral reef",
+                    "A forest",
+                    "A lake",
+                    "An ocean"
+                ],
+                correct: 1,
+                answer: "A forest is a terrestrial habitat for land-dwelling organisms."
+            },
+            {
+                question: "Which adaptation helps fish in aquatic environments?",
+                options: [
+                    "Gills for respiration",
+                    "Thick fur",
+                    "Large wings",
+                    "Spiny leaves"
+                ],
+                correct: 0,
+                answer: "Gills allow fish to extract oxygen from water."
+            },
+            {
+                question: "Which interaction involves two species harming each other?",
+                options: [
+                    "Mutualism",
+                    "Competition",
+                    "Predation",
+                    "Commensalism"
+                ],
+                correct: 1,
+                answer: "Competition harms both species as they vie for limited resources."
+            },
+            {
+                question: "What is a characteristic of a declining population?",
+                options: [
+                    "High birth rate",
+                    "Low death rate",
+                    "High death rate",
+                    "Stable age distribution"
+                ],
+                correct: 2,
+                answer: "A high death rate contributes to a declining population."
+            },
+            {
+                question: "Which is an example of a parasitic interaction?",
+                options: [
+                    "A mosquito on a human",
+                    "A bird eating a fish",
+                    "A bee pollinating a flower",
+                    "A lichen on a rock"
+                ],
+                correct: 0,
+                answer: "A mosquito on a human is a parasitic interaction, harming the host."
+            },
+            {
+                question: "What is the significance of population attributes?",
+                options: [
+                    "Predict species extinction",
+                    "Understand population dynamics",
+                    "Increase competition",
+                    "Reduce biodiversity"
+                ],
+                correct: 1,
+                answer: "Population attributes help understand dynamics like growth and stability."
+            },
+            {
+                question: "Which adaptation helps tundra plants survive?",
+                options: [
+                    "Large leaves",
+                    "Low growth near ground",
+                    "Deep roots",
+                    "Thin stems"
+                ],
+                correct: 1,
+                answer: "Low growth near the ground protects tundra plants from cold winds."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

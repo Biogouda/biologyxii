@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heredity and Variation MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Heredity and Variation MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the term for the physical expression of a gene?",
+                options: [
+                    "Genotype",
+                    "Phenotype",
+                    "Allele",
+                    "Locus"
+                ],
+                correct: 1,
+                answer: "The phenotype is the physical expression of a gene, such as eye color."
+            },
+            {
+                question: "Who is considered the father of genetics?",
+                options: [
+                    "Charles Darwin",
+                    "Gregor Mendel",
+                    "Thomas Morgan",
+                    "Hugo de Vries"
+                ],
+                correct: 1,
+                answer: "Gregor Mendel established the principles of inheritance through pea plant experiments."
+            },
+            {
+                question: "What is the expected phenotypic ratio of a monohybrid cross in Mendelian inheritance?",
+                options: [
+                    "1:1",
+                    "3:1",
+                    "9:3:3:1",
+                    "1:2:1"
+                ],
+                correct: 1,
+                answer: "A monohybrid cross yields a 3:1 phenotypic ratio in the F2 generation."
+            },
+            {
+                question: "Which of the following is an example of incomplete dominance?",
+                options: [
+                    "ABO blood groups",
+                    "Flower color in snapdragons",
+                    "Sickle-cell anemia",
+                    "Pea plant height"
+                ],
+                correct: 1,
+                answer: "In snapdragons, red and white flowers produce pink offspring, showing incomplete dominance."
+            },
+            {
+                question: "What is co-dominance in genetics?",
+                options: [
+                    "One allele masks another",
+                    "Both alleles are fully expressed",
+                    "Alleles blend in the phenotype",
+                    "One allele is recessive"
+                ],
+                correct: 1,
+                answer: "In co-dominance, both alleles are fully expressed, as in AB blood type."
+            },
+            {
+                question: "Which blood group system is an example of multiple alleles?",
+                options: [
+                    "MN blood group",
+                    "ABO blood group",
+                    "Rh factor",
+                    "Sickle-cell trait"
+                ],
+                correct: 1,
+                answer: "The ABO blood group is controlled by three alleles: A, B, and O."
+            },
+            {
+                question: "What is pleiotropy?",
+                options: [
+                    "One gene affects multiple traits",
+                    "Multiple genes affect one trait",
+                    "Genes are linked on a chromosome",
+                    "Alleles segregate independently"
+                ],
+                correct: 0,
+                answer: "Pleiotropy occurs when one gene influences multiple, unrelated traits."
+            },
+            {
+                question: "What is polygenic inheritance?",
+                options: [
+                    "One gene controls one trait",
+                    "Multiple genes control one trait",
+                    "Genes do not segregate",
+                    "Alleles are co-dominant"
+                ],
+                correct: 1,
+                answer: "Polygenic inheritance involves multiple genes controlling a single trait, like skin color."
+            },
+            {
+                question: "What does the chromosome theory of inheritance state?",
+                options: [
+                    "Genes are located on chromosomes",
+                    "Chromosomes are made of RNA",
+                    "Genes segregate randomly",
+                    "Chromosomes do not carry traits"
+                ],
+                correct: 0,
+                answer: "The chromosome theory states that genes are located on chromosomes."
+            },
+            {
+                question: "What is the term for the exchange of genetic material between homologous chromosomes?",
+                options: [
+                    "Mutation",
+                    "Crossing over",
+                    "Segregation",
+                    "Linkage"
+                ],
+                correct: 1,
+                answer: "Crossing over is the exchange of genetic material during meiosis."
+            },
+            {
+                question: "In Mendel's experiments, what is the law of segregation?",
+                options: [
+                    "Genes assort independently",
+                    "Alleles separate during gamete formation",
+                    "Dominant traits mask recessive traits",
+                    "Traits blend in offspring"
+                ],
+                correct: 1,
+                answer: "The law of segregation states that alleles separate during gamete formation."
+            },
+            {
+                question: "What is the genotypic ratio of a monohybrid cross in the F2 generation?",
+                options: [
+                    "1:2:1",
+                    "3:1",
+                    "9:3:3:1",
+                    "1:1"
+                ],
+                correct: 0,
+                answer: "The genotypic ratio of a monohybrid cross is 1:2:1 (homozygous dominant: heterozygous: homozygous recessive)."
+            },
+            {
+                question: "Which of the following shows co-dominance?",
+                options: [
+                    "Flower color in peas",
+                    "AB blood group",
+                    "Height in humans",
+                    "Seed shape in peas"
+                ],
+                correct: 1,
+                answer: "The AB blood group shows co-dominance, with both A and B antigens expressed."
+            },
+            {
+                question: "What is the phenotypic ratio of a dihybrid cross in Mendelian inheritance?",
+                options: [
+                    "3:1",
+                    "1:2:1",
+                    "9:3:3:1",
+                    "1:1:1:1"
+                ],
+                correct: 2,
+                answer: "A dihybrid cross yields a 9:3:3:1 phenotypic ratio in the F2 generation."
+            },
+            {
+                question: "Which trait in Mendel's pea plants followed complete dominance?",
+                options: [
+                    "Flower color",
+                    "Pod color",
+                    "Seed color",
+                    "All of the above"
+                ],
+                correct: 3,
+                answer: "All traits Mendel studied, like flower, pod, and seed color, showed complete dominance."
+            },
+            {
+                question: "What is an example of a pleiotropic gene?",
+                options: [
+                    "Sickle-cell anemia",
+                    "ABO blood groups",
+                    "Pea plant height",
+                    "Human eye color"
+                ],
+                correct: 0,
+                answer: "Sickle-cell anemia is pleiotropic, affecting multiple traits like blood cells and oxygen transport."
+            },
+            {
+                question: "Which scientist provided evidence for the chromosome theory of inheritance?",
+                options: [
+                    "Gregor Mendel",
+                    "Thomas Morgan",
+                    "Charles Darwin",
+                    "Alfred Wallace"
+                ],
+                correct: 1,
+                answer: "Thomas Morgan's work with fruit flies supported the chromosome theory."
+            },
+            {
+                question: "What is genetic linkage?",
+                options: [
+                    "Genes assort independently",
+                    "Genes on the same chromosome tend to be inherited together",
+                    "Genes mutate randomly",
+                    "Alleles blend in the phenotype"
+                ],
+                correct: 1,
+                answer: "Genetic linkage means genes on the same chromosome are often inherited together."
+            },
+            {
+                question: "What is the law of independent assortment in Mendelian inheritance?",
+                options: [
+                    "Alleles segregate during gamete formation",
+                    "Genes for different traits assort independently",
+                    "Dominant traits mask recessive traits",
+                    "Genes are linked on chromosomes"
+                ],
+                correct: 1,
+                answer: "The law of independent assortment states that genes for different traits assort independently."
+            },
+            {
+                question: "In incomplete dominance, what is the phenotypic ratio of a monohybrid cross?",
+                options: [
+                    "3:1",
+                    "1:2:1",
+                    "9:3:3:1",
+                    "1:1"
+                ],
+                correct: 1,
+                answer: "Incomplete dominance results in a 1:2:1 phenotypic ratio, as in snapdragon flower color."
+            },
+            {
+                question: "Which blood type is the universal donor in the ABO system?",
+                options: [
+                    "A",
+                    "B",
+                    "AB",
+                    "O"
+                ],
+                correct: 3,
+                answer: "Type O is the universal donor as it lacks A and B antigens."
+            },
+            {
+                question: "What is a characteristic of polygenic traits?",
+                options: [
+                    "Controlled by one gene",
+                    "Show discrete phenotypes",
+                    "Show continuous variation",
+                    "Follow complete dominance"
+                ],
+                correct: 2,
+                answer: "Polygenic traits, like height, show continuous variation in phenotypes."
+            },
+            {
+                question: "What is the role of crossing over in genetic variation?",
+                options: [
+                    "Prevents recombination",
+                    "Increases genetic diversity",
+                    "Ensures identical offspring",
+                    "Reduces chromosome number"
+                ],
+                correct: 1,
+                answer: "Crossing over increases genetic diversity by exchanging genetic material."
+            },
+            {
+                question: "Which of the following is a recessive trait in Mendel's pea plants?",
+                options: [
+                    "Yellow seeds",
+                    "Green seeds",
+                    "Tall plants",
+                    "Purple flowers"
+                ],
+                correct: 1,
+                answer: "Green seeds are a recessive trait in Mendel's pea plants."
+            },
+            {
+                question: "What is the genotype of a heterozygous individual in a monohybrid cross?",
+                options: [
+                    "AA",
+                    "Aa",
+                    "aa",
+                    "A"
+                ],
+                correct: 1,
+                answer: "A heterozygous individual has one dominant and one recessive allele, like Aa."
+            },
+            {
+                question: "Which deviation from Mendelism involves three or more alleles for a trait?",
+                options: [
+                    "Incomplete dominance",
+                    "Co-dominance",
+                    "Multiple alleles",
+                    "Pleiotropy"
+                ],
+                correct: 2,
+                answer: "Multiple alleles involve three or more alleles, as in the ABO blood group system."
+            },
+            {
+                question: "What is the significance of the test cross in genetics?",
+                options: [
+                    "Determines the phenotype",
+                    "Identifies the genotype of an individual",
+                    "Produces a 9:3:3:1 ratio",
+                    "Prevents crossing over"
+                ],
+                correct: 1,
+                answer: "A test cross identifies the genotype of an individual by crossing with a homozygous recessive."
+            },
+            {
+                question: "Which organism was used by Morgan to study linkage?",
+                options: [
+                    "Pea plants",
+                    "Fruit flies",
+                    "Mice",
+                    "Bacteria"
+                ],
+                correct: 1,
+                answer: "Thomas Morgan used fruit flies (Drosophila) to study genetic linkage."
+            },
+            {
+                question: "What is a gene?",
+                options: [
+                    "A segment of DNA that codes for a trait",
+                    "A type of chromosome",
+                    "A protein structure",
+                    "A cell organelle"
+                ],
+                correct: 0,
+                answer: "A gene is a segment of DNA that codes for a specific trait or protein."
+            },
+            {
+                question: "What is the phenotypic ratio of a cross involving co-dominance?",
+                options: [
+                    "3:1",
+                    "1:2:1",
+                    "1:1",
+                    "9:3:3:1"
+                ],
+                correct: 1,
+                answer: "Co-dominance results in a 1:2:1 phenotypic ratio, as both alleles are expressed."
+            },
+            {
+                question: "Which chromosome carries the genes for sex-linked traits in humans?",
+                options: [
+                    "Autosome",
+                    "X chromosome",
+                    "Y chromosome",
+                    "Mitochondrial DNA"
+                ],
+                correct: 1,
+                answer: "The X chromosome carries genes for sex-linked traits, like color blindness."
+            },
+            {
+                question: "What is the effect of linkage on inheritance?",
+                options: [
+                    "Increases independent assortment",
+                    "Reduces recombination frequency",
+                    "Ensures blending of traits",
+                    "Prevents crossing over"
+                ],
+                correct: 1,
+                answer: "Linkage reduces recombination frequency as genes are inherited together."
+            },
+            {
+                question: "Which of the following is an example of a polygenic trait?",
+                options: [
+                    "Sickle-cell anemia",
+                    "Human height",
+                    "ABO blood groups",
+                    "Cystic fibrosis"
+                ],
+                correct: 1,
+                answer: "Human height is a polygenic trait controlled by multiple genes."
+            },
+            {
+                question: "What is the purpose of a Punnett square?",
+                options: [
+                    "Measure chromosome length",
+                    "Predict offspring genotypes",
+                    "Identify mutations",
+                    "Analyze protein structure"
+                ],
+                correct: 1,
+                answer: "A Punnett square predicts the genotypes of offspring in a genetic cross."
+            },
+            {
+                question: "Which Mendelian law is violated by linked genes?",
+                options: [
+                    "Law of segregation",
+                    "Law of dominance",
+                    "Law of independent assortment",
+                    "Law of recombination"
+                ],
+                correct: 2,
+                answer: "Linked genes violate the law of independent assortment by not assorting independently."
+            },
+            {
+                question: "What is the genotype of an individual with type O blood?",
+                options: [
+                    "IAIA",
+                    "IBIB",
+                    "IAIB",
+                    "ii"
+                ],
+                correct: 3,
+                answer: "Type O blood results from the homozygous recessive genotype ii."
+            },
+            {
+                question: "What is the role of homologous chromosomes in inheritance?",
+                options: [
+                    "Carry identical genes",
+                    "Carry alleles for the same traits",
+                    "Prevent crossing over",
+                    "Reduce genetic variation"
+                ],
+                correct: 1,
+                answer: "Homologous chromosomes carry alleles for the same traits."
+            },
+            {
+                question: "Which of the following is a sex-linked disorder?",
+                options: [
+                    "Sickle-cell anemia",
+                    "Hemophilia",
+                    "Cystic fibrosis",
+                    "PKU"
+                ],
+                correct: 1,
+                answer: "Hemophilia is a sex-linked disorder carried on the X chromosome."
+            },
+            {
+                question: "What is the effect of crossing over on linked genes?",
+                options: [
+                    "Increases linkage",
+                    "Produces recombinant offspring",
+                    "Prevents recombination",
+                    "Ensures identical gametes"
+                ],
+                correct: 1,
+                answer: "Crossing over produces recombinant offspring by exchanging linked genes."
+            },
+            {
+                question: "Which of Mendel's laws explains why traits are not blended in offspring?",
+                options: [
+                    "Law of segregation",
+                    "Law of independent assortment",
+                    "Law of dominance",
+                    "Law of recombination"
+                ],
+                correct: 0,
+                answer: "The law of segregation ensures alleles remain distinct, preventing blending."
+            },
+            {
+                question: "What is the phenotypic outcome of a cross between two heterozygous individuals for a co-dominant trait?",
+                options: [
+                    "All dominant",
+                    "1:2:1 ratio",
+                    "3:1 ratio",
+                    "All recessive"
+                ],
+                correct: 1,
+                answer: "A cross between heterozygotes for a co-dominant trait yields a 1:2:1 phenotypic ratio."
+            },
+            {
+                question: "Which of the following traits in Mendel's experiments was dominant?",
+                options: [
+                    "Green pods",
+                    "Wrinkled seeds",
+                    "Yellow seeds",
+                    "White flowers"
+                ],
+                correct: 2,
+                answer: "Yellow seeds were dominant over green seeds in Mendel's experiments."
+            },
+            {
+                question: "What is the term for different forms of a gene?",
+                options: [
+                    "Chromosome",
+                    "Allele",
+                    "Locus",
+                    "Genotype"
+                ],
+                correct: 1,
+                answer: "Alleles are different forms of a gene at the same locus."
+            },
+            {
+                question: "Which of the following is controlled by multiple alleles?",
+                options: [
+                    "Pea plant height",
+                    "Rabbit coat color",
+                    "Sickle-cell anemia",
+                    "Human eye color"
+                ],
+                correct: 1,
+                answer: "Rabbit coat color is controlled by multiple alleles at a single locus."
+            },
+            {
+                question: "What is the significance of recombination frequency in linkage studies?",
+                options: [
+                    "Measures chromosome length",
+                    "Indicates distance between genes",
+                    "Predicts mutation rate",
+                    "Determines phenotype"
+                ],
+                correct: 1,
+                answer: "Recombination frequency indicates the distance between genes on a chromosome."
+            },
+            {
+                question: "Which of the following is a characteristic of incomplete dominance?",
+                options: [
+                    "Both alleles fully expressed",
+                    "Intermediate phenotype in heterozygotes",
+                    "One allele completely masks another",
+                    "Multiple genes control one trait"
+                ],
+                correct: 1,
+                answer: "Incomplete dominance results in an intermediate phenotype in heterozygotes."
+            },
+            {
+                question: "What is the term for the location of a gene on a chromosome?",
+                options: [
+                    "Allele",
+                    "Locus",
+                    "Genotype",
+                    "Phenotype"
+                ],
+                correct: 1,
+                answer: "The locus is the specific location of a gene on a chromosome."
+            },
+            {
+                question: "Which of the following is an example of a polygenic trait in humans?",
+                options: [
+                    "Blood type",
+                    "Skin color",
+                    "Sickle-cell anemia",
+                    "Hemophilia"
+                ],
+                correct: 1,
+                answer: "Skin color is a polygenic trait influenced by multiple genes."
+            },
+            {
+                question: "What is the primary source of genetic variation in a population?",
+                options: [
+                    "Independent assortment",
+                    "Crossing over",
+                    "Mutation",
+                    "All of the above"
+                ],
+                correct: 3,
+                answer: "Independent assortment, crossing over, and mutation all contribute to genetic variation."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

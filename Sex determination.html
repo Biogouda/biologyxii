@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sex Determination and Genetic Disorders MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: pink;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Sex Determination and Genetic Disorders MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Which chromosomes determine sex in humans?",
+                options: [
+                    "Autosomes",
+                    "X and Y chromosomes",
+                    "Mitochondrial DNA",
+                    "Z and W chromosomes"
+                ],
+                correct: 1,
+                answer: "In humans, sex is determined by the X and Y chromosomes (XX for female, XY for male)."
+            },
+            {
+                question: "What is the sex determination system in birds?",
+                options: [
+                    "XX/XY",
+                    "ZZ/ZW",
+                    "Haplo-diploid",
+                    "XO/XX"
+                ],
+                correct: 1,
+                answer: "In birds, the ZZ/ZW system determines sex, with males being ZZ and females ZW."
+            },
+            {
+                question: "How is sex determined in honey bees?",
+                options: [
+                    "XX/XY system",
+                    "Haplo-diploid system",
+                    "ZZ/ZW system",
+                    "Temperature-dependent"
+                ],
+                correct: 1,
+                answer: "Honey bees use a haplo-diploid system, where unfertilized eggs become males and fertilized eggs become females."
+            },
+            {
+                question: "Which disorder is an example of sex-linked inheritance?",
+                options: [
+                    "Thalassaemia",
+                    "Haemophilia",
+                    "Down’s syndrome",
+                    "Cystic fibrosis"
+                ],
+                correct: 1,
+                answer: "Haemophilia is a sex-linked disorder carried on the X chromosome."
+            },
+            {
+                question: "What causes colour blindness in humans?",
+                options: [
+                    "Autosomal dominant mutation",
+                    "X-linked recessive mutation",
+                    "Y-linked mutation",
+                    "Chromosomal duplication"
+                ],
+                correct: 1,
+                answer: "Colour blindness is caused by an X-linked recessive mutation."
+            },
+            {
+                question: "Which Mendelian disorder affects haemoglobin production?",
+                options: [
+                    "Haemophilia",
+                    "Thalassaemia",
+                    "Sickle-cell anaemia",
+                    "Both B and C"
+                ],
+                correct: 1,
+                answer: "Thalassaemia is a Mendelian disorder causing defective haemoglobin production."
+            },
+            {
+                question: "What is the chromosomal abnormality in Down’s syndrome?",
+                options: [
+                    "Trisomy 21",
+                    "Monosomy X",
+                    "Trisomy 18",
+                    "XXY"
+                ],
+                correct: 0,
+                answer: "Down’s syndrome is caused by trisomy 21, an extra copy of chromosome 21."
+            },
+            {
+                question: "What is the karyotype of Turner’s syndrome?",
+                options: [
+                    "XXY",
+                    "XO",
+                    "XXX",
+                    "YY"
+                ],
+                correct: 1,
+                answer: "Turner’s syndrome is characterized by a 45,XO karyotype (monosomy X)."
+            },
+            {
+                question: "What is the karyotype of Klinefelter’s syndrome?",
+                options: [
+                    "XXY",
+                    "XO",
+                    "XXX",
+                    "XYY"
+                ],
+                correct: 0,
+                answer: "Klinefelter’s syndrome is characterized by a 47,XXY karyotype."
+            },
+            {
+                question: "In humans, who determines the sex of the offspring?",
+                options: [
+                    "Mother",
+                    "Father",
+                    "Both parents",
+                    "Environment"
+                ],
+                correct: 1,
+                answer: "The father determines the sex, as his sperm carries either an X or Y chromosome."
+            },
+            {
+                question: "Which chromosome carries the gene for haemophilia?",
+                options: [
+                    "Y chromosome",
+                    "X chromosome",
+                    "Autosome",
+                    "Mitochondrial DNA"
+                ],
+                correct: 1,
+                answer: "Haemophilia is carried on the X chromosome, making it sex-linked."
+            },
+            {
+                question: "Why are males more likely to express sex-linked disorders like colour blindness?",
+                options: [
+                    "They have two X chromosomes",
+                    "They have one X chromosome",
+                    "They lack a Y chromosome",
+                    "They have more autosomes"
+                ],
+                correct: 1,
+                answer: "Males have one X chromosome, so a recessive allele is expressed without a dominant counterpart."
+            },
+            {
+                question: "What is a characteristic symptom of thalassaemia?",
+                options: [
+                    "Excessive bleeding",
+                    "Severe anaemia",
+                    "Mental retardation",
+                    "Infertility"
+                ],
+                correct: 1,
+                answer: "Thalassaemia causes severe anaemia due to defective haemoglobin."
+            },
+            {
+                question: "Which feature is commonly associated with Down’s syndrome?",
+                options: [
+                    "Tall stature",
+                    "Flat facial profile",
+                    "Excessive hair growth",
+                    "Normal intelligence"
+                ],
+                correct: 1,
+                answer: "A flat facial profile is a common feature of Down’s syndrome."
+            },
+            {
+                question: "What is a symptom of Turner’s syndrome?",
+                options: [
+                    "Tall stature",
+                    "Short stature",
+                    "Excessive testosterone",
+                    "Normal fertility"
+                ],
+                correct: 1,
+                answer: "Short stature is a common symptom of Turner’s syndrome."
+            },
+            {
+                question: "Which disorder results from an extra X chromosome in males?",
+                options: [
+                    "Down’s syndrome",
+                    "Klinefelter’s syndrome",
+                    "Turner’s syndrome",
+                    "Thalassaemia"
+                ],
+                correct: 1,
+                answer: "Klinefelter’s syndrome results from an extra X chromosome (XXY) in males."
+            },
+            {
+                question: "In honey bees, what determines a male (drone)?",
+                options: [
+                    "Fertilized egg",
+                    "Unfertilized egg",
+                    "ZW chromosomes",
+                    "XY chromosomes"
+                ],
+                correct: 1,
+                answer: "In honey bees, unfertilized eggs develop into male drones via the haplo-diploid system."
+            },
+            {
+                question: "Which of the following is a sex-linked trait?",
+                options: [
+                    "Sickle-cell anaemia",
+                    "Red-green colour blindness",
+                    "Cystic fibrosis",
+                    "Phenylketonuria"
+                ],
+                correct: 1,
+                answer: "Red-green colour blindness is a sex-linked trait carried on the X chromosome."
+            },
+            {
+                question: "What type of inheritance pattern does thalassaemia follow?",
+                options: [
+                    "Autosomal recessive",
+                    "Autosomal dominant",
+                    "X-linked recessive",
+                    "Y-linked"
+                ],
+                correct: 0,
+                answer: "Thalassaemia follows an autosomal recessive inheritance pattern."
+            },
+            {
+                question: "What is a common feature of Klinefelter’s syndrome?",
+                options: [
+                    "Short stature",
+                    "Infertility",
+                    "High intelligence",
+                    "Normal testosterone levels"
+                ],
+                correct: 1,
+                answer: "Infertility is a common feature of Klinefelter’s syndrome due to low testosterone."
+            },
+            {
+                question: "In birds, which sex is heterogametic?",
+                options: [
+                    "Male",
+                    "Female",
+                    "Both",
+                    "Neither"
+                ],
+                correct: 1,
+                answer: "In birds, females are heterogametic (ZW), while males are homogametic (ZZ)."
+            },
+            {
+                question: "Which gene mutation causes haemophilia?",
+                options: [
+                    "F8 or F9 gene",
+                    "HBB gene",
+                    "CFTR gene",
+                    "PAX6 gene"
+                ],
+                correct: 0,
+                answer: "Haemophilia is caused by mutations in the F8 or F9 genes on the X chromosome."
+            },
+            {
+                question: "What is the genetic basis of Down’s syndrome?",
+                options: [
+                    "Deletion of chromosome 21",
+                    "Extra copy of chromosome 21",
+                    "Mutation in a single gene",
+                    "Loss of an X chromosome"
+                ],
+                correct: 1,
+                answer: "Down’s syndrome is caused by an extra copy of chromosome 21 (trisomy 21)."
+            },
+            {
+                question: "Which syndrome is associated with a 45,XO karyotype?",
+                options: [
+                    "Klinefelter’s syndrome",
+                    "Turner’s syndrome",
+                    "Down’s syndrome",
+                    "XYY syndrome"
+                ],
+                correct: 1,
+                answer: "Turner’s syndrome is associated with a 45,XO karyotype."
+            },
+            {
+                question: "What is a characteristic of thalassaemia major?",
+                options: [
+                    "Mild symptoms",
+                    "Severe anaemia requiring transfusions",
+                    "Normal haemoglobin",
+                    "Excessive clotting"
+                ],
+                correct: 1,
+                answer: "Thalassaemia major causes severe anaemia, often requiring regular blood transfusions."
+            },
+            {
+                question: "Which of the following is a sex-linked disorder affecting blood?",
+                options: [
+                    "Thalassaemia",
+                    "Haemophilia",
+                    "Sickle-cell anaemia",
+                    "Cystic fibrosis"
+                ],
+                correct: 1,
+                answer: "Haemophilia is a sex-linked disorder affecting blood clotting."
+            },
+            {
+                question: "What is the primary cause of colour blindness?",
+                options: [
+                    "Defective opsin genes",
+                    "Extra chromosome 21",
+                    "Mutated HBB gene",
+                    "Loss of an X chromosome"
+                ],
+                correct: 0,
+                answer: "Colour blindness is caused by defective opsin genes on the X chromosome."
+            },
+            {
+                question: "Which syndrome is characterized by intellectual disability and distinct facial features?",
+                options: [
+                    "Turner’s syndrome",
+                    "Klinefelter’s syndrome",
+                    "Down’s syndrome",
+                    "Haemophilia"
+                ],
+                correct: 2,
+                answer: "Down’s syndrome is characterized by intellectual disability and distinct facial features."
+            },
+            {
+                question: "In humans, what is the probability of a male offspring from a single pregnancy?",
+                options: [
+                    "25%",
+                    "50%",
+                    "75%",
+                    "100%"
+                ],
+                correct: 1,
+                answer: "There is a 50% chance of a male offspring, as the father contributes either an X or Y chromosome."
+            },
+            {
+                question: "Which disorder is caused by an autosomal recessive mutation?",
+                options: [
+                    "Haemophilia",
+                    "Thalassaemia",
+                    "Colour blindness",
+                    "Klinefelter’s syndrome"
+                ],
+                correct: 1,
+                answer: "Thalassaemia is caused by an autosomal recessive mutation in the HBB gene."
+            },
+            {
+                question: "What is a common feature of Turner’s syndrome?",
+                options: [
+                    "Webbed neck",
+                    "Tall stature",
+                    "High fertility",
+                    "Normal ovarian function"
+                ],
+                correct: 0,
+                answer: "A webbed neck is a common feature of Turner’s syndrome."
+            },
+            {
+                question: "Which chromosome is involved in Klinefelter’s syndrome?",
+                options: [
+                    "Chromosome 21",
+                    "X chromosome",
+                    "Y chromosome",
+                    "Autosome"
+                ],
+                correct: 1,
+                answer: "Klinefelter’s syndrome involves an extra X chromosome (XXY)."
+            },
+            {
+                question: "In honey bees, what determines a female (queen or worker)?",
+                options: [
+                    "Unfertilized egg",
+                    "Fertilized egg",
+                    "ZW chromosomes",
+                    "Environmental factors only"
+                ],
+                correct: 1,
+                answer: "Fertilized eggs develop into females (queens or workers) in the haplo-diploid system."
+            },
+            {
+                question: "Which of the following is inherited through the X chromosome?",
+                options: [
+                    "Sickle-cell anaemia",
+                    "Haemophilia",
+                    "Thalassaemia",
+                    "Down’s syndrome"
+                ],
+                correct: 1,
+                answer: "Haemophilia is inherited through the X chromosome as a sex-linked trait."
+            },
+            {
+                question: "What is the genetic consequence of trisomy 21?",
+                options: [
+                    "Normal development",
+                    "Down’s syndrome",
+                    "Turner’s syndrome",
+                    "Haemophilia"
+                ],
+                correct: 1,
+                answer: "Trisomy 21 leads to Down’s syndrome, causing developmental and intellectual challenges."
+            },
+            {
+                question: "Which disorder is associated with reduced fertility in males?",
+                options: [
+                    "Thalassaemia",
+                    "Klinefelter’s syndrome",
+                    "Colour blindness",
+                    "Down’s syndrome"
+                ],
+                correct: 1,
+                answer: "Klinefelter’s syndrome is associated with reduced fertility in males."
+            },
+            {
+                question: "What is the mode of inheritance for colour blindness?",
+                options: [
+                    "Autosomal dominant",
+                    "Autosomal recessive",
+                    "X-linked recessive",
+                    "Y-linked"
+                ],
+                correct: 2,
+                answer: "Colour blindness follows an X-linked recessive inheritance pattern."
+            },
+            {
+                question: "Which of the following is a chromosomal disorder?",
+                options: [
+                    "Haemophilia",
+                    "Thalassaemia",
+                    "Turner’s syndrome",
+                    "Sickle-cell anaemia"
+                ],
+                correct: 2,
+                answer: "Turner’s syndrome is a chromosomal disorder due to monosomy X."
+            },
+            {
+                question: "What is a treatment for thalassaemia major?",
+                options: [
+                    "Antibiotics",
+                    "Blood transfusions",
+                    "Hormone therapy",
+                    "Surgery"
+                ],
+                correct: 1,
+                answer: "Blood transfusions are a common treatment for thalassaemia major to manage anaemia."
+            },
+            {
+                question: "Which syndrome is caused by nondisjunction during meiosis?",
+                options: [
+                    "Haemophilia",
+                    "Thalassaemia",
+                    "Down’s syndrome",
+                    "Sickle-cell anaemia"
+                ],
+                correct: 2,
+                answer: "Down’s syndrome is caused by nondisjunction, leading to an extra chromosome 21."
+            },
+            {
+                question: "What is a characteristic of haemophilia?",
+                options: [
+                    "Excessive clotting",
+                    "Impaired blood clotting",
+                    "High haemoglobin levels",
+                    "Normal bleeding"
+                ],
+                correct: 1,
+                answer: "Haemophilia is characterized by impaired blood clotting, leading to excessive bleeding."
+            },
+            {
+                question: "Which of the following is a feature of Klinefelter’s syndrome?",
+                options: [
+                    "Short stature",
+                    "Gynecomastia",
+                    "High fertility",
+                    "Normal testosterone"
+                ],
+                correct: 1,
+                answer: "Gynecomastia (breast development) is a feature of Klinefelter’s syndrome."
+            },
+            {
+                question: "In birds, who determines the sex of the offspring?",
+                options: [
+                    "Male",
+                    "Female",
+                    "Both parents",
+                    "Environment"
+                ],
+                correct: 1,
+                answer: "In birds, the female determines the sex, as she produces either a Z or W egg."
+            },
+            {
+                question: "Which disorder is more common in females due to its X-linked nature?",
+                options: [
+                    "Haemophilia carriers",
+                    "Thalassaemia",
+                    "Down’s syndrome",
+                    "Klinefelter’s syndrome"
+                ],
+                correct: 0,
+                answer: "Females are more likely to be carriers of haemophilia due to having two X chromosomes."
+            },
+            {
+                question: "What is the primary cause of Turner’s syndrome?",
+                options: [
+                    "Extra X chromosome",
+                    "Missing X chromosome",
+                    "Extra chromosome 21",
+                    "Mutated HBB gene"
+                ],
+                correct: 1,
+                answer: "Turner’s syndrome is caused by a missing X chromosome (monosomy X)."
+            },
+            {
+                question: "Which disorder affects both males and females equally?",
+                options: [
+                    "Haemophilia",
+                    "Colour blindness",
+                    "Thalassaemia",
+                    "Klinefelter’s syndrome"
+                ],
+                correct: 2,
+                answer: "Thalassaemia, an autosomal recessive disorder, affects males and females equally."
+            },
+            {
+                question: "What is a risk factor for Down’s syndrome?",
+                options: [
+                    "Young maternal age",
+                    "Advanced maternal age",
+                    "Male age",
+                    "Dietary factors"
+                ],
+                correct: 1,
+                answer: "Advanced maternal age increases the risk of Down’s syndrome due to nondisjunction."
+            },
+            {
+                question: "Which of the following is a sex-linked trait in humans?",
+                options: [
+                    "Duchenne muscular dystrophy",
+                    "Sickle-cell anaemia",
+                    "Cystic fibrosis",
+                    "Thalassaemia"
+                ],
+                correct: 0,
+                answer: "Duchenne muscular dystrophy is a sex-linked trait carried on the X chromosome."
+            },
+            {
+                question: "What is the genetic basis of thalassaemia?",
+                options: [
+                    "Mutation in clotting genes",
+                    "Mutation in haemoglobin genes",
+                    "Extra X chromosome",
+                    "Deletion of chromosome 21"
+                ],
+                correct: 1,
+                answer: "Thalassaemia is caused by mutations in haemoglobin genes (HBB or HBA)."
+            },
+            {
+                question: "Which syndrome is characterized by ovarian dysfunction?",
+                options: [
+                    "Klinefelter’s syndrome",
+                    "Turner’s syndrome",
+                    "Down’s syndrome",
+                    "Thalassaemia"
+                ],
+                correct: 1,
+                answer: "Turner’s syndrome is characterized by ovarian dysfunction due to monosomy X."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

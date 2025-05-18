@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biotechnology Principles and Processes MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Biotechnology Principles and Processes MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the primary goal of genetic engineering?",
+                options: [
+                    "Protein synthesis",
+                    "DNA manipulation for desired traits",
+                    "Cell division",
+                    "RNA transcription"
+                ],
+                correct: 1,
+                answer: "Genetic engineering manipulates DNA to introduce desired traits in organisms."
+            },
+            {
+                question: "What is recombinant DNA technology?",
+                options: [
+                    "Cloning entire organisms",
+                    "Combining DNA from different sources",
+                    "Sequencing genomes",
+                    "Synthesizing proteins"
+                ],
+                correct: 1,
+                answer: "Recombinant DNA technology combines DNA from different sources to create new genetic combinations."
+            },
+            {
+                question: "Which enzyme is essential for cutting DNA in genetic engineering?",
+                options: [
+                    "DNA polymerase",
+                    "Restriction enzyme",
+                    "Ligase",
+                    "Helicase"
+                ],
+                correct: 1,
+                answer: "Restriction enzymes cut DNA at specific sites for genetic engineering."
+            },
+            {
+                question: "What is a vector in genetic engineering?",
+                options: [
+                    "A DNA-cutting enzyme",
+                    "A carrier of foreign DNA",
+                    "A sequencing tool",
+                    "A protein synthesizer"
+                ],
+                correct: 1,
+                answer: "A vector carries foreign DNA into a host cell for replication or expression."
+            },
+            {
+                question: "Which of the following is a common vector in biotechnology?",
+                options: [
+                    "Plasmid",
+                    "Ribosome",
+                    "Nucleus",
+                    "Mitochondrion"
+                ],
+                correct: 0,
+                answer: "Plasmids are commonly used as vectors to carry foreign DNA."
+            },
+            {
+                question: "What is the role of restriction enzymes in recombinant DNA technology?",
+                options: [
+                    "Join DNA fragments",
+                    "Cut DNA at specific sequences",
+                    "Replicate DNA",
+                    "Transcribe DNA"
+                ],
+                correct: 1,
+                answer: "Restriction enzymes cut DNA at specific recognition sequences."
+            },
+            {
+                question: "What is a palindromic sequence in DNA?",
+                options: [
+                    "A random DNA sequence",
+                    "A sequence identical on both strands when read 5’ to 3’",
+                    "A sequence with no symmetry",
+                    "A single-stranded sequence"
+                ],
+                correct: 1,
+                answer: "A palindromic sequence reads the same on both strands in the 5’ to 3’ direction."
+            },
+            {
+                question: "Which enzyme joins DNA fragments in genetic engineering?",
+                options: [
+                    "Restriction enzyme",
+                    "DNA ligase",
+                    "Polymerase",
+                    "Helicase"
+                ],
+                correct: 1,
+                answer: "DNA ligase joins DNA fragments by forming phosphodiester bonds."
+            },
+            {
+                question: "What is the source of the restriction enzyme EcoRI?",
+                options: [
+                    "Escherichia coli",
+                    "Streptococcus pneumoniae",
+                    "Bacillus subtilis",
+                    "Saccharomyces cerevisiae"
+                ],
+                correct: 0,
+                answer: "EcoRI is derived from Escherichia coli strain RY13."
+            },
+            {
+                question: "What does the ‘R’ in EcoRI stand for?",
+                options: [
+                    "Recombinant",
+                    "Restriction",
+                    "Replication",
+                    "Reverse"
+                ],
+                correct: 1,
+                answer: "The ‘R’ in EcoRI stands for restriction, indicating its role as a restriction enzyme."
+            },
+            {
+                question: "What is the recognition sequence for EcoRI?",
+                options: [
+                    "GAATTC",
+                    "CTTAAG",
+                    "GGATCC",
+                    "AAGCTT"
+                ],
+                correct: 0,
+                answer: "EcoRI recognizes and cuts at the palindromic sequence GAATTC."
+            },
+            {
+                question: "What type of ends does EcoRI produce after cutting DNA?",
+                options: [
+                    "Blunt ends",
+                    "Sticky ends",
+                    "Circular ends",
+                    "Fragmented ends"
+                ],
+                correct: 1,
+                answer: "EcoRI produces sticky ends with single-stranded overhangs."
+            },
+            {
+                question: "Which restriction enzyme cuts at the sequence GGATCC?",
+                options: [
+                    "EcoRI",
+                    "BamHI",
+                    "HindIII",
+                    "PstI"
+                ],
+                correct: 1,
+                answer: "BamHI cuts at the palindromic sequence GGATCC."
+            },
+            {
+                question: "What is the nomenclature rule for restriction enzymes?",
+                options: [
+                    "Named after the scientist who discovered them",
+                    "First three letters from genus, species, and strain",
+                    "Random alphanumeric code",
+                    "Based on DNA sequence"
+                ],
+                correct: 1,
+                answer: "Restriction enzymes are named with the first three letters from genus, species, and strain."
+            },
+            {
+                question: "What does the ‘I’ in EcoRI indicate?",
+                options: [
+                    "First enzyme isolated",
+                    "Inhibitor",
+                    "Insertion",
+                    "Intron"
+                ],
+                correct: 0,
+                answer: "The ‘I’ in EcoRI indicates it was the first restriction enzyme isolated from the strain."
+            },
+            {
+                question: "Which vector is derived from E. coli and widely used in cloning?",
+                options: [
+                    "YAC",
+                    "BAC",
+                    "pBR322",
+                    "Cosmid"
+                ],
+                correct: 2,
+                answer: "pBR322 is a plasmid vector derived from E. coli, widely used in cloning."
+            },
+            {
+                question: "What is a key feature of pBR322?",
+                options: [
+                    "Single restriction site",
+                    "Multiple cloning sites",
+                    "No antibiotic resistance",
+                    "Linear DNA"
+                ],
+                correct: 1,
+                answer: "pBR322 has multiple cloning sites and antibiotic resistance genes."
+            },
+            {
+                question: "Which antibiotic resistance gene is present in pBR322?",
+                options: [
+                    "Ampicillin resistance",
+                    "Chloramphenicol resistance",
+                    "Penicillin resistance",
+                    "Erythromycin resistance"
+                ],
+                correct: 0,
+                answer: "pBR322 contains an ampicillin resistance gene for selection."
+            },
+            {
+                question: "What is the role of the ori in pBR322?",
+                options: [
+                    "Cuts DNA",
+                    "Initiates replication",
+                    "Joins fragments",
+                    "Transcribes RNA"
+                ],
+                correct: 1,
+                answer: "The ori (origin of replication) in pBR322 initiates plasmid replication."
+            },
+            {
+                question: "What is a YAC used for in genetic engineering?",
+                options: [
+                    "Cloning small DNA fragments",
+                    "Cloning large DNA fragments",
+                    "Protein synthesis",
+                    "DNA sequencing"
+                ],
+                correct: 1,
+                answer: "Yeast Artificial Chromosomes (YACs) are used to clone large DNA fragments."
+            },
+            {
+                question: "What is the host organism for YAC vectors?",
+                options: [
+                    "E. coli",
+                    "Yeast",
+                    "Bacillus",
+                    "Mammalian cells"
+                ],
+                correct: 1,
+                answer: "YACs are maintained and replicated in yeast cells."
+            },
+            {
+                question: "What is the cloning capacity of a YAC?",
+                options: [
+                    "Up to 10 kb",
+                    "Up to 100 kb",
+                    "Up to 1 Mb",
+                    "Up to 10 Mb"
+                ],
+                correct: 2,
+                answer: "YACs can clone DNA fragments up to 1 megabase in size."
+            },
+            {
+                question: "What is a BAC used for in biotechnology?",
+                options: [
+                    "Protein expression",
+                    "Cloning large DNA fragments",
+                    "RNA synthesis",
+                    "Small plasmid cloning"
+                ],
+                correct: 1,
+                answer: "Bacterial Artificial Chromosomes (BACs) are used to clone large DNA fragments."
+            },
+            {
+                question: "What is the typical host for BAC vectors?",
+                options: [
+                    "Yeast",
+                    "E. coli",
+                    "Mammalian cells",
+                    "Plant cells"
+                ],
+                correct: 1,
+                answer: "BACs are maintained in E. coli for cloning purposes."
+            },
+            {
+                question: "What is the cloning capacity of a BAC?",
+                options: [
+                    "Up to 10 kb",
+                    "Up to 300 kb",
+                    "Up to 1 Mb",
+                    "Up to 10 Mb"
+                ],
+                correct: 1,
+                answer: "BACs can clone DNA fragments up to 300 kilobases."
+            },
+            {
+                question: "What is a cosmid vector?",
+                options: [
+                    "A plasmid with phage DNA",
+                    "A yeast chromosome",
+                    "A bacterial chromosome",
+                    "A linear DNA molecule"
+                ],
+                correct: 0,
+                answer: "A cosmid is a plasmid containing phage DNA sequences for cloning."
+            },
+            {
+                question: "What is the cloning capacity of a cosmid?",
+                options: [
+                    "Up to 5 kb",
+                    "Up to 45 kb",
+                    "Up to 100 kb",
+                    "Up to 500 kb"
+                ],
+                correct: 1,
+                answer: "Cosmids can clone DNA fragments up to 45 kilobases."
+            },
+            {
+                question: "What is the role of cos sites in cosmids?",
+                options: [
+                    "Cut DNA",
+                    "Enable packaging into phage particles",
+                    "Initiate replication",
+                    "Join fragments"
+                ],
+                correct: 1,
+                answer: "Cos sites allow cosmids to be packaged into phage particles for infection."
+            },
+            {
+                question: "Which enzyme is used to produce blunt ends in DNA?",
+                options: [
+                    "EcoRI",
+                    "KpnI",
+                    "SmaI",
+                    "BamHI"
+                ],
+                correct: 2,
+                answer: "SmaI is a restriction enzyme that produces blunt ends."
+            },
+            {
+                question: "What is the recognition sequence for HindIII?",
+                options: [
+                    "AAGCTT",
+                    "GAATTC",
+                    "GGATCC",
+                    "CTGCAG"
+                ],
+                correct: 0,
+                answer: "HindIII cuts at the palindromic sequence AAGCTT."
+            },
+            {
+                question: "What is the purpose of a selectable marker in vectors?",
+                options: [
+                    "Cut DNA",
+                    "Identify transformed cells",
+                    "Replicate DNA",
+                    "Transcribe RNA"
+                ],
+                correct: 1,
+                answer: "Selectable markers, like antibiotic resistance, identify cells with the vector."
+            },
+            {
+                question: "Which component is essential for a cloning vector?",
+                options: [
+                    "Origin of replication",
+                    "Promoter",
+                    "Terminator",
+                    "Intron"
+                ],
+                correct: 0,
+                answer: "The origin of replication ensures the vector can replicate in the host."
+            },
+            {
+                question: "What is the role of T4 DNA ligase in genetic engineering?",
+                options: [
+                    "Cuts DNA",
+                    "Joins DNA fragments",
+                    "Replicates DNA",
+                    "Transcribes RNA"
+                ],
+                correct: 1,
+                answer: "T4 DNA ligase joins DNA fragments by forming phosphodiester bonds."
+            },
+            {
+                question: "Which restriction enzyme produces sticky ends?",
+                options: [
+                    "SmaI",
+                    "EcoRI",
+                    "AluI",
+                    "HaeIII"
+                ],
+                correct: 1,
+                answer: "EcoRI produces sticky ends, facilitating DNA ligation."
+            },
+            {
+                question: "What is an example of a palindromic sequence?",
+                options: [
+                    "ATCGAT",
+                    "GAATTC",
+                    "TAGCTA",
+                    "CGTACG"
+                ],
+                correct: 1,
+                answer: "GAATTC is a palindromic sequence recognized by EcoRI."
+            },
+            {
+                question: "What is the source of the restriction enzyme BamHI?",
+                options: [
+                    "Bacillus amyloliquefaciens",
+                    "Escherichia coli",
+                    "Streptococcus pneumoniae",
+                    "Haemophilus influenzae"
+                ],
+                correct: 0,
+                answer: "BamHI is derived from Bacillus amyloliquefaciens."
+            },
+            {
+                question: "What does the ‘H’ in HindIII stand for?",
+                options: [
+                    "Hybrid",
+                    "Haemophilus",
+                    "Helix",
+                    "Homologous"
+                ],
+                correct: 1,
+                answer: "The ‘H’ in HindIII refers to Haemophilus, the source bacterium."
+            },
+            {
+                question: "Which vector is used for genomic library construction?",
+                options: [
+                    "pBR322",
+                    "YAC",
+                    "BAC",
+                    "Both B and C"
+                ],
+                correct: 3,
+                answer: "YACs and BACs are used for genomic library construction due to their large cloning capacity."
+            },
+            {
+                question: "What is the role of the tetracycline resistance gene in pBR322?",
+                options: [
+                    "Promotes transcription",
+                    "Allows selection of transformants",
+                    "Cuts DNA",
+                    "Replicates plasmid"
+                ],
+                correct: 1,
+                answer: "The tetracycline resistance gene allows selection of cells with pBR322."
+            },
+            {
+                question: "What is a limitation of YAC vectors?",
+                options: [
+                    "Small cloning capacity",
+                    "Instability of inserts",
+                    "No selectable markers",
+                    "Cannot replicate"
+                ],
+                correct: 1,
+                answer: "YACs can be unstable, leading to loss or rearrangement of inserted DNA."
+            },
+            {
+                question: "What is the advantage of BACs over YACs?",
+                options: [
+                    "Larger cloning capacity",
+                    "Greater stability",
+                    "Smaller size",
+                    "No replication"
+                ],
+                correct: 1,
+                answer: "BACs are more stable than YACs, making them reliable for cloning."
+            },
+            {
+                question: "What is the role of lambda phage in cosmids?",
+                options: [
+                    "Provides cos sites",
+                    "Cuts DNA",
+                    "Joins fragments",
+                    "Replicates plasmid"
+                ],
+                correct: 0,
+                answer: "Lambda phage cos sites in cosmids enable packaging into phage particles."
+            },
+            {
+                question: "Which restriction enzyme cuts at CTGCAG?",
+                options: [
+                    "EcoRI",
+                    "BamHI",
+                    "PstI",
+                    "HindIII"
+                ],
+                correct: 2,
+                answer: "PstI cuts at the palindromic sequence CTGCAG."
+            },
+            {
+                question: "What is the purpose of a multiple cloning site in a vector?",
+                options: [
+                    "Replicates DNA",
+                    "Provides multiple restriction sites",
+                    "Transcribes RNA",
+                    "Fixes mutations"
+                ],
+                correct: 1,
+                answer: "A multiple cloning site provides several restriction sites for DNA insertion."
+            },
+            {
+                question: "What is the source of the restriction enzyme PstI?",
+                options: [
+                    "Providencia stuartii",
+                    "Escherichia coli",
+                    "Bacillus amyloliquefaciens",
+                    "Haemophilus influenzae"
+                ],
+                correct: 0,
+                answer: "PstI is derived from Providencia stuartii."
+            },
+            {
+                question: "What is the role of alkaline phosphatase in cloning?",
+                options: [
+                    "Cuts DNA",
+                    "Prevents self-ligation of vectors",
+                    "Joins DNA fragments",
+                    "Replicates DNA"
+                ],
+                correct: 1,
+                answer: "Alkaline phosphatase removes phosphate groups to prevent vector self-ligation."
+            },
+            {
+                question: "Which vector is suitable for cloning DNA up to 45 kb?",
+                options: [
+                    "pBR322",
+                    "YAC",
+                    "Cosmid",
+                    "BAC"
+                ],
+                correct: 2,
+                answer: "Cosmids can clone DNA fragments up to 45 kilobases."
+            },
+            {
+                question: "What is the recognition sequence for SmaI?",
+                options: [
+                    "CCCGGG",
+                    "GAATTC",
+                    "GGATCC",
+                    "AAGCTT"
+                ],
+                correct: 0,
+                answer: "SmaI cuts at the palindromic sequence CCCGGG, producing blunt ends."
+            },
+            {
+                question: "What is the advantage of sticky ends in cloning?",
+                options: [
+                    "Prevent ligation",
+                    "Facilitate specific base pairing",
+                    "Reduce vector size",
+                    "Increase mutation"
+                ],
+                correct: 1,
+                answer: "Sticky ends facilitate specific base pairing during DNA ligation."
+            },
+            {
+                question: "Which enzyme is used to synthesize cDNA in genetic engineering?",
+                options: [
+                    "Restriction enzyme",
+                    "Reverse transcriptase",
+                    "DNA ligase",
+                    "Polymerase"
+                ],
+                correct: 1,
+                answer: "Reverse transcriptase synthesizes cDNA from an RNA template."
+            },
+            {
+                question: "What is the role of a promoter in an expression vector?",
+                options: [
+                    "Cuts DNA",
+                    "Initiates transcription",
+                    "Replicates DNA",
+                    "Joins fragments"
+                ],
+                correct: 1,
+                answer: "A promoter initiates transcription of the inserted gene."
+            },
+            {
+                question: "Which restriction enzyme produces blunt ends?",
+                options: [
+                    "EcoRI",
+                    "HaeIII",
+                    "BamHI",
+                    "HindIII"
+                ],
+                correct: 1,
+                answer: "HaeIII produces blunt ends, unlike EcoRI or BamHI."
+            },
+            {
+                question: "What is the purpose of electroporation in genetic engineering?",
+                options: [
+                    "Cut DNA",
+                    "Introduce DNA into cells",
+                    "Join fragments",
+                    "Sequence DNA"
+                ],
+                correct: 1,
+                answer: "Electroporation uses electric pulses to introduce DNA into cells."
+            },
+            {
+                question: "Which vector is used for large-scale genome sequencing?",
+                options: [
+                    "pBR322",
+                    "BAC",
+                    "Cosmid",
+                    "Plasmid"
+                ],
+                correct: 1,
+                answer: "BACs are used for large-scale genome sequencing due to their stability."
+            },
+            {
+                question: "What is the role of the rop gene in pBR322?",
+                options: [
+                    "Antibiotic resistance",
+                    "Regulates copy number",
+                    "Cuts DNA",
+                    "Promotes transcription"
+                ],
+                correct: 1,
+                answer: "The rop gene regulates the copy number of pBR322 in E. coli."
+            },
+            {
+                question: "What is a disadvantage of cosmids compared to BACs?",
+                options: [
+                    "Smaller cloning capacity",
+                    "Greater instability",
+                    "No replication",
+                    "No selectable markers"
+                ],
+                correct: 1,
+                answer: "Cosmids are less stable than BACs for cloning large DNA fragments."
+            },
+            {
+                question: "What is the source of the restriction enzyme KpnI?",
+                options: [
+                    "Klebsiella pneumoniae",
+                    "Escherichia coli",
+                    "Bacillus subtilis",
+                    "Streptococcus pneumoniae"
+                ],
+                correct: 0,
+                answer: "KpnI is derived from Klebsiella pneumoniae."
+            },
+            {
+                question: "What is the recognition sequence for PstI?",
+                options: [
+                    "CTGCAG",
+                    "GAATTC",
+                    "GGATCC",
+                    "AAGCTT"
+                ],
+                correct: 0,
+                answer: "PstI cuts at the palindromic sequence CTGCAG."
+            },
+            {
+                question: "What is the role of competent cells in genetic engineering?",
+                options: [
+                    "Cut DNA",
+                    "Take up foreign DNA",
+                    "Join fragments",
+                    "Sequence DNA"
+                ],
+                correct: 1,
+                answer: "Competent cells are treated to take up foreign DNA during transformation."
+            },
+            {
+                question: "Which restriction enzyme is isoschizomer of SmaI?",
+                options: [
+                    "XmaI",
+                    "EcoRI",
+                    "BamHI",
+                    "HindIII"
+                ],
+                correct: 0,
+                answer: "XmaI is an isoschizomer of SmaI, cutting at the same sequence but producing sticky ends."
+            },
+            {
+                question: "What is the purpose of a reporter gene in a vector?",
+                options: [
+                    "Cut DNA",
+                    "Monitor gene expression",
+                    "Replicate DNA",
+                    "Join fragments"
+                ],
+                correct: 1,
+                answer: "A reporter gene monitors the expression of the inserted gene."
+            },
+            {
+                question: "Which vector is used for cloning in yeast cells?",
+                options: [
+                    "pBR322",
+                    "BAC",
+                    "YAC",
+                    "Cosmid"
+                ],
+                correct: 2,
+                answer: "YACs are specifically designed for cloning in yeast cells."
+            },
+            {
+                question: "What is the role of centromere sequences in YACs?",
+                options: [
+                    "Cut DNA",
+                    "Ensure chromosome segregation",
+                    "Join fragments",
+                    "Initiate replication"
+                ],
+                correct: 1,
+                answer: "Centromere sequences in YACs ensure proper chromosome segregation."
+            },
+            {
+                question: "What is the advantage of pBR322 for cloning?",
+                options: [
+                    "Large cloning capacity",
+                    "Multiple selectable markers",
+                    "No replication",
+                    "Single restriction site"
+                ],
+                correct: 1,
+                answer: "pBR322 has multiple selectable markers, like ampicillin and tetracycline resistance."
+            },
+            {
+                question: "What is the recognition sequence for BamHI?",
+                options: [
+                    "GGATCC",
+                    "GAATTC",
+                    "AAGCTT",
+                    "CTGCAG"
+                ],
+                correct: 0,
+                answer: "BamHI cuts at the palindromic sequence GGATCC."
+            },
+            {
+                question: "What is the role of telomeric sequences in YACs?",
+                options: [
+                    "Cut DNA",
+                    "Stabilize chromosome ends",
+                    "Join fragments",
+                    "Replicate DNA"
+                ],
+                correct: 1,
+                answer: "Telomeric sequences stabilize the ends of YACs, mimicking chromosomes."
+            },
+            {
+                question: "Which restriction enzyme cuts at GGTACC?",
+                options: [
+                    "EcoRI",
+                    "BamHI",
+                    "KpnI",
+                    "HindIII"
+                ],
+                correct: 2,
+                answer: "KpnI cuts at the palindromic sequence GGTACC."
+            },
+            {
+                question: "What is the purpose of blue-white screening in cloning?",
+                options: [
+                    "Cut DNA",
+                    "Detect recombinant vectors",
+                    "Replicate DNA",
+                    "Join fragments"
+                ],
+                correct: 1,
+                answer: "Blue-white screening detects recombinant vectors using lacZ gene disruption."
+            },
+            {
+                question: "What is the role of the F1 origin in BACs?",
+                options: [
+                    "Cut DNA",
+                    "Allows single-stranded replication",
+                    "Joins fragments",
+                    "Transcribes RNA"
+                ],
+                correct: 1,
+                answer: "The F1 origin in BACs allows single-stranded replication for sequencing."
+            },
+            {
+                question: "What is the source of the restriction enzyme SalI?",
+                options: [
+                    "Streptomyces albus",
+                    "Escherichia coli",
+                    "Bacillus subtilis",
+                    "Haemophilus influenzae"
+                ],
+                correct: 0,
+                answer: "SalI is derived from Streptomyces albus."
+            },
+            {
+                question: "What is the recognition sequence for SalI?",
+                options: [
+                    "GTCGAC",
+                    "GAATTC",
+                    "GGATCC",
+                    "AAGCTT"
+                ],
+                correct: 0,
+                answer: "SalI cuts at the palindromic sequence GTCGAC."
+            },
+            {
+                question: "What is the role of transformation in genetic engineering?",
+                options: [
+                    "Cut DNA",
+                    "Introduce DNA into host cells",
+                    "Join fragments",
+                    "Sequence DNA"
+                ],
+                correct: 1,
+                answer: "Transformation introduces recombinant DNA into host cells."
+            },
+            {
+                question: "Which restriction enzyme is used in pBR322 cloning?",
+                options: [
+                    "EcoRI",
+                    "SmaI",
+                    "HaeIII",
+                    "AluI"
+                ],
+                correct: 0,
+                answer: "EcoRI is commonly used in pBR322 cloning due to its multiple cloning site."
+            },
+            {
+                question: "What is the advantage of cosmids over plasmids?",
+                options: [
+                    "Smaller size",
+                    "Larger cloning capacity",
+                    "No replication",
+                    "Fewer restriction sites"
+                ],
+                correct: 1,
+                answer: "Cosmids have a larger cloning capacity than typical plasmids."
+            },
+            {
+                question: "What is the role of restriction enzymes in DNA fingerprinting?",
+                options: [
+                    "Amplify DNA",
+                    "Cut DNA at specific sites",
+                    "Join DNA fragments",
+                    "Sequence DNA"
+                ],
+                correct: 1,
+                answer: "Restriction enzymes cut DNA at specific sites for DNA fingerprinting."
+            },
+            {
+                question: "What is the purpose of a shuttle vector?",
+                options: [
+                    "Replicate in multiple hosts",
+                    "Cut DNA",
+                    "Join fragments",
+                    "Sequence DNA"
+                ],
+                correct: 0,
+                answer: "Shuttle vectors can replicate in multiple host organisms, like E. coli and yeast."
+            },
+            {
+                question: "Which restriction enzyme cuts at AGCT?",
+                options: [
+                    "AluI",
+                    "EcoRI",
+                    "BamHI",
+                    "HindIII"
+                ],
+                correct: 0,
+                answer: "AluI cuts at the palindromic sequence AGCT, producing blunt ends."
+            },
+            {
+                question: "What is the role of the lacZ gene in pBR322 cloning?",
+                options: [
+                    "Antibiotic resistance",
+                    "Screening recombinants",
+                    "DNA replication",
+                    "RNA transcription"
+                ],
+                correct: 1,
+                answer: "The lacZ gene is used for blue-white screening to identify recombinants."
+            },
+            {
+                question: "What is the significance of palindromic sequences in biotechnology?",
+                options: [
+                    "Prevent replication",
+                    "Serve as restriction enzyme sites",
+                    "Inhibit transcription",
+                    "Reduce mutation"
+                ],
+                correct: 1,
+                answer: "Palindromic sequences are recognition sites for restriction enzymes."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

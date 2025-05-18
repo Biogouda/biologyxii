@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbes in Human Welfare MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Microbes in Human Welfare MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Which microbe is used in the production of curd in household food processing?",
+                options: [
+                    "Saccharomyces cerevisiae",
+                    "Lactobacillus",
+                    "Aspergillus niger",
+                    "Rhizobium"
+                ],
+                correct: 1,
+                answer: "Lactobacillus converts milk into curd by fermenting lactose into lactic acid."
+            },
+            {
+                question: "What is the role of yeast in bread making?",
+                options: [
+                    "Produces lactic acid",
+                    "Releases carbon dioxide",
+                    "Fixes nitrogen",
+                    "Degrades cellulose"
+                ],
+                correct: 1,
+                answer: "Yeast (Saccharomyces cerevisiae) releases carbon dioxide, causing bread dough to rise."
+            },
+            {
+                question: "Which microbe is used to ferment idli and dosa batter?",
+                options: [
+                    "Lactobacillus",
+                    "Penicillium",
+                    "Clostridium",
+                    "Azotobacter"
+                ],
+                correct: 0,
+                answer: "Lactobacillus ferments the batter for idli and dosa, producing a sour flavor."
+            },
+            {
+                question: "What is the primary microbe in yogurt production?",
+                options: [
+                    "Streptococcus thermophilus",
+                    "Escherichia coli",
+                    "Bacillus subtilis",
+                    "Pseudomonas"
+                ],
+                correct: 0,
+                answer: "Streptococcus thermophilus, along with Lactobacillus, is used in yogurt production."
+            },
+            {
+                question: "Which microbe is involved in the fermentation of cheese?",
+                options: [
+                    "Lactococcus lactis",
+                    "Rhizopus",
+                    "Trichoderma",
+                    "Methanobacterium"
+                ],
+                correct: 0,
+                answer: "Lactococcus lactis is used in cheese fermentation to develop flavor and texture."
+            },
+            {
+                question: "Which microbe is used in the industrial production of ethanol?",
+                options: [
+                    "Saccharomyces cerevisiae",
+                    "Aspergillus oryzae",
+                    "Lactobacillus",
+                    "Bacillus thuringiensis"
+                ],
+                correct: 0,
+                answer: "Saccharomyces cerevisiae ferments sugars to produce ethanol industrially."
+            },
+            {
+                question: "What is the role of Aspergillus niger in industrial production?",
+                options: [
+                    "Produces citric acid",
+                    "Fixes nitrogen",
+                    "Degrades sewage",
+                    "Produces biogas"
+                ],
+                correct: 0,
+                answer: "Aspergillus niger is used industrially to produce citric acid."
+            },
+            {
+                question: "Which microbe produces penicillin, an antibiotic?",
+                options: [
+                    "Penicillium chrysogenum",
+                    "Streptomyces",
+                    "Clostridium",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Penicillium chrysogenum is the source of the antibiotic penicillin."
+            },
+            {
+                question: "What is the role of Streptomyces in industrial production?",
+                options: [
+                    "Produces ethanol",
+                    "Produces antibiotics",
+                    "Ferments milk",
+                    "Fixes nitrogen"
+                ],
+                correct: 1,
+                answer: "Streptomyces species produce antibiotics like streptomycin."
+            },
+            {
+                question: "Which microbe is used to produce acetic acid (vinegar)?",
+                options: [
+                    "Acetobacter",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Rhizopus"
+                ],
+                correct: 0,
+                answer: "Acetobacter oxidizes ethanol to produce acetic acid in vinegar production."
+            },
+            {
+                question: "Which microbe is used in sewage treatment to degrade organic matter?",
+                options: [
+                    "Pseudomonas",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Azotobacter"
+                ],
+                correct: 0,
+                answer: "Pseudomonas degrades organic matter in sewage treatment processes."
+            },
+            {
+                question: "What is the role of nitrifying bacteria in sewage treatment?",
+                options: [
+                    "Convert ammonia to nitrates",
+                    "Produce biogas",
+                    "Ferment sugars",
+                    "Fix nitrogen"
+                ],
+                correct: 0,
+                answer: "Nitrifying bacteria, like Nitrosomonas, convert ammonia to nitrates in sewage treatment."
+            },
+            {
+                question: "Which microbe produces methane in anaerobic sewage treatment?",
+                options: [
+                    "Methanobacterium",
+                    "Lactobacillus",
+                    "Aspergillus",
+                    "Trichoderma"
+                ],
+                correct: 0,
+                answer: "Methanobacterium produces methane during anaerobic sewage treatment."
+            },
+            {
+                question: "What is the purpose of activated sludge in sewage treatment?",
+                options: [
+                    "Produces ethanol",
+                    "Degrades organic matter",
+                    "Fixes nitrogen",
+                    "Ferments milk"
+                ],
+                correct: 1,
+                answer: "Activated sludge contains microbes that degrade organic matter in sewage."
+            },
+            {
+                question: "Which microbe is used in biogas production?",
+                options: [
+                    "Methanogens",
+                    "Saccharomyces",
+                    "Rhizobium",
+                    "Penicillium"
+                ],
+                correct: 0,
+                answer: "Methanogens, like Methanobacterium, produce methane in biogas plants."
+            },
+            {
+                question: "What is the primary gas produced in biogas plants?",
+                options: [
+                    "Carbon dioxide",
+                    "Methane",
+                    "Nitrogen",
+                    "Oxygen"
+                ],
+                correct: 1,
+                answer: "Methane is the primary gas produced in biogas plants for energy."
+            },
+            {
+                question: "Which microbe is used as a biocontrol agent against insect pests?",
+                options: [
+                    "Bacillus thuringiensis",
+                    "Lactobacillus",
+                    "Aspergillus",
+                    "Rhizopus"
+                ],
+                correct: 0,
+                answer: "Bacillus thuringiensis produces toxins to control insect pests."
+            },
+            {
+                question: "What is the role of Trichoderma in biocontrol?",
+                options: [
+                    "Controls fungal pathogens",
+                    "Produces antibiotics",
+                    "Fixes nitrogen",
+                    "Ferments sugars"
+                ],
+                correct: 0,
+                answer: "Trichoderma controls fungal pathogens in plants as a biocontrol agent."
+            },
+            {
+                question: "Which microbe is used as a biofertilizer to fix nitrogen?",
+                options: [
+                    "Rhizobium",
+                    "Saccharomyces",
+                    "Methanobacterium",
+                    "Penicillium"
+                ],
+                correct: 0,
+                answer: "Rhizobium fixes nitrogen in leguminous plants, acting as a biofertilizer."
+            },
+            {
+                question: "What is the role of Azotobacter as a biofertilizer?",
+                options: [
+                    "Produces ethanol",
+                    "Fixes nitrogen in soil",
+                    "Degrades organic matter",
+                    "Controls pests"
+                ],
+                correct: 1,
+                answer: "Azotobacter fixes nitrogen in soil, enhancing soil fertility."
+            },
+            {
+                question: "Which microbe is used in the production of soy sauce?",
+                options: [
+                    "Aspergillus oryzae",
+                    "Lactobacillus",
+                    "Saccharomyces",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Aspergillus oryzae is used in the fermentation of soy sauce."
+            },
+            {
+                question: "What is the role of microbes in household pickling?",
+                options: [
+                    "Produce lactic acid",
+                    "Fix nitrogen",
+                    "Degrade cellulose",
+                    "Produce methane"
+                ],
+                correct: 0,
+                answer: "Microbes like Lactobacillus produce lactic acid for pickling."
+            },
+            {
+                question: "Which microbe is used in the production of wine?",
+                options: [
+                    "Saccharomyces cerevisiae",
+                    "Aspergillus niger",
+                    "Lactococcus",
+                    "Pseudomonas"
+                ],
+                correct: 0,
+                answer: "Saccharomyces cerevisiae ferments grape juice to produce wine."
+            },
+            {
+                question: "What is the role of Propionibacterium in cheese production?",
+                options: [
+                    "Produces holes in Swiss cheese",
+                    "Fixes nitrogen",
+                    "Produces ethanol",
+                    "Degrades sewage"
+                ],
+                correct: 0,
+                answer: "Propionibacterium produces carbon dioxide, creating holes in Swiss cheese."
+            },
+            {
+                question: "Which microbe is used industrially to produce lactic acid?",
+                options: [
+                    "Lactobacillus",
+                    "Saccharomyces",
+                    "Methanobacterium",
+                    "Trichoderma"
+                ],
+                correct: 0,
+                answer: "Lactobacillus is used to produce lactic acid industrially."
+            },
+            {
+                question: "What is the role of Clostridium in industrial production?",
+                options: [
+                    "Produces acetone",
+                    "Fixes nitrogen",
+                    "Ferments milk",
+                    "Controls pests"
+                ],
+                correct: 0,
+                answer: "Clostridium species produce acetone and butanol industrially."
+            },
+            {
+                question: "Which microbe is used in the production of vitamin B12?",
+                options: [
+                    "Propionibacterium",
+                    "Saccharomyces",
+                    "Rhizobium",
+                    "Aspergillus"
+                ],
+                correct: 0,
+                answer: "Propionibacterium freudenreichii is used to produce vitamin B12."
+            },
+            {
+                question: "What is the role of microbes in aerobic sewage treatment?",
+                options: [
+                    "Produce methane",
+                    "Degrade organic matter",
+                    "Fix nitrogen",
+                    "Ferment sugars"
+                ],
+                correct: 1,
+                answer: "Microbes degrade organic matter in aerobic sewage treatment."
+            },
+            {
+                question: "Which microbe helps in denitrification in sewage treatment?",
+                options: [
+                    "Pseudomonas",
+                    "Lactobacillus",
+                    "Saccharomyces",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Pseudomonas performs denitrification, converting nitrates to nitrogen gas."
+            },
+            {
+                question: "What is the role of Anabaena as a biofertilizer?",
+                options: [
+                    "Fixes nitrogen in rice fields",
+                    "Produces antibiotics",
+                    "Degrades sewage",
+                    "Controls pests"
+                ],
+                correct: 0,
+                answer: "Anabaena fixes nitrogen in rice fields, acting as a biofertilizer."
+            },
+            {
+                question: "Which microbe is used as a biocontrol agent against caterpillars?",
+                options: [
+                    "Bacillus thuringiensis",
+                    "Aspergillus",
+                    "Lactobacillus",
+                    "Methanobacterium"
+                ],
+                correct: 0,
+                answer: "Bacillus thuringiensis produces toxins to control caterpillars."
+            },
+            {
+                question: "What is the role of Saccharomyces in beer production?",
+                options: [
+                    "Produces ethanol",
+                    "Fixes nitrogen",
+                    "Degrades organic matter",
+                    "Controls fungi"
+                ],
+                correct: 0,
+                answer: "Saccharomyces ferments sugars to produce ethanol in beer."
+            },
+            {
+                question: "Which microbe is used in the production of miso?",
+                options: [
+                    "Aspergillus oryzae",
+                    "Lactobacillus",
+                    "Rhizobium",
+                    "Pseudomonas"
+                ],
+                correct: 0,
+                answer: "Aspergillus oryzae is used in the fermentation of miso."
+            },
+            {
+                question: "What is the role of microbes in kimchi production?",
+                options: [
+                    "Produce lactic acid",
+                    "Fix nitrogen",
+                    "Produce methane",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes like Lactobacillus produce lactic acid in kimchi fermentation."
+            },
+            {
+                question: "Which microbe is used industrially to produce enzymes like amylase?",
+                options: [
+                    "Aspergillus niger",
+                    "Saccharomyces",
+                    "Lactococcus",
+                    "Methanobacterium"
+                ],
+                correct: 0,
+                answer: "Aspergillus niger produces enzymes like amylase for industrial use."
+            },
+            {
+                question: "What is the role of Nitrosomonas in sewage treatment?",
+                options: [
+                    "Converts ammonia to nitrite",
+                    "Produces biogas",
+                    "Ferments sugars",
+                    "Fixes nitrogen"
+                ],
+                correct: 0,
+                answer: "Nitrosomonas converts ammonia to nitrite in sewage treatment."
+            },
+            {
+                question: "Which microbe is used in biogas production from cow dung?",
+                options: [
+                    "Methanococcus",
+                    "Lactobacillus",
+                    "Aspergillus",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Methanococcus produces methane from cow dung in biogas plants."
+            },
+            {
+                question: "What is the role of Beauveria bassiana as a biocontrol agent?",
+                options: [
+                    "Controls insect pests",
+                    "Fixes nitrogen",
+                    "Produces ethanol",
+                    "Degrades sewage"
+                ],
+                correct: 0,
+                answer: "Beauveria bassiana is a fungus used to control insect pests."
+            },
+            {
+                question: "Which microbe is used as a biofertilizer in paddy fields?",
+                options: [
+                    "Nostoc",
+                    "Saccharomyces",
+                    "Penicillium",
+                    "Clostridium"
+                ],
+                correct: 0,
+                answer: "Nostoc, a cyanobacterium, fixes nitrogen in paddy fields."
+            },
+            {
+                question: "What is the role of microbes in household sauerkraut production?",
+                options: [
+                    "Produce lactic acid",
+                    "Fix nitrogen",
+                    "Produce methane",
+                    "Control fungi"
+                ],
+                correct: 0,
+                answer: "Microbes like Lactobacillus produce lactic acid in sauerkraut fermentation."
+            },
+            {
+                question: "Which microbe is used in the production of citric acid?",
+                options: [
+                    "Aspergillus niger",
+                    "Lactobacillus",
+                    "Rhizobium",
+                    "Saccharomyces"
+                ],
+                correct: 0,
+                answer: "Aspergillus niger is used to produce citric acid industrially."
+            },
+            {
+                question: "What is the role of Saccharomyces in industrial alcohol production?",
+                options: [
+                    "Produces ethanol",
+                    "Fixes nitrogen",
+                    "Degrades organic matter",
+                    "Controls pests"
+                ],
+                correct: 0,
+                answer: "Saccharomyces ferments sugars to produce ethanol industrially."
+            },
+            {
+                question: "Which microbe is used in the production of streptomycin?",
+                options: [
+                    "Streptomyces griseus",
+                    "Lactococcus",
+                    "Methanobacterium",
+                    "Aspergillus"
+                ],
+                correct: 0,
+                answer: "Streptomyces griseus produces the antibiotic streptomycin."
+            },
+            {
+                question: "What is the role of microbes in anaerobic sewage treatment?",
+                options: [
+                    "Produce methane",
+                    "Fix nitrogen",
+                    "Ferment milk",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes like methanogens produce methane in anaerobic sewage treatment."
+            },
+            {
+                question: "Which microbe is used as a biocontrol agent against soil-borne pathogens?",
+                options: [
+                    "Trichoderma",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Trichoderma controls soil-borne fungal pathogens in agriculture."
+            },
+            {
+                question: "What is the role of Azospirillum as a biofertilizer?",
+                options: [
+                    "Fixes nitrogen",
+                    "Produces ethanol",
+                    "Degrades sewage",
+                    "Controls insects"
+                ],
+                correct: 0,
+                answer: "Azospirillum fixes nitrogen, enhancing soil fertility for crops."
+            },
+            {
+                question: "Which microbe is used in the production of tempeh?",
+                options: [
+                    "Rhizopus oligosporus",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Pseudomonas"
+                ],
+                correct: 0,
+                answer: "Rhizopus oligosporus ferments soybeans to produce tempeh."
+            },
+            {
+                question: "What is the role of microbes in household buttermilk production?",
+                options: [
+                    "Produce lactic acid",
+                    "Fix nitrogen",
+                    "Produce methane",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes like Lactobacillus produce lactic acid in buttermilk."
+            },
+            {
+                question: "Which microbe is used industrially to produce gluconic acid?",
+                options: [
+                    "Aspergillus niger",
+                    "Saccharomyces",
+                    "Rhizobium",
+                    "Lactococcus"
+                ],
+                correct: 0,
+                answer: "Aspergillus niger is used to produce gluconic acid industrially."
+            },
+            {
+                question: "What is the role of Nitrobacter in sewage treatment?",
+                options: [
+                    "Converts nitrite to nitrate",
+                    "Produces biogas",
+                    "Ferments sugars",
+                    "Fixes nitrogen"
+                ],
+                correct: 0,
+                answer: "Nitrobacter converts nitrite to nitrate in sewage treatment."
+            },
+            {
+                question: "Which microbe is used in biogas production from organic waste?",
+                options: [
+                    "Methanosarcina",
+                    "Lactobacillus",
+                    "Aspergillus",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Methanosarcina produces methane from organic waste in biogas production."
+            },
+            {
+                question: "What is the role of Pseudomonas fluorescens as a biocontrol agent?",
+                options: [
+                    "Controls plant pathogens",
+                    "Produces ethanol",
+                    "Fixes nitrogen",
+                    "Ferments milk"
+                ],
+                correct: 0,
+                answer: "Pseudomonas fluorescens controls plant pathogens in agriculture."
+            },
+            {
+                question: "Which microbe is used as a biofertilizer for phosphate solubilization?",
+                options: [
+                    "Bacillus megaterium",
+                    "Saccharomyces",
+                    "Methanobacterium",
+                    "Lactococcus"
+                ],
+                correct: 0,
+                answer: "Bacillus megaterium solubilizes phosphates, acting as a biofertilizer."
+            },
+            {
+                question: "Which microbe is used in the production of sake?",
+                options: [
+                    "Aspergillus oryzae",
+                    "Lactobacillus",
+                    "Rhizobium",
+                    "Pseudomonas"
+                ],
+                correct: 0,
+                answer: "Aspergillus oryzae is used in sake production to ferment rice."
+            },
+            {
+                question: "What is the role of microbes in household vinegar production?",
+                options: [
+                    "Produce acetic acid",
+                    "Fix nitrogen",
+                    "Produce methane",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes like Acetobacter produce acetic acid in vinegar production."
+            },
+            {
+                question: "Which microbe is used industrially to produce insulin?",
+                options: [
+                    "Escherichia coli",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Methanobacterium"
+                ],
+                correct: 0,
+                answer: "Genetically engineered Escherichia coli produces insulin industrially."
+            },
+            {
+                question: "What is the role of microbes in trickling filters for sewage treatment?",
+                options: [
+                    "Degrade organic matter",
+                    "Produce ethanol",
+                    "Fix nitrogen",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes in trickling filters degrade organic matter in sewage."
+            },
+            {
+                question: "Which microbe is used in biogas production from plant waste?",
+                options: [
+                    "Methanobrevibacter",
+                    "Lactobacillus",
+                    "Aspergillus",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Methanobrevibacter produces methane from plant waste in biogas plants."
+            },
+            {
+                question: "What is the role of Metarhizium as a biocontrol agent?",
+                options: [
+                    "Controls insect pests",
+                    "Fixes nitrogen",
+                    "Produces ethanol",
+                    "Degrades sewage"
+                ],
+                correct: 0,
+                answer: "Metarhizium is a fungus used to control insect pests."
+            },
+            {
+                question: "Which microbe is used as a biofertilizer for mycorrhizal association?",
+                options: [
+                    "Glomus",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Pseudomonas"
+                ],
+                correct: 0,
+                answer: "Glomus forms mycorrhizal associations, enhancing nutrient uptake."
+            },
+            {
+                question: "Which microbe is used in the production of Roquefort cheese?",
+                options: [
+                    "Penicillium roqueforti",
+                    "Saccharomyces",
+                    "Rhizobium",
+                    "Lactococcus"
+                ],
+                correct: 0,
+                answer: "Penicillium roqueforti is used to produce the blue veins in Roquefort cheese."
+            },
+            {
+                question: "What is the role of microbes in household kombucha production?",
+                options: [
+                    "Produce acetic acid",
+                    "Fix nitrogen",
+                    "Produce methane",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes like Acetobacter produce acetic acid in kombucha fermentation."
+            },
+            {
+                question: "Which microbe is used industrially to produce xanthan gum?",
+                options: [
+                    "Xanthomonas campestris",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Methanobacterium"
+                ],
+                correct: 0,
+                answer: "Xanthomonas campestris produces xanthan gum, used as a food thickener."
+            },
+            {
+                question: "What is the role of microbes in oxidation ponds for sewage treatment?",
+                options: [
+                    "Degrade organic matter",
+                    "Produce ethanol",
+                    "Fix nitrogen",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes in oxidation ponds degrade organic matter in sewage."
+            },
+            {
+                question: "Which microbe is used in biogas production from municipal waste?",
+                options: [
+                    "Methanosaeta",
+                    "Lactobacillus",
+                    "Aspergillus",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Methanosaeta produces methane from municipal waste in biogas plants."
+            },
+            {
+                question: "What is the role of Verticillium as a biocontrol agent?",
+                options: [
+                    "Controls insect pests",
+                    "Fixes nitrogen",
+                    "Produces ethanol",
+                    "Degrades sewage"
+                ],
+                correct: 0,
+                answer: "Verticillium is used to control insect pests in agriculture."
+            },
+            {
+                question: "Which microbe is used as a biofertilizer for sulfur oxidation?",
+                options: [
+                    "Thiobacillus",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Pseudomonas"
+                ],
+                correct: 0,
+                answer: "Thiobacillus oxidizes sulfur, enhancing soil fertility."
+            },
+            {
+                question: "Which microbe is used in the production of natto?",
+                options: [
+                    "Bacillus subtilis",
+                    "Saccharomyces",
+                    "Rhizobium",
+                    "Lactococcus"
+                ],
+                correct: 0,
+                answer: "Bacillus subtilis ferments soybeans to produce natto."
+            },
+            {
+                question: "What is the role of microbes in household sourdough bread production?",
+                options: [
+                    "Produce lactic acid",
+                    "Fix nitrogen",
+                    "Produce methane",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes like Lactobacillus produce lactic acid in sourdough fermentation."
+            },
+            {
+                question: "Which microbe is used industrially to produce aspartic acid?",
+                options: [
+                    "Corynebacterium glutamicum",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Methanobacterium"
+                ],
+                correct: 0,
+                answer: "Corynebacterium glutamicum is used to produce aspartic acid industrially."
+            },
+            {
+                question: "What is the role of microbes in septic tanks for sewage treatment?",
+                options: [
+                    "Degrade organic matter",
+                    "Produce ethanol",
+                    "Fix nitrogen",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes in septic tanks degrade organic matter in sewage."
+            },
+            {
+                question: "Which microbe is used in biogas production from sludge?",
+                options: [
+                    "Methanotrix",
+                    "Lactobacillus",
+                    "Aspergillus",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Methanotrix produces methane from sludge in biogas production."
+            },
+            {
+                question: "What is the role of Paecilomyces as a biocontrol agent?",
+                options: [
+                    "Controls nematodes",
+                    "Fixes nitrogen",
+                    "Produces ethanol",
+                    "Degrades sewage"
+                ],
+                correct: 0,
+                answer: "Paecilomyces is used to control nematodes in agriculture."
+            },
+            {
+                question: "Which microbe is used as a biofertilizer for potassium solubilization?",
+                options: [
+                    "Bacillus mucilaginosus",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Pseudomonas"
+                ],
+                correct: 0,
+                answer: "Bacillus mucilaginosus solubilizes potassium, acting as a biofertilizer."
+            },
+            {
+                question: "Which microbe is used in the production of kefir?",
+                options: [
+                    "Lactobacillus kefiranofaciens",
+                    "Saccharomyces",
+                    "Rhizobium",
+                    "Aspergillus"
+                ],
+                correct: 0,
+                answer: "Lactobacillus kefiranofaciens is used in kefir fermentation."
+            },
+            {
+                question: "What is the role of microbes in household fermented pickles?",
+                options: [
+                    "Produce lactic acid",
+                    "Fix nitrogen",
+                    "Produce methane",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes like Lactobacillus produce lactic acid in fermented pickles."
+            },
+            {
+                question: "Which microbe is used industrially to produce lysine?",
+                options: [
+                    "Corynebacterium glutamicum",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Methanobacterium"
+                ],
+                correct: 0,
+                answer: "Corynebacterium glutamicum is used to produce lysine industrially."
+            },
+            {
+                question: "What is the role of microbes in anaerobic digesters for sewage treatment?",
+                options: [
+                    "Produce methane",
+                    "Fix nitrogen",
+                    "Ferment milk",
+                    "Control pests"
+                ],
+                correct: 0,
+                answer: "Microbes like methanogens produce methane in anaerobic digesters."
+            },
+            {
+                question: "Which microbe is used in biogas production from food waste?",
+                options: [
+                    "Methanobacterium",
+                    "Lactobacillus",
+                    "Aspergillus",
+                    "Rhizobium"
+                ],
+                correct: 0,
+                answer: "Methanobacterium produces methane from food waste in biogas production."
+            },
+            {
+                question: "What is the role of Nomuraea rileyi as a biocontrol agent?",
+                options: [
+                    "Controls insect pests",
+                    "Fixes nitrogen",
+                    "Produces ethanol",
+                    "Degrades sewage"
+                ],
+                correct: 0,
+                answer: "Nomuraea rileyi is used to control insect pests in agriculture."
+            },
+            {
+                question: "Which microbe is used as a biofertilizer for zinc solubilization?",
+                options: [
+                    "Pseudomonas fluorescens",
+                    "Saccharomyces",
+                    "Lactobacillus",
+                    "Methanobacterium"
+                ],
+                correct: 0,
+                answer: "Pseudomonas fluorescens solubilizes zinc, acting as a biofertilizer."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

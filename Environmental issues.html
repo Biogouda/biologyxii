@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Issues MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Environmental Issues MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is a primary source of air pollution?",
+                options: [
+                    "Deforestation",
+                    "Vehicle emissions",
+                    "Water treatment",
+                    "Organic farming"
+                ],
+                correct: 1,
+                answer: "Vehicle emissions release pollutants like carbon monoxide and nitrogen oxides, causing air pollution."
+            },
+            {
+                question: "Which pollutant is responsible for acid rain?",
+                options: [
+                    "Carbon dioxide",
+                    "Sulfur dioxide",
+                    "Ozone",
+                    "Methane"
+                ],
+                correct: 1,
+                answer: "Sulfur dioxide combines with water vapor to form sulfuric acid, causing acid rain."
+            },
+            {
+                question: "What is a method to control air pollution?",
+                options: [
+                    "Increase fossil fuel use",
+                    "Use electrostatic precipitators",
+                    "Burn more coal",
+                    "Promote deforestation"
+                ],
+                correct: 1,
+                answer: "Electrostatic precipitators remove particulate matter from industrial emissions."
+            },
+            {
+                question: "Which device reduces vehicle-related air pollution?",
+                options: [
+                    "Catalytic converter",
+                    "Fuel injector",
+                    "Radiator",
+                    "Air filter"
+                ],
+                correct: 0,
+                answer: "Catalytic converters reduce harmful emissions like carbon monoxide and nitrogen oxides."
+            },
+            {
+                question: "What is particulate matter in air pollution?",
+                options: [
+                    "Gaseous pollutants",
+                    "Tiny solid or liquid particles",
+                    "Dissolved chemicals",
+                    "Ozone molecules"
+                ],
+                correct: 1,
+                answer: "Particulate matter consists of tiny solid or liquid particles suspended in the air."
+            },
+            {
+                question: "Which gas is a major contributor to smog?",
+                options: [
+                    "Carbon dioxide",
+                    "Ozone",
+                    "Nitrogen",
+                    "Oxygen"
+                ],
+                correct: 1,
+                answer: "Ozone at ground level contributes to smog, harming health and visibility."
+            },
+            {
+                question: "What is a health effect of air pollution?",
+                options: [
+                    "Improved lung function",
+                    "Respiratory diseases",
+                    "Increased immunity",
+                    "Better vision"
+                ],
+                correct: 1,
+                answer: "Air pollution causes respiratory diseases like asthma and bronchitis."
+            },
+            {
+                question: "What is a source of water pollution?",
+                options: [
+                    "Rainwater harvesting",
+                    "Industrial effluents",
+                    "Organic farming",
+                    "Afforestation"
+                ],
+                correct: 1,
+                answer: "Industrial effluents release toxic chemicals into water bodies, causing pollution."
+            },
+            {
+                question: "Which pollutant causes eutrophication in water bodies?",
+                options: [
+                    "Nitrates",
+                    "Carbon dioxide",
+                    "Sulfur dioxide",
+                    "Ozone"
+                ],
+                correct: 0,
+                answer: "Nitrates from fertilizers cause eutrophication, leading to algal blooms."
+            },
+            {
+                question: "What is a method to control water pollution?",
+                options: [
+                    "Dumping waste in rivers",
+                    "Sewage treatment plants",
+                    "Increasing industrial discharge",
+                    "Using more pesticides"
+                ],
+                correct: 1,
+                answer: "Sewage treatment plants remove contaminants before water is released."
+            },
+            {
+                question: "Which technique removes heavy metals from water?",
+                options: [
+                    "Filtration",
+                    "Bioremediation",
+                    "Incineration",
+                    "Landfilling"
+                ],
+                correct: 1,
+                answer: "Bioremediation uses microorganisms to remove heavy metals from water."
+            },
+            {
+                question: "What is a health effect of water pollution?",
+                options: [
+                    "Improved digestion",
+                    "Waterborne diseases",
+                    "Enhanced immunity",
+                    "Better skin health"
+                ],
+                correct: 1,
+                answer: "Water pollution causes waterborne diseases like cholera and dysentery."
+            },
+            {
+                question: "Which water pollutant is linked to oil spills?",
+                options: [
+                    "Nitrates",
+                    "Hydrocarbons",
+                    "Phosphates",
+                    "Sulfur"
+                ],
+                correct: 1,
+                answer: "Hydrocarbons from oil spills pollute water, harming aquatic life."
+            },
+            {
+                question: "What is a biological method to treat water pollution?",
+                options: [
+                    "Chemical precipitation",
+                    "Activated sludge process",
+                    "Incineration",
+                    "Landfilling"
+                ],
+                correct: 1,
+                answer: "The activated sludge process uses microbes to treat sewage."
+            },
+            {
+                question: "What are agrochemicals?",
+                options: [
+                    "Organic fertilizers",
+                    "Pesticides and fertilizers",
+                    "Natural compost",
+                    "Biodegradable waste"
+                ],
+                correct: 1,
+                answer: "Agrochemicals include pesticides and fertilizers used in agriculture."
+            },
+            {
+                question: "What is an effect of agrochemicals on soil?",
+                options: [
+                    "Increased fertility",
+                    "Soil degradation",
+                    "Enhanced biodiversity",
+                    "Improved water retention"
+                ],
+                correct: 1,
+                answer: "Agrochemicals can cause soil degradation by reducing fertility."
+            },
+            {
+                question: "How do agrochemicals affect aquatic ecosystems?",
+                options: [
+                    "Increase fish populations",
+                    "Cause eutrophication",
+                    "Enhance water clarity",
+                    "Reduce algal growth"
+                ],
+                correct: 1,
+                answer: "Agrochemicals cause eutrophication, leading to oxygen depletion in water."
+            },
+            {
+                question: "What is a health impact of pesticide exposure?",
+                options: [
+                    "Improved immunity",
+                    "Neurological disorders",
+                    "Better digestion",
+                    "Increased energy"
+                ],
+                correct: 1,
+                answer: "Pesticide exposure can cause neurological disorders and other health issues."
+            },
+            {
+                question: "Which practice reduces agrochemical pollution?",
+                options: [
+                    "Monoculture",
+                    "Integrated pest management",
+                    "Excessive fertilizer use",
+                    "Burning crop residue"
+                ],
+                correct: 1,
+                answer: "Integrated pest management reduces reliance on harmful agrochemicals."
+            },
+            {
+                question: "What is solid waste management?",
+                options: [
+                    "Dumping waste in rivers",
+                    "Collection, treatment, and disposal of waste",
+                    "Burning all waste",
+                    "Ignoring waste"
+                ],
+                correct: 1,
+                answer: "Solid waste management involves the collection, treatment, and disposal of waste."
+            },
+            {
+                question: "Which method is part of solid waste management?",
+                options: [
+                    "Open burning",
+                    "Recycling",
+                    "Dumping in oceans",
+                    "Increasing waste"
+                ],
+                correct: 1,
+                answer: "Recycling is a key method in solid waste management."
+            },
+            {
+                question: "What is composting in solid waste management?",
+                options: [
+                    "Burning waste",
+                    "Converting organic waste to fertilizer",
+                    "Dumping waste in landfills",
+                    "Releasing waste into rivers"
+                ],
+                correct: 1,
+                answer: "Composting converts organic waste into nutrient-rich fertilizer."
+            },
+            {
+                question: "What is a benefit of recycling?",
+                options: [
+                    "Increased landfill use",
+                    "Reduced resource depletion",
+                    "More pollution",
+                    "Higher waste production"
+                ],
+                correct: 1,
+                answer: "Recycling reduces resource depletion and waste in landfills."
+            },
+            {
+                question: "What is a challenge in solid waste management?",
+                options: [
+                    "Effective recycling",
+                    "Segregation of waste",
+                    "Composting",
+                    "Reuse programs"
+                ],
+                correct: 1,
+                answer: "Segregation of waste is a challenge in effective waste management."
+            },
+            {
+                question: "What is radioactive waste?",
+                options: [
+                    "Household waste",
+                    "Waste emitting radiation",
+                    "Organic waste",
+                    "Plastic waste"
+                ],
+                correct: 1,
+                answer: "Radioactive waste emits radiation and requires special handling."
+            },
+            {
+                question: "Which source produces radioactive waste?",
+                options: [
+                    "Nuclear power plants",
+                    "Organic farming",
+                    "Paper recycling",
+                    "Water treatment"
+                ],
+                correct: 0,
+                answer: "Nuclear power plants produce radioactive waste from fuel processing."
+            },
+            {
+                question: "What is a method to manage radioactive waste?",
+                options: [
+                    "Dumping in rivers",
+                    "Deep geological disposal",
+                    "Open burning",
+                    "Surface storage"
+                ],
+                correct: 1,
+                answer: "Deep geological disposal isolates radioactive waste safely."
+            },
+            {
+                question: "Why is radioactive waste hazardous?",
+                options: [
+                    "It biodegrades quickly",
+                    "It emits harmful radiation",
+                    "It is non-toxic",
+                    "It supports plant growth"
+                ],
+                correct: 1,
+                answer: "Radioactive waste emits harmful radiation, posing health and environmental risks."
+            },
+            {
+                question: "What is a safety measure for radioactive waste?",
+                options: [
+                    "Store in plastic bags",
+                    "Use shielded containers",
+                    "Dump in oceans",
+                    "Burn in open air"
+                ],
+                correct: 1,
+                answer: "Shielded containers prevent radiation leakage from radioactive waste."
+            },
+            {
+                question: "What is the greenhouse effect?",
+                options: [
+                    "Cooling of Earth",
+                    "Trapping of heat by gases",
+                    "Ozone depletion",
+                    "Deforestation"
+                ],
+                correct: 1,
+                answer: "The greenhouse effect traps heat in the atmosphere by greenhouse gases."
+            },
+            {
+                question: "Which gas contributes most to the greenhouse effect?",
+                options: [
+                    "Oxygen",
+                    "Carbon dioxide",
+                    "Nitrogen",
+                    "Argon"
+                ],
+                correct: 1,
+                answer: "Carbon dioxide is the primary contributor to the greenhouse effect."
+            },
+            {
+                question: "What is a consequence of global warming?",
+                options: [
+                    "Stable climate",
+                    "Rising sea levels",
+                    "Decreased temperatures",
+                    "No effect on ecosystems"
+                ],
+                correct: 1,
+                answer: "Global warming causes rising sea levels due to melting ice caps."
+            },
+            {
+                question: "Which activity increases greenhouse gas emissions?",
+                options: [
+                    "Afforestation",
+                    "Burning fossil fuels",
+                    "Solar energy use",
+                    "Wind power"
+                ],
+                correct: 1,
+                answer: "Burning fossil fuels releases greenhouse gases like carbon dioxide."
+            },
+            {
+                question: "What is a mitigation strategy for global warming?",
+                options: [
+                    "Increase coal use",
+                    "Promote renewable energy",
+                    "Deforestation",
+                    "Burn more fossil fuels"
+                ],
+                correct: 1,
+                answer: "Promoting renewable energy reduces greenhouse gas emissions."
+            },
+            {
+                question: "What is ozone depletion?",
+                options: [
+                    "Increase in ozone levels",
+                    "Thinning of the ozone layer",
+                    "Cooling of the atmosphere",
+                    "Rise in sea levels"
+                ],
+                correct: 1,
+                answer: "Ozone depletion is the thinning of the ozone layer, allowing more UV radiation."
+            },
+            {
+                question: "Which chemical causes ozone depletion?",
+                options: [
+                    "Carbon dioxide",
+                    "Chlorofluorocarbons (CFCs)",
+                    "Oxygen",
+                    "Nitrogen"
+                ],
+                correct: 1,
+                answer: "CFCs release chlorine, which breaks down ozone molecules."
+            },
+            {
+                question: "What is a health effect of ozone depletion?",
+                options: [
+                    "Improved immunity",
+                    "Increased skin cancer",
+                    "Better vision",
+                    "Reduced allergies"
+                ],
+                correct: 1,
+                answer: "Ozone depletion increases UV exposure, leading to higher skin cancer rates."
+            },
+            {
+                question: "Which agreement addresses ozone depletion?",
+                options: [
+                    "Kyoto Protocol",
+                    "Montreal Protocol",
+                    "Paris Agreement",
+                    "Rio Declaration"
+                ],
+                correct: 1,
+                answer: "The Montreal Protocol phases out ozone-depleting substances like CFCs."
+            },
+            {
+                question: "What is a consequence of ozone depletion?",
+                options: [
+                    "Cooler climate",
+                    "Harm to marine ecosystems",
+                    "Increased rainfall",
+                    "Stable temperatures"
+                ],
+                correct: 1,
+                answer: "Ozone depletion harms marine ecosystems by increasing UV radiation."
+            },
+            {
+                question: "What is deforestation?",
+                options: [
+                    "Planting trees",
+                    "Clearing of forests",
+                    "Soil conservation",
+                    "Water purification"
+                ],
+                correct: 1,
+                answer: "Deforestation is the clearing of forests for agriculture or other uses."
+            },
+            {
+                question: "What is an environmental impact of deforestation?",
+                options: [
+                    "Increased biodiversity",
+                    "Loss of habitat",
+                    "Improved soil fertility",
+                    "Reduced carbon emissions"
+                ],
+                correct: 1,
+                answer: "Deforestation causes habitat loss, reducing biodiversity."
+            },
+            {
+                question: "How does deforestation contribute to global warming?",
+                options: [
+                    "Increases carbon sequestration",
+                    "Releases stored carbon",
+                    "Reduces greenhouse gases",
+                    "Cools the atmosphere"
+                ],
+                correct: 1,
+                answer: "Deforestation releases stored carbon, increasing greenhouse gas levels."
+            },
+            {
+                question: "What is a strategy to reduce deforestation?",
+                options: [
+                    "Promote logging",
+                    "Reforestation",
+                    "Increase agriculture",
+                    "Expand urbanization"
+                ],
+                correct: 1,
+                answer: "Reforestation restores forests, reducing deforestation impacts."
+            },
+            {
+                question: "What is a social impact of deforestation?",
+                options: [
+                    "Improved livelihoods",
+                    "Displacement of indigenous communities",
+                    "Increased forest cover",
+                    "Enhanced biodiversity"
+                ],
+                correct: 1,
+                answer: "Deforestation displaces indigenous communities reliant on forests."
+            },
+            {
+                question: "Which case study is a success story in air pollution control?",
+                options: [
+                    "Bhopal Gas Tragedy",
+                    "London Smog Reduction",
+                    "Chernobyl Disaster",
+                    "Minamata Bay"
+                ],
+                correct: 1,
+                answer: "The London Smog Reduction, via the Clean Air Act, reduced air pollution significantly."
+            },
+            {
+                question: "What was a key measure in the London Smog case study?",
+                options: [
+                    "Increased coal use",
+                    "Clean Air Act",
+                    "Promoted industrialization",
+                    "Ignored emissions"
+                ],
+                correct: 1,
+                answer: "The Clean Air Act introduced controls on coal burning, reducing smog in London."
+            },
+            {
+                question: "Which case study addresses water pollution success?",
+                options: [
+                    "Exxon Valdez Oil Spill",
+                    "Cleaning of River Thames",
+                    "Fukushima Disaster",
+                    "Love Canal"
+                ],
+                correct: 1,
+                answer: "The cleaning of the River Thames restored its ecosystem through pollution control."
+            },
+            {
+                question: "What was a key action in the River Thames cleanup?",
+                options: [
+                    "Dumping more waste",
+                    "Sewage treatment upgrades",
+                    "Increased industrial discharge",
+                    "No regulations"
+                ],
+                correct: 1,
+                answer: "Upgrading sewage treatment facilities helped clean the River Thames."
+            },
+            {
+                question: "Which case study is a success in ozone depletion control?",
+                options: [
+                    "Montreal Protocol",
+                    "Kyoto Protocol",
+                    "Paris Agreement",
+                    "Copenhagen Accord"
+                ],
+                correct: 0,
+                answer: "The Montreal Protocol successfully reduced ozone-depleting substances globally."
+            },
+            {
+                question: "What was a result of the Montreal Protocol?",
+                options: [
+                    "Increased CFC use",
+                    "Recovery of ozone layer",
+                    "More UV radiation",
+                    "No effect"
+                ],
+                correct: 1,
+                answer: "The Montreal Protocol led to the gradual recovery of the ozone layer."
+            },
+            {
+                question: "What is a common feature of environmental success stories?",
+                options: [
+                    "Ignoring regulations",
+                    "International cooperation",
+                    "Increased pollution",
+                    "No public involvement"
+                ],
+                correct: 1,
+                answer: "International cooperation is key to environmental success stories."
+            },
+            {
+                question: "What is biomagnification related to agrochemicals?",
+                options: [
+                    "Decreased toxicity",
+                    "Accumulation of toxins in food chains",
+                    "Improved crop yield",
+                    "Reduced pesticide use"
+                ],
+                correct: 1,
+                answer: "Biomagnification is the accumulation of toxins, like pesticides, in higher trophic levels."
+            },
+            {
+                question: "Which gas is a minor contributor to global warming?",
+                options: [
+                    "Carbon dioxide",
+                    "Methane",
+                    "Nitrous oxide",
+                    "Oxygen"
+                ],
+                correct: 2,
+                answer: "Nitrous oxide contributes to global warming but less than carbon dioxide."
+            },
+            {
+                question: "What is a source of indoor air pollution?",
+                options: [
+                    "Solar panels",
+                    "Burning biomass fuels",
+                    "Wind turbines",
+                    "Rainwater harvesting"
+                ],
+                correct: 1,
+                answer: "Burning biomass fuels indoors releases pollutants, causing air pollution."
+            },
+            {
+                question: "Which method reduces water pollution from agriculture?",
+                options: [
+                    "Excessive fertilizer use",
+                    "Contour plowing",
+                    "Monoculture",
+                    "Burning crop residue"
+                ],
+                correct: 1,
+                answer: "Contour plowing reduces runoff, preventing agrochemical pollution."
+            },
+            {
+                question: "What is a type of solid waste?",
+                options: [
+                    "Rainwater",
+                    "Municipal waste",
+                    "Oxygen",
+                    "Sunlight"
+                ],
+                correct: 1,
+                answer: "Municipal waste, like household garbage, is a type of solid waste."
+            },
+            {
+                question: "What is a long-term effect of deforestation?",
+                options: [
+                    "Increased soil fertility",
+                    "Soil erosion",
+                    "Enhanced biodiversity",
+                    "Improved water quality"
+                ],
+                correct: 1,
+                answer: "Deforestation leads to soil erosion, degrading land quality."
+            },
+            {
+                question: "Which pollutant is monitored in air quality index (AQI)?",
+                options: [
+                    "Water vapor",
+                    "Particulate matter (PM2.5)",
+                    "Nitrogen gas",
+                    "Oxygen"
+                ],
+                correct: 1,
+                answer: "Particulate matter (PM2.5) is monitored in the air quality index for health impacts."
+            },
+            {
+                question: "What is a biological indicator of water pollution?",
+                options: [
+                    "Presence of algae",
+                    "Clear water",
+                    "High oxygen levels",
+                    "No aquatic life"
+                ],
+                correct: 0,
+                answer: "Excessive algae indicate water pollution due to nutrient enrichment."
+            },
+            {
+                question: "What is a renewable energy source to reduce global warming?",
+                options: [
+                    "Coal",
+                    "Solar power",
+                    "Natural gas",
+                    "Oil"
+                ],
+                correct: 1,
+                answer: "Solar power reduces greenhouse gas emissions, mitigating global warming."
+            },
+            {
+                question: "Which is a greenhouse gas from agriculture?",
+                options: [
+                    "Oxygen",
+                    "Methane",
+                    "Nitrogen",
+                    "Argon"
+                ],
+                correct: 1,
+                answer: "Methane from livestock and rice fields is a greenhouse gas."
+            },
+            {
+                question: "What is a consequence of radioactive waste mismanagement?",
+                options: [
+                    "Improved soil fertility",
+                    "Contamination of groundwater",
+                    "Increased biodiversity",
+                    "Enhanced air quality"
+                ],
+                correct: 1,
+                answer: "Mismanaged radioactive waste can contaminate groundwater."
+            },
+            {
+                question: "Which practice supports sustainable solid waste management?",
+                options: [
+                    "Open dumping",
+                    "Source reduction",
+                    "Burning waste",
+                    "Ocean disposal"
+                ],
+                correct: 1,
+                answer: "Source reduction minimizes waste generation, supporting sustainability."
+            },
+            {
+                question: "What is a benefit of the River Thames cleanup?",
+                options: [
+                    "Increased pollution",
+                    "Restored fish populations",
+                    "Reduced biodiversity",
+                    "More industrial waste"
+                ],
+                correct: 1,
+                answer: "The River Thames cleanup restored fish populations and water quality."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Molecular Basis of Inheritance MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: pink;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Molecular Basis of Inheritance MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Who provided evidence that DNA is the genetic material?",
+                options: [
+                    "Mendel",
+                    "Watson and Crick",
+                    "Hershey and Chase",
+                    "Franklin"
+                ],
+                correct: 2,
+                answer: "Hershey and Chase used bacteriophages to show DNA is the genetic material."
+            },
+            {
+                question: "What is the shape of the DNA molecule?",
+                options: [
+                    "Single helix",
+                    "Double helix",
+                    "Triple helix",
+                    "Linear chain"
+                ],
+                correct: 1,
+                answer: "DNA has a double helix structure, as described by Watson and Crick."
+            },
+            {
+                question: "Which base is found in RNA but not in DNA?",
+                options: [
+                    "Adenine",
+                    "Thymine",
+                    "Uracil",
+                    "Guanine"
+                ],
+                correct: 2,
+                answer: "Uracil replaces thymine in RNA."
+            },
+            {
+                question: "What is the role of histones in DNA packaging?",
+                options: [
+                    "Unwind DNA",
+                    "Form nucleosomes",
+                    "Synthesize DNA",
+                    "Repair DNA"
+                ],
+                correct: 1,
+                answer: "Histones help package DNA into nucleosomes for compact storage."
+            },
+            {
+                question: "What is the process of DNA replication called?",
+                options: [
+                    "Semi-conservative",
+                    "Conservative",
+                    "Dispersive",
+                    "Random"
+                ],
+                correct: 0,
+                answer: "DNA replication is semi-conservative, with each strand serving as a template."
+            },
+            {
+                question: "Which enzyme synthesizes the RNA primer during DNA replication?",
+                options: [
+                    "DNA polymerase",
+                    "Helicase",
+                    "Primase",
+                    "Ligase"
+                ],
+                correct: 2,
+                answer: "Primase synthesizes the RNA primer needed for DNA replication."
+            },
+            {
+                question: "What is transcription in molecular biology?",
+                options: [
+                    "DNA replication",
+                    "Synthesis of RNA from DNA",
+                    "Protein synthesis",
+                    "DNA repair"
+                ],
+                correct: 1,
+                answer: "Transcription is the synthesis of RNA from a DNA template."
+            },
+            {
+                question: "How many codons code for amino acids in the genetic code?",
+                options: [
+                    "20",
+                    "61",
+                    "64",
+                    "3"
+                ],
+                correct: 1,
+                answer: "61 of the 64 codons code for amino acids; the rest are stop codons."
+            },
+            {
+                question: "What is the role of tRNA in translation?",
+                options: [
+                    "Carries amino acids",
+                    "Forms ribosomes",
+                    "Synthesizes mRNA",
+                    "Unwinds DNA"
+                ],
+                correct: 0,
+                answer: "tRNA carries amino acids to the ribosome during translation."
+            },
+            {
+                question: "What does the central dogma of molecular biology state?",
+                options: [
+                    "DNA → RNA → Protein",
+                    "RNA → DNA → Protein",
+                    "Protein → RNA → DNA",
+                    "DNA → Protein → RNA"
+                ],
+                correct: 0,
+                answer: "The central dogma states that genetic information flows from DNA to RNA to protein."
+            },
+            {
+                question: "What is the Lac Operon an example of?",
+                options: [
+                    "DNA replication",
+                    "Gene regulation",
+                    "Protein synthesis",
+                    "DNA packaging"
+                ],
+                correct: 1,
+                answer: "The Lac Operon is a model of gene regulation in bacteria."
+            },
+            {
+                question: "What was the main goal of the Human Genome Project?",
+                options: [
+                    "Clone humans",
+                    "Sequence the entire human genome",
+                    "Cure genetic diseases",
+                    "Develop DNA fingerprinting"
+                ],
+                correct: 1,
+                answer: "The Human Genome Project aimed to sequence the entire human genome."
+            },
+            {
+                question: "What is DNA fingerprinting used for?",
+                options: [
+                    "Protein synthesis",
+                    "Identifying individuals",
+                    "DNA replication",
+                    "Gene cloning"
+                ],
+                correct: 1,
+                answer: "DNA fingerprinting is used to identify individuals based on unique DNA patterns."
+            },
+            {
+                question: "Which experiment confirmed DNA as the transforming principle?",
+                options: [
+                    "Griffith’s experiment",
+                    "Avery-MacLeod-McCarty experiment",
+                    "Meselson-Stahl experiment",
+                    "Hershey-Chase experiment"
+                ],
+                correct: 1,
+                answer: "The Avery-MacLeod-McCarty experiment confirmed DNA as the transforming principle."
+            },
+            {
+                question: "What are the nitrogenous bases in DNA?",
+                options: [
+                    "Adenine, Uracil, Cytosine, Guanine",
+                    "Adenine, Thymine, Cytosine, Guanine",
+                    "Adenine, Thymine, Uracil, Cytosine",
+                    "Thymine, Uracil, Cytosine, Guanine"
+                ],
+                correct: 1,
+                answer: "DNA contains adenine, thymine, cytosine, and guanine."
+            },
+            {
+                question: "What is the sugar in RNA?",
+                options: [
+                    "Deoxyribose",
+                    "Ribose",
+                    "Glucose",
+                    "Fructose"
+                ],
+                correct: 1,
+                answer: "RNA contains ribose sugar, unlike DNA’s deoxyribose."
+            },
+            {
+                question: "How is DNA packaged in eukaryotic cells?",
+                options: [
+                    "As a single strand",
+                    "Into chromatin and chromosomes",
+                    "As circular DNA",
+                    "In plasmids"
+                ],
+                correct: 1,
+                answer: "DNA is packaged into chromatin and chromosomes in eukaryotic cells."
+            },
+            {
+                question: "Which enzyme seals nicks in the DNA backbone during replication?",
+                options: [
+                    "Helicase",
+                    "Primase",
+                    "Ligase",
+                    "Polymerase"
+                ],
+                correct: 2,
+                answer: "DNA ligase seals nicks in the DNA backbone during replication."
+            },
+            {
+                question: "What is the template strand in transcription?",
+                options: [
+                    "The coding strand",
+                    "The strand read by RNA polymerase",
+                    "The newly synthesized RNA",
+                    "The double-stranded DNA"
+                ],
+                correct: 1,
+                answer: "The template strand is read by RNA polymerase to synthesize RNA."
+            },
+            {
+                question: "What is a codon?",
+                options: [
+                    "A single nucleotide",
+                    "A triplet of nucleotides",
+                    "A protein sequence",
+                    "A type of enzyme"
+                ],
+                correct: 1,
+                answer: "A codon is a triplet of nucleotides that codes for an amino acid or stop signal."
+            },
+            {
+                question: "Where does translation occur in eukaryotic cells?",
+                options: [
+                    "Nucleus",
+                    "Cytoplasm",
+                    "Mitochondria",
+                    "Golgi apparatus"
+                ],
+                correct: 1,
+                answer: "Translation occurs in the cytoplasm on ribosomes."
+            },
+            {
+                question: "What induces the Lac Operon in bacteria?",
+                options: [
+                    "Glucose",
+                    "Lactose",
+                    "Sucrose",
+                    "Maltose"
+                ],
+                correct: 1,
+                answer: "Lactose induces the Lac Operon by binding to the repressor."
+            },
+            {
+                question: "How many base pairs are in the human genome?",
+                options: [
+                    "3 million",
+                    "3 billion",
+                    "300 million",
+                    "30 billion"
+                ],
+                correct: 1,
+                answer: "The human genome contains approximately 3 billion base pairs."
+            },
+            {
+                question: "What is the basis of DNA fingerprinting?",
+                options: [
+                    "Variable number tandem repeats (VNTRs)",
+                    "Single nucleotide polymorphisms (SNPs)",
+                    "Protein sequences",
+                    "Ribosomal RNA"
+                ],
+                correct: 0,
+                answer: "DNA fingerprinting relies on variable number tandem repeats (VNTRs)."
+            },
+            {
+                question: "Which scientist’s X-ray diffraction images aided DNA structure discovery?",
+                options: [
+                    "Marie Curie",
+                    "Rosalind Franklin",
+                    "Barbara McClintock",
+                    "Linus Pauling"
+                ],
+                correct: 1,
+                answer: "Rosalind Franklin’s X-ray images were critical for discovering DNA’s structure."
+            },
+            {
+                question: "What type of bond holds DNA strands together?",
+                options: [
+                    "Covalent bonds",
+                    "Ionic bonds",
+                    "Hydrogen bonds",
+                    "Peptide bonds"
+                ],
+                correct: 2,
+                answer: "Hydrogen bonds hold the complementary bases of DNA strands together."
+            },
+            {
+                question: "Which RNA molecule carries the genetic code to the ribosome?",
+                options: [
+                    "tRNA",
+                    "mRNA",
+                    "rRNA",
+                    "snRNA"
+                ],
+                correct: 1,
+                answer: "mRNA carries the genetic code from DNA to the ribosome."
+            },
+            {
+                question: "What is a nucleosome composed of?",
+                options: [
+                    "DNA and ribosomes",
+                    "DNA and histones",
+                    "RNA and proteins",
+                    "DNA and enzymes"
+                ],
+                correct: 1,
+                answer: "A nucleosome is composed of DNA wrapped around histone proteins."
+            },
+            {
+                question: "Which direction does DNA polymerase synthesize new DNA?",
+                options: [
+                    "3’ to 5’",
+                    "5’ to 3’",
+                    "Both directions",
+                    "Random"
+                ],
+                correct: 1,
+                answer: "DNA polymerase synthesizes new DNA in the 5’ to 3’ direction."
+            },
+            {
+                question: "What is the role of the promoter in transcription?",
+                options: [
+                    "Terminates transcription",
+                    "Initiates transcription",
+                    "Synthesizes RNA",
+                    "Binds amino acids"
+                ],
+                correct: 1,
+                answer: "The promoter is the DNA region where transcription initiates."
+            },
+            {
+                question: "What is the start codon in the genetic code?",
+                options: [
+                    "UAA",
+                    "AUG",
+                    "UAG",
+                    "UGA"
+                ],
+                correct: 1,
+                answer: "AUG is the start codon, coding for methionine and initiating translation."
+            },
+            {
+                question: "What is the role of ribosomes in translation?",
+                options: [
+                    "Synthesize DNA",
+                    "Assemble proteins",
+                    "Replicate RNA",
+                    "Package DNA"
+                ],
+                correct: 1,
+                answer: "Ribosomes assemble proteins by linking amino acids during translation."
+            },
+            {
+                question: "What represses the Lac Operon in the absence of lactose?",
+                options: [
+                    "Operator",
+                    "Repressor protein",
+                    "Promoter",
+                    "Inducer"
+                ],
+                correct: 1,
+                answer: "The repressor protein binds to the operator, repressing the Lac Operon."
+            },
+            {
+                question: "What is a genome?",
+                options: [
+                    "A single gene",
+                    "All DNA in an organism",
+                    "A protein sequence",
+                    "A type of enzyme"
+                ],
+                correct: 1,
+                answer: "A genome is the complete set of DNA in an organism."
+            },
+            {
+                question: "What is a key application of DNA fingerprinting?",
+                options: [
+                    "Protein synthesis",
+                    "Forensic identification",
+                    "Gene cloning",
+                    "RNA sequencing"
+                ],
+                correct: 1,
+                answer: "DNA fingerprinting is widely used in forensic identification."
+            },
+            {
+                question: "Which experiment showed DNA replication is semi-conservative?",
+                options: [
+                    "Hershey-Chase",
+                    "Meselson-Stahl",
+                    "Avery-MacLeod-McCarty",
+                    "Griffith’s"
+                ],
+                correct: 1,
+                answer: "The Meselson-Stahl experiment confirmed semi-conservative DNA replication."
+            },
+            {
+                question: "What is the backbone of DNA made of?",
+                options: [
+                    "Amino acids",
+                    "Sugar and phosphate",
+                    "Nitrogenous bases",
+                    "Lipids"
+                ],
+                correct: 1,
+                answer: "The DNA backbone consists of sugar and phosphate molecules."
+            },
+            {
+                question: "Which type of RNA forms the ribosome’s structure?",
+                options: [
+                    "mRNA",
+                    "tRNA",
+                    "rRNA",
+                    "snRNA"
+                ],
+                correct: 2,
+                answer: "rRNA forms the structural and catalytic core of ribosomes."
+            },
+            {
+                question: "What is chromatin in eukaryotic cells?",
+                options: [
+                    "Unpackaged DNA",
+                    "DNA-protein complex",
+                    "RNA molecules",
+                    "Enzyme complex"
+                ],
+                correct: 1,
+                answer: "Chromatin is a DNA-protein complex that organizes DNA in the nucleus."
+            },
+            {
+                question: "What are Okazaki fragments in DNA replication?",
+                options: [
+                    "RNA primers",
+                    "Short DNA segments on the lagging strand",
+                    "Leading strand segments",
+                    "Protein fragments"
+                ],
+                correct: 1,
+                answer: "Okazaki fragments are short DNA segments synthesized on the lagging strand."
+            },
+            {
+                question: "What enzyme catalyzes transcription?",
+                options: [
+                    "DNA polymerase",
+                    "RNA polymerase",
+                    "Ligase",
+                    "Helicase"
+                ],
+                correct: 1,
+                answer: "RNA polymerase catalyzes the synthesis of RNA during transcription."
+            },
+            {
+                question: "How many stop codons are in the genetic code?",
+                options: [
+                    "1",
+                    "2",
+                    "3",
+                    "4"
+                ],
+                correct: 2,
+                answer: "There are three stop codons: UAA, UAG, and UGA."
+            },
+            {
+                question: "What is the anticodon in tRNA?",
+                options: [
+                    "A protein-binding site",
+                    "A triplet that pairs with mRNA codon",
+                    "A DNA sequence",
+                    "An enzyme"
+                ],
+                correct: 1,
+                answer: "The anticodon is a triplet on tRNA that pairs with the mRNA codon."
+            },
+            {
+                question: "What is the role of the operator in the Lac Operon?",
+                options: [
+                    "Synthesizes lactose",
+                    "Binds the repressor",
+                    "Initiates transcription",
+                    "Codes for enzymes"
+                ],
+                correct: 1,
+                answer: "The operator is the DNA region where the repressor binds to regulate the Lac Operon."
+            },
+            {
+                question: "What did the Human Genome Project reveal about human genes?",
+                options: [
+                    "Humans have 1 million genes",
+                    "Humans have 20,000–25,000 genes",
+                    "Humans have no introns",
+                    "Humans have identical genomes"
+                ],
+                correct: 1,
+                answer: "The Human Genome Project found humans have 20,000–25,000 genes."
+            },
+            {
+                question: "What is the primary enzyme used in DNA fingerprinting?",
+                options: [
+                    "DNA polymerase",
+                    "Restriction enzyme",
+                    "RNA polymerase",
+                    "Ligase"
+                ],
+                correct: 1,
+                answer: "Restriction enzymes cut DNA at specific sites for DNA fingerprinting."
+            },
+            {
+                question: "Which molecule is single-stranded in its structure?",
+                options: [
+                    "DNA",
+                    "RNA",
+                    "Both DNA and RNA",
+                    "Neither"
+                ],
+                correct: 1,
+                answer: "RNA is typically single-stranded, unlike double-stranded DNA."
+            },
+            {
+                question: "What is the leading strand in DNA replication?",
+                options: [
+                    "Synthesized discontinuously",
+                    "Synthesized continuously",
+                    "Synthesized without a primer",
+                    "Synthesized in the 3’ to 5’ direction"
+                ],
+                correct: 1,
+                answer: "The leading strand is synthesized continuously in the 5’ to 3’ direction."
+            },
+            {
+                question: "What is the role of introns in eukaryotic genes?",
+                options: [
+                    "Code for proteins",
+                    "Non-coding regions removed during processing",
+                    "Initiate transcription",
+                    "Bind tRNA"
+                ],
+                correct: 1,
+                answer: "Introns are non-coding regions removed from RNA during processing."
+            },
+            {
+                question: "What is the degeneracy of the genetic code?",
+                options: [
+                    "One codon per amino acid",
+                    "Multiple codons per amino acid",
+                    "No stop codons",
+                    "Random codon assignment"
+                ],
+                correct: 1,
+                answer: "Degeneracy means multiple codons can code for the same amino acid."
+            },
+            {
+                question: "What is the significance of DNA fingerprinting in paternity testing?",
+                options: [
+                    "Compares protein profiles",
+                    "Compares DNA patterns",
+                    "Measures gene expression",
+                    "Sequences entire genomes"
+                ],
+                correct: 1,
+                answer: "DNA fingerprinting compares DNA patterns to determine paternity."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

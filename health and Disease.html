@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health and Disease MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Health and Disease MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the causative agent of malaria?",
+                options: [
+                    "Bacteria",
+                    "Virus",
+                    "Plasmodium parasite",
+                    "Fungus"
+                ],
+                correct: 2,
+                answer: "Malaria is caused by the Plasmodium parasite, transmitted by Anopheles mosquitoes."
+            },
+            {
+                question: "Which mosquito transmits the Plasmodium parasite?",
+                options: [
+                    "Aedes",
+                    "Culex",
+                    "Anopheles",
+                    "Mansonia"
+                ],
+                correct: 2,
+                answer: "Anopheles mosquitoes are the vectors for the Plasmodium parasite causing malaria."
+            },
+            {
+                question: "What is a common symptom of malaria?",
+                options: [
+                    "Persistent cough",
+                    "High fever with chills",
+                    "Skin rash",
+                    "Diarrhea"
+                ],
+                correct: 1,
+                answer: "High fever with chills is a hallmark symptom of malaria."
+            },
+            {
+                question: "Which drug is commonly used to treat malaria?",
+                options: [
+                    "Penicillin",
+                    "Chloroquine",
+                    "Amoxicillin",
+                    "Aspirin"
+                ],
+                correct: 1,
+                answer: "Chloroquine is a common antimalarial drug, though resistance is a concern."
+            },
+            {
+                question: "How is malaria primarily diagnosed?",
+                options: [
+                    "Blood smear microscopy",
+                    "X-ray",
+                    "Urine test",
+                    "Skin biopsy"
+                ],
+                correct: 0,
+                answer: "Blood smear microscopy detects Plasmodium parasites for malaria diagnosis."
+            },
+            {
+                question: "What is a key method to control malaria?",
+                options: [
+                    "Antibiotic therapy",
+                    "Mosquito nets",
+                    "Vaccination",
+                    "Surgery"
+                ],
+                correct: 1,
+                answer: "Mosquito nets, especially insecticide-treated, are effective in controlling malaria."
+            },
+            {
+                question: "What causes filariasis in humans?",
+                options: [
+                    "Wuchereria bancrofti",
+                    "Salmonella typhi",
+                    "Entamoeba histolytica",
+                    "Rhinovirus"
+                ],
+                correct: 0,
+                answer: "Filariasis is caused by the parasitic worm Wuchereria bancrofti, transmitted by mosquitoes."
+            },
+            {
+                question: "What is a symptom of filariasis?",
+                options: [
+                    "Lymphatic swelling",
+                    "High fever",
+                    "Sore throat",
+                    "Skin lesions"
+                ],
+                correct: 0,
+                answer: "Lymphatic swelling, often leading to elephantiasis, is a symptom of filariasis."
+            },
+            {
+                question: "How is filariasis diagnosed?",
+                options: [
+                    "Blood test for microfilariae",
+                    "Stool examination",
+                    "Chest X-ray",
+                    "Skin scraping"
+                ],
+                correct: 0,
+                answer: "Blood tests detect microfilariae for diagnosing filariasis."
+            },
+            {
+                question: "Which drug is used to treat filariasis?",
+                options: [
+                    "Diethylcarbamazine",
+                    "Paracetamol",
+                    "Azithromycin",
+                    "Fluconazole"
+                ],
+                correct: 0,
+                answer: "Diethylcarbamazine is commonly used to treat filariasis."
+            },
+            {
+                question: "What causes ascariasis?",
+                options: [
+                    "Ascaris lumbricoides",
+                    "Plasmodium falciparum",
+                    "Streptococcus pneumoniae",
+                    "Trichophyton"
+                ],
+                correct: 0,
+                answer: "Ascariasis is caused by the roundworm Ascaris lumbricoides."
+            },
+            {
+                question: "How is ascariasis transmitted?",
+                options: [
+                    "Mosquito bites",
+                    "Contaminated food or water",
+                    "Airborne droplets",
+                    "Direct skin contact"
+                ],
+                correct: 1,
+                answer: "Ascariasis is transmitted through ingestion of contaminated food or water."
+            },
+            {
+                question: "What is a symptom of ascariasis?",
+                options: [
+                    "Abdominal pain",
+                    "Persistent cough",
+                    "Skin rash",
+                    "Joint pain"
+                ],
+                correct: 0,
+                answer: "Abdominal pain is a common symptom of ascariasis due to intestinal worms."
+            },
+            {
+                question: "How is ascariasis diagnosed?",
+                options: [
+                    "Blood smear",
+                    "Stool examination",
+                    "Urine test",
+                    "Biopsy"
+                ],
+                correct: 1,
+                answer: "Stool examination detects Ascaris eggs for diagnosis."
+            },
+            {
+                question: "Which drug treats ascariasis?",
+                options: [
+                    "Albendazole",
+                    "Chloroquine",
+                    "Penicillin",
+                    "Aspirin"
+                ],
+                correct: 0,
+                answer: "Albendazole is commonly used to treat ascariasis."
+            },
+            {
+                question: "What is the causative agent of typhoid?",
+                options: [
+                    "Salmonella typhi",
+                    "Vibrio cholerae",
+                    "Rhinovirus",
+                    "Candida albicans"
+                ],
+                correct: 0,
+                answer: "Typhoid is caused by the bacterium Salmonella typhi."
+            },
+            {
+                question: "How is typhoid primarily transmitted?",
+                options: [
+                    "Airborne droplets",
+                    "Contaminated food or water",
+                    "Mosquito bites",
+                    "Skin contact"
+                ],
+                correct: 1,
+                answer: "Typhoid is transmitted through contaminated food or water."
+            },
+            {
+                question: "What is a symptom of typhoid?",
+                options: [
+                    "Sustained fever",
+                    "Skin rash",
+                    "Sore throat",
+                    "Cough"
+                ],
+                correct: 0,
+                answer: "Sustained fever is a characteristic symptom of typhoid."
+            },
+            {
+                question: "How is typhoid diagnosed?",
+                options: [
+                    "Blood culture",
+                    "Stool test",
+                    "X-ray",
+                    "Skin biopsy"
+                ],
+                correct: 0,
+                answer: "Blood culture is used to diagnose typhoid by detecting Salmonella typhi."
+            },
+            {
+                question: "Which antibiotic is used to treat typhoid?",
+                options: [
+                    "Ciprofloxacin",
+                    "Albendazole",
+                    "Chloroquine",
+                    "Fluconazole"
+                ],
+                correct: 0,
+                answer: "Ciprofloxacin is commonly used to treat typhoid."
+            },
+            {
+                question: "What causes pneumonia?",
+                options: [
+                    "Streptococcus pneumoniae",
+                    "Plasmodium vivax",
+                    "Entamoeba histolytica",
+                    "Rhinovirus"
+                ],
+                correct: 0,
+                answer: "Pneumonia is often caused by the bacterium Streptococcus pneumoniae."
+            },
+            {
+                question: "What is a symptom of pneumonia?",
+                options: [
+                    "Chest pain with coughing",
+                    "Skin rash",
+                    "Diarrhea",
+                    "Joint swelling"
+                ],
+                correct: 0,
+                answer: "Chest pain with coughing is a common symptom of pneumonia."
+            },
+            {
+                question: "How is pneumonia diagnosed?",
+                options: [
+                    "Chest X-ray",
+                    "Stool test",
+                    "Blood smear",
+                    "Skin scraping"
+                ],
+                correct: 0,
+                answer: "Chest X-ray is commonly used to diagnose pneumonia."
+            },
+            {
+                question: "Which treatment is used for bacterial pneumonia?",
+                options: [
+                    "Antiviral drugs",
+                    "Antibiotics",
+                    "Antifungal drugs",
+                    "Antiparasitic drugs"
+                ],
+                correct: 1,
+                answer: "Antibiotics are used to treat bacterial pneumonia."
+            },
+            {
+                question: "What is the causative agent of the common cold?",
+                options: [
+                    "Rhinovirus",
+                    "Salmonella typhi",
+                    "Ascaris lumbricoides",
+                    "Trichophyton"
+                ],
+                correct: 0,
+                answer: "The common cold is primarily caused by rhinoviruses."
+            },
+            {
+                question: "How is the common cold transmitted?",
+                options: [
+                    "Contaminated food",
+                    "Airborne droplets",
+                    "Mosquito bites",
+                    "Skin contact"
+                ],
+                correct: 1,
+                answer: "The common cold is transmitted through airborne droplets or contact."
+            },
+            {
+                question: "What is a symptom of the common cold?",
+                options: [
+                    "Runny nose",
+                    "High fever",
+                    "Abdominal pain",
+                    "Skin lesions"
+                ],
+                correct: 0,
+                answer: "A runny nose is a common symptom of the common cold."
+            },
+            {
+                question: "What is the primary treatment for the common cold?",
+                options: [
+                    "Antibiotics",
+                    "Symptomatic relief",
+                    "Antiparasitic drugs",
+                    "Surgery"
+                ],
+                correct: 1,
+                answer: "Symptomatic relief, like rest and fluids, is the primary treatment for the common cold."
+            },
+            {
+                question: "What causes amoebiasis?",
+                options: [
+                    "Entamoeba histolytica",
+                    "Wuchereria bancrofti",
+                    "Streptococcus pneumoniae",
+                    "Rhinovirus"
+                ],
+                correct: 0,
+                answer: "Amoebiasis is caused by the protozoan Entamoeba histolytica."
+            },
+            {
+                question: "How is amoebiasis transmitted?",
+                options: [
+                    "Airborne droplets",
+                    "Contaminated food or water",
+                    "Mosquito bites",
+                    "Direct skin contact"
+                ],
+                correct: 1,
+                answer: "Amoebiasis is transmitted through contaminated food or water."
+            },
+            {
+                question: "What is a symptom of amoebiasis?",
+                options: [
+                    "Bloody diarrhea",
+                    "Sore throat",
+                    "Skin rash",
+                    "Chest pain"
+                ],
+                correct: 0,
+                answer: "Bloody diarrhea is a common symptom of amoebiasis."
+            },
+            {
+                question: "Which drug treats amoebiasis?",
+                options: [
+                    "Metronidazole",
+                    "Penicillin",
+                    "Chloroquine",
+                    "Albendazole"
+                ],
+                correct: 0,
+                answer: "Metronidazole is used to treat amoebiasis."
+            },
+            {
+                question: "What causes ringworm?",
+                options: [
+                    "Bacteria",
+                    "Virus",
+                    "Fungus",
+                    "Parasite"
+                ],
+                correct: 2,
+                answer: "Ringworm is caused by dermatophyte fungi, such as Trichophyton."
+            },
+            {
+                question: "How is ringworm transmitted?",
+                options: [
+                    "Airborne droplets",
+                    "Direct skin contact",
+                    "Contaminated food",
+                    "Mosquito bites"
+                ],
+                correct: 1,
+                answer: "Ringworm is transmitted through direct skin contact or contaminated surfaces."
+            },
+            {
+                question: "What is a symptom of ringworm?",
+                options: [
+                    "Circular red rash",
+                    "High fever",
+                    "Abdominal pain",
+                    "Cough"
+                ],
+                correct: 0,
+                answer: "A circular red rash is a characteristic symptom of ringworm."
+            },
+            {
+                question: "Which treatment is used for ringworm?",
+                options: [
+                    "Antiviral drugs",
+                    "Antifungal creams",
+                    "Antibiotics",
+                    "Antiparasitic drugs"
+                ],
+                correct: 1,
+                answer: "Antifungal creams, like clotrimazole, are used to treat ringworm."
+            },
+            {
+                question: "What is a vaccine?",
+                options: [
+                    "A drug to cure infections",
+                    "A preparation to stimulate immunity",
+                    "A diagnostic tool",
+                    "A surgical procedure"
+                ],
+                correct: 1,
+                answer: "A vaccine stimulates the immune system to provide immunity against specific diseases."
+            },
+            {
+                question: "What type of immunity is provided by vaccines?",
+                options: [
+                    "Passive immunity",
+                    "Active immunity",
+                    "Innate immunity",
+                    "Temporary immunity"
+                ],
+                correct: 1,
+                answer: "Vaccines provide active immunity by stimulating the body’s immune response."
+            },
+            {
+                question: "Which vaccine protects against typhoid?",
+                options: [
+                    "BCG vaccine",
+                    "Typhoid vaccine",
+                    "MMR vaccine",
+                    "Hepatitis B vaccine"
+                ],
+                correct: 1,
+                answer: "The typhoid vaccine protects against Salmonella typhi infection."
+            },
+            {
+                question: "What is the role of antibodies in the immune system?",
+                options: [
+                    "Cause infections",
+                    "Neutralize pathogens",
+                    "Produce toxins",
+                    "Break down tissues"
+                ],
+                correct: 1,
+                answer: "Antibodies neutralize pathogens by binding to them, aiding immune defense."
+            },
+            {
+                question: "What is a characteristic of cancer?",
+                options: [
+                    "Controlled cell growth",
+                    "Uncontrolled cell division",
+                    "Normal cell function",
+                    "Temporary cell changes"
+                ],
+                correct: 1,
+                answer: "Cancer is characterized by uncontrolled cell division, forming tumors."
+            },
+            {
+                question: "What is a common cause of cancer?",
+                options: [
+                    "Bacterial infection",
+                    "Genetic mutations",
+                    "Viral infection",
+                    "Both B and C"
+                ],
+                correct: 3,
+                answer: "Genetic mutations and certain viral infections can cause cancer."
+            },
+            {
+                question: "How is cancer diagnosed?",
+                options: [
+                    "Blood culture",
+                    "Biopsy",
+                    "Stool test",
+                    "Skin scraping"
+                ],
+                correct: 1,
+                answer: "A biopsy, examining tissue samples, is commonly used to diagnose cancer."
+            },
+            {
+                question: "What is a treatment for cancer?",
+                options: [
+                    "Chemotherapy",
+                    "Antibiotics",
+                    "Antiviral drugs",
+                    "Antiparasitic drugs"
+                ],
+                correct: 0,
+                answer: "Chemotherapy is a common treatment for cancer, targeting rapidly dividing cells."
+            },
+            {
+                question: "What virus causes AIDS?",
+                options: [
+                    "Rhinovirus",
+                    "HIV",
+                    "Influenza virus",
+                    "Hepatitis B virus"
+                ],
+                correct: 1,
+                answer: "AIDS is caused by the Human Immunodeficiency Virus (HIV)."
+            },
+            {
+                question: "How is HIV primarily transmitted?",
+                options: [
+                    "Airborne droplets",
+                    "Blood and bodily fluids",
+                    "Contaminated food",
+                    "Skin contact"
+                ],
+                correct: 1,
+                answer: "HIV is transmitted through blood, semen, vaginal fluids, and breast milk."
+            },
+            {
+                question: "What is a symptom of AIDS?",
+                options: [
+                    "High blood pressure",
+                    "Opportunistic infections",
+                    "Skin rash",
+                    "Joint pain"
+                ],
+                correct: 1,
+                answer: "Opportunistic infections occur in AIDS due to a weakened immune system."
+            },
+            {
+                question: "What is used to manage HIV infection?",
+                options: [
+                    "Antibiotics",
+                    "Antiretroviral therapy",
+                    "Antifungal drugs",
+                    "Surgery"
+                ],
+                correct: 1,
+                answer: "Antiretroviral therapy (ART) is used to manage HIV infection."
+            },
+            {
+                question: "What is a method to prevent HIV transmission?",
+                options: [
+                    "Mosquito nets",
+                    "Condom use",
+                    "Antibiotics",
+                    "Vaccination"
+                ],
+                correct: 1,
+                answer: "Condom use is an effective method to prevent HIV transmission."
+            },
+            {
+                question: "What is adolescence defined as?",
+                options: [
+                    "Infancy to childhood",
+                    "Transition from childhood to adulthood",
+                    "Adulthood to old age",
+                    "Early childhood"
+                ],
+                correct: 1,
+                answer: "Adolescence is the transition period from childhood to adulthood."
+            },
+            {
+                question: "What is a common issue during adolescence?",
+                options: [
+                    "Drug abuse",
+                    "High blood pressure",
+                    "Arthritis",
+                    "Diabetes"
+                ],
+                correct: 0,
+                answer: "Drug abuse is a significant issue during adolescence due to peer pressure."
+            },
+            {
+                question: "What is a health risk of drug abuse?",
+                options: [
+                    "Improved memory",
+                    "Organ damage",
+                    "Increased immunity",
+                    "Better coordination"
+                ],
+                correct: 1,
+                answer: "Drug abuse can lead to organ damage, such as liver or brain damage."
+            },
+            {
+                question: "What is a common effect of alcohol abuse?",
+                options: [
+                    "Liver cirrhosis",
+                    "Enhanced reflexes",
+                    "Improved vision",
+                    "Stronger immunity"
+                ],
+                correct: 0,
+                answer: "Alcohol abuse can cause liver cirrhosis, damaging liver tissue."
+            },
+            {
+                question: "What is a strategy to prevent drug abuse in adolescents?",
+                options: [
+                    "Encourage isolation",
+                    "Education and counseling",
+                    "Increase drug access",
+                    "Ignore peer pressure"
+                ],
+                correct: 1,
+                answer: "Education and counseling help prevent drug abuse by raising awareness."
+            },
+            {
+                question: "What is the vector for filariasis?",
+                options: [
+                    "Anopheles mosquito",
+                    "Culex mosquito",
+                    "Aedes mosquito",
+                    "Housefly"
+                ],
+                correct: 1,
+                answer: "Culex mosquitoes are the primary vectors for filariasis."
+            },
+            {
+                question: "What is a control measure for ascariasis?",
+                options: [
+                    "Mosquito nets",
+                    "Improved sanitation",
+                    "Antiviral drugs",
+                    "Skin creams"
+                ],
+                correct: 1,
+                answer: "Improved sanitation prevents ascariasis by reducing contamination."
+            },
+            {
+                question: "What is a complication of untreated typhoid?",
+                options: [
+                    "Intestinal perforation",
+                    "Skin rash",
+                    "Joint swelling",
+                    "Hair loss"
+                ],
+                correct: 0,
+                answer: "Untreated typhoid can lead to intestinal perforation, a serious complication."
+            },
+            {
+                question: "What is a preventive measure for pneumonia?",
+                options: [
+                    "Mosquito repellent",
+                    "Pneumococcal vaccine",
+                    "Antiparasitic drugs",
+                    "Skin ointments"
+                ],
+                correct: 1,
+                answer: "The pneumococcal vaccine helps prevent bacterial pneumonia."
+            },
+            {
+                question: "What is a risk factor for the common cold?",
+                options: [
+                    "Poor hygiene",
+                    "High cholesterol",
+                    "Low blood sugar",
+                    "Excessive exercise"
+                ],
+                correct: 0,
+                answer: "Poor hygiene increases the risk of contracting the common cold."
+            },
+            {
+                question: "What is a control measure for amoebiasis?",
+                options: [
+                    "Safe drinking water",
+                    "Mosquito nets",
+                    "Antibiotics",
+                    "Skin creams"
+                ],
+                correct: 0,
+                answer: "Safe drinking water prevents amoebiasis by avoiding contamination."
+            },
+            {
+                question: "What is a diagnostic method for ringworm?",
+                options: [
+                    "Blood test",
+                    "Skin scraping",
+                    "Chest X-ray",
+                    "Stool test"
+                ],
+                correct: 1,
+                answer: "Skin scraping is used to diagnose ringworm by detecting fungi."
+            },
+            {
+                question: "What is the role of B-cells in immunity?",
+                options: [
+                    "Engulf pathogens",
+                    "Produce antibodies",
+                    "Attack infected cells",
+                    "Regulate inflammation"
+                ],
+                correct: 1,
+                answer: "B-cells produce antibodies to neutralize pathogens."
+            },
+            {
+                question: "What is a carcinogen?",
+                options: [
+                    "A vaccine",
+                    "A cancer-causing agent",
+                    "An antibiotic",
+                    "A diagnostic tool"
+                ],
+                correct: 1,
+                answer: "A carcinogen is an agent, like tobacco smoke, that can cause cancer."
+            },
+            {
+                question: "What is a symptom of advanced cancer?",
+                options: [
+                    "Weight loss",
+                    "Improved appetite",
+                    "Increased energy",
+                    "Normal cell growth"
+                ],
+                correct: 0,
+                answer: "Unexplained weight loss is a symptom of advanced cancer."
+            },
+            {
+                question: "What is a preventive measure for HIV?",
+                options: [
+                    "Safe blood transfusion",
+                    "Mosquito nets",
+                    "Antibiotics",
+                    "Skin ointments"
+                ],
+                correct: 0,
+                answer: "Safe blood transfusion practices prevent HIV transmission."
+            },
+            {
+                question: "What is a psychological effect of drug abuse?",
+                options: [
+                    "Improved focus",
+                    "Addiction",
+                    "Enhanced memory",
+                    "Better sleep"
+                ],
+                correct: 1,
+                answer: "Addiction is a psychological effect of drug abuse."
+            },
+            {
+                question: "What is a social consequence of alcohol abuse?",
+                options: [
+                    "Improved relationships",
+                    "Family conflicts",
+                    "Better job performance",
+                    "Enhanced social skills"
+                ],
+                correct: 1,
+                answer: "Alcohol abuse often leads to family conflicts and social issues."
+            },
+            {
+                question: "What is a control measure for malaria?",
+                options: [
+                    "Insecticide spraying",
+                    "Antiviral drugs",
+                    "Skin creams",
+                    "Stool tests"
+                ],
+                correct: 0,
+                answer: "Insecticide spraying helps control malaria by reducing mosquito populations."
+            },
+            {
+                question: "What is a complication of filariasis?",
+                options: [
+                    "Elephantiasis",
+                    "High fever",
+                    "Sore throat",
+                    "Hair loss"
+                ],
+                correct: 0,
+                answer: "Elephantiasis, severe lymphatic swelling, is a complication of filariasis."
+            },
+            {
+                question: "What is a preventive measure for typhoid?",
+                options: [
+                    "Safe drinking water",
+                    "Mosquito nets",
+                    "Antiviral drugs",
+                    "Skin ointments"
+                ],
+                correct: 0,
+                answer: "Safe drinking water prevents typhoid transmission."
+            },
+            {
+                question: "What is the role of T-cells in immunity?",
+                options: [
+                    "Produce antibodies",
+                    "Attack infected cells",
+                    "Engulf pathogens",
+                    "Store antigens"
+                ],
+                correct: 1,
+                answer: "T-cells attack infected cells to eliminate pathogens."
+            },
+            {
+                question: "What is a risk factor for cancer?",
+                options: [
+                    "Tobacco use",
+                    "Regular exercise",
+                    "Balanced diet",
+                    "Adequate sleep"
+                ],
+                correct: 0,
+                answer: "Tobacco use is a major risk factor for developing cancer."
+            },
+            {
+                question: "What is a diagnostic tool for HIV?",
+                options: [
+                    "ELISA test",
+                    "Stool test",
+                    "Chest X-ray",
+                    "Skin biopsy"
+                ],
+                correct: 0,
+                answer: "The ELISA test detects HIV antibodies for diagnosis."
+            },
+            {
+                question: "What is a physical effect of alcohol abuse?",
+                options: [
+                    "Improved coordination",
+                    "Heart disease",
+                    "Enhanced vision",
+                    "Stronger immunity"
+                ],
+                correct: 1,
+                answer: "Alcohol abuse can lead to heart disease and other health issues."
+            },
+            {
+                question: "What is a preventive measure for drug abuse?",
+                options: [
+                    "Peer pressure",
+                    "Community awareness programs",
+                    "Increased drug access",
+                    "Ignoring mental health"
+                ],
+                correct: 1,
+                answer: "Community awareness programs help prevent drug abuse by educating youth."
+            },
+            {
+                question: "What is a symptom of severe malaria?",
+                options: [
+                    "Cerebral malaria",
+                    "Mild cough",
+                    "Skin rash",
+                    "Sore throat"
+                ],
+                correct: 0,
+                answer: "Cerebral malaria, affecting the brain, is a severe complication."
+            },
+            {
+                question: "What is a control measure for ringworm?",
+                options: [
+                    "Personal hygiene",
+                    "Mosquito nets",
+                    "Antiviral drugs",
+                    "Blood tests"
+                ],
+                correct: 0,
+                answer: "Personal hygiene prevents the spread of ringworm."
+            },
+            {
+                question: "What is the target of vaccines in the immune system?",
+                options: [
+                    "Pathogens directly",
+                    "Antigen recognition",
+                    "Blood cells",
+                    "Nervous system"
+                ],
+                correct: 1,
+                answer: "Vaccines target antigen recognition to stimulate immunity."
+            },
+            {
+                question: "What is a type of cancer treatment?",
+                options: [
+                    "Radiation therapy",
+                    "Antibiotics",
+                    "Antiparasitic drugs",
+                    "Blood transfusion"
+                ],
+                correct: 0,
+                answer: "Radiation therapy is used to target and destroy cancer cells."
+            },
+            {
+                question: "What is a mode of HIV transmission in infants?",
+                options: [
+                    "Airborne droplets",
+                    "Breastfeeding",
+                    "Skin contact",
+                    "Contaminated food"
+                ],
+                correct: 1,
+                answer: "HIV can be transmitted to infants through breastfeeding from an infected mother."
+            },
+            {
+                question: "What is a long-term effect of drug abuse?",
+                options: [
+                    "Improved mental health",
+                    "Chronic health issues",
+                    "Enhanced reflexes",
+                    "Better social skills"
+                ],
+                correct: 1,
+                answer: "Chronic health issues, like heart or liver damage, result from long-term drug abuse."
+            },
+            {
+                question: "What is a preventive measure for pneumonia?",
+                options: [
+                    "Good hygiene",
+                    "Mosquito nets",
+                    "Antiparasitic drugs",
+                    "Skin creams"
+                ],
+                correct: 0,
+                answer: "Good hygiene reduces the risk of pneumonia by preventing infections."
+            },
+            {
+                question: "What is a complication of untreated amoebiasis?",
+                options: [
+                    "Liver abscess",
+                    "High fever",
+                    "Skin rash",
+                    "Joint pain"
+                ],
+                correct: 0,
+                answer: "Untreated amoebiasis can lead to a liver abscess."
+            },
+            {
+                question: "What is a characteristic of innate immunity?",
+                options: [
+                    "Specific to pathogens",
+                    "Non-specific defense",
+                    "Memory-based",
+                    "Slow response"
+                ],
+                correct: 1,
+                answer: "Innate immunity provides non-specific defense, like skin barriers."
+            },
+            {
+                question: "What is a symptom of HIV infection in early stages?",
+                options: [
+                    "Flu-like symptoms",
+                    "High blood pressure",
+                    "Hair loss",
+                    "Joint swelling"
+                ],
+                correct: 0,
+                answer: "Flu-like symptoms, such as fever, occur in early HIV infection."
+            },
+            {
+                question: "What is a social factor contributing to adolescent drug abuse?",
+                options: [
+                    "Strong family support",
+                    "Peer pressure",
+                    "Healthy lifestyle",
+                    "Academic success"
+                ],
+                correct: 1,
+                answer: "Peer pressure is a social factor contributing to adolescent drug abuse."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolution MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Evolution MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the primary source of energy for Earth's early atmosphere in the origin of life?",
+                options: [
+                    "Solar radiation",
+                    "Geothermal heat",
+                    "Lightning",
+                    "All of the above"
+                ],
+                correct: 3,
+                answer: "Solar radiation, geothermal heat, and lightning provided energy for chemical reactions in the origin of life."
+            },
+            {
+                question: "Who proposed the theory of chemical evolution?",
+                options: [
+                    "Charles Darwin",
+                    "Oparin and Haldane",
+                    "Lamarck",
+                    "Wallace"
+                ],
+                correct: 1,
+                answer: "Oparin and Haldane proposed that organic molecules formed in Earth's early atmosphere."
+            },
+            {
+                question: "Which of the following is a paleontological evidence for evolution?",
+                options: [
+                    "Homologous structures",
+                    "Fossils",
+                    "DNA sequences",
+                    "Embryonic similarities"
+                ],
+                correct: 1,
+                answer: "Fossils provide paleontological evidence of evolutionary changes over time."
+            },
+            {
+                question: "What are homologous structures in comparative anatomy?",
+                options: [
+                    "Structures with different origins but same function",
+                    "Structures with same origin but different functions",
+                    "Identical structures in all species",
+                    "Vestigial structures"
+                ],
+                correct: 1,
+                answer: "Homologous structures, like human arms and whale flippers, share a common origin but differ in function."
+            },
+            {
+                question: "Which embryonic feature supports evolutionary relationships?",
+                options: [
+                    "Gill slits in vertebrate embryos",
+                    "Adult bone structure",
+                    "Hair color",
+                    "Blood type"
+                ],
+                correct: 0,
+                answer: "Gill slits in vertebrate embryos indicate a shared evolutionary ancestry."
+            },
+            {
+                question: "What is an example of molecular evidence for evolution?",
+                options: [
+                    "Fossil records",
+                    "DNA sequence similarities",
+                    "Homologous limbs",
+                    "Embryonic stages"
+                ],
+                correct: 1,
+                answer: "Similarities in DNA sequences among species provide molecular evidence for evolution."
+            },
+            {
+                question: "What is the core idea of Darwinism?",
+                options: [
+                    "Inheritance of acquired traits",
+                    "Natural selection drives evolution",
+                    "Genetic drift is the main mechanism",
+                    "Species are fixed and unchanging"
+                ],
+                correct: 1,
+                answer: "Darwinism emphasizes natural selection as the primary mechanism of evolution."
+            },
+            {
+                question: "What does the Modern Synthetic Theory of Evolution integrate?",
+                options: [
+                    "Lamarckism and mutation",
+                    "Darwinism and genetics",
+                    "Fossil records and embryology",
+                    "Natural selection and acquired traits"
+                ],
+                correct: 1,
+                answer: "The Modern Synthetic Theory integrates Darwinism with Mendelian genetics."
+            },
+            {
+                question: "What is a source of genetic variation in populations?",
+                options: [
+                    "Mutation",
+                    "Natural selection",
+                    "Genetic drift",
+                    "Gene flow"
+                ],
+                correct: 0,
+                answer: "Mutation introduces new genetic variation by altering DNA sequences."
+            },
+            {
+                question: "What is recombination in evolution?",
+                options: [
+                    "Random change in allele frequency",
+                    "Shuffling of genes during meiosis",
+                    "Survival of the fittest",
+                    "Migration of individuals"
+                ],
+                correct: 1,
+                answer: "Recombination shuffles genes during meiosis, creating new allele combinations."
+            },
+            {
+                question: "What is natural selection?",
+                options: [
+                    "Random changes in allele frequency",
+                    "Differential survival and reproduction",
+                    "Migration between populations",
+                    "Fixation of all alleles"
+                ],
+                correct: 1,
+                answer: "Natural selection is the differential survival and reproduction of individuals with favorable traits."
+            },
+            {
+                question: "Which is an example of natural selection?",
+                options: [
+                    "Peppered moth color change",
+                    "Random mating",
+                    "Genetic drift in small populations",
+                    "Gene flow between populations"
+                ],
+                correct: 0,
+                answer: "The peppered moth’s color change during industrialization is an example of natural selection."
+            },
+            {
+                question: "What is stabilizing selection?",
+                options: [
+                    "Favors extreme phenotypes",
+                    "Favors intermediate phenotypes",
+                    "Favors one extreme phenotype",
+                    "Eliminates all variation"
+                ],
+                correct: 1,
+                answer: "Stabilizing selection favors intermediate phenotypes, reducing variation."
+            },
+            {
+                question: "What is directional selection?",
+                options: [
+                    "Favors intermediate phenotypes",
+                    "Favors one extreme phenotype",
+                    "Favors both extreme phenotypes",
+                    "Randomly selects phenotypes"
+                ],
+                correct: 1,
+                answer: "Directional selection favors one extreme phenotype, shifting the population mean."
+            },
+            {
+                question: "What is disruptive selection?",
+                options: [
+                    "Favors intermediate phenotypes",
+                    "Favors both extreme phenotypes",
+                    "Favors one extreme phenotype",
+                    "Eliminates all phenotypes"
+                ],
+                correct: 1,
+                answer: "Disruptive selection favors both extreme phenotypes, increasing variation."
+            },
+            {
+                question: "What is gene flow in evolution?",
+                options: [
+                    "Random allele frequency change",
+                    "Movement of alleles between populations",
+                    "Fixation of alleles",
+                    "Mutation in DNA"
+                ],
+                correct: 1,
+                answer: "Gene flow is the movement of alleles between populations via migration."
+            },
+            {
+                question: "What is genetic drift?",
+                options: [
+                    "Directed allele frequency change",
+                    "Random allele frequency change",
+                    "Selection of favorable traits",
+                    "Recombination of genes"
+                ],
+                correct: 1,
+                answer: "Genetic drift is the random change in allele frequencies, especially in small populations."
+            },
+            {
+                question: "What does Hardy-Weinberg’s principle describe?",
+                options: [
+                    "Evolutionary change",
+                    "Population equilibrium",
+                    "Natural selection",
+                    "Mutation rate"
+                ],
+                correct: 1,
+                answer: "Hardy-Weinberg’s principle describes allele frequency equilibrium in a non-evolving population."
+            },
+            {
+                question: "What is a condition for Hardy-Weinberg equilibrium?",
+                options: [
+                    "Small population size",
+                    "No mutations",
+                    "Natural selection",
+                    "High gene flow"
+                ],
+                correct: 1,
+                answer: "No mutations is a condition for Hardy-Weinberg equilibrium."
+            },
+            {
+                question: "What is adaptive radiation?",
+                options: [
+                    "Evolution of a single species",
+                    "Divergence of species from a common ancestor",
+                    "Loss of genetic variation",
+                    "Random allele changes"
+                ],
+                correct: 1,
+                answer: "Adaptive radiation is the divergence of multiple species from a common ancestor."
+            },
+            {
+                question: "Which is an example of adaptive radiation?",
+                options: [
+                    "Peppered moth color",
+                    "Darwin’s finches",
+                    "Genetic drift",
+                    "Human height variation"
+                ],
+                correct: 1,
+                answer: "Darwin’s finches diversified into multiple species, an example of adaptive radiation."
+            },
+            {
+                question: "Which species is considered the closest ancestor to modern humans?",
+                options: [
+                    "Homo habilis",
+                    "Homo neanderthalensis",
+                    "Homo erectus",
+                    "Australopithecus"
+                ],
+                correct: 1,
+                answer: "Homo neanderthalensis is closely related to modern humans, with evidence of interbreeding."
+            },
+            {
+                question: "What gas was likely absent in Earth’s early atmosphere during the origin of life?",
+                options: [
+                    "Methane",
+                    "Ammonia",
+                    "Oxygen",
+                    "Carbon dioxide"
+                ],
+                correct: 2,
+                answer: "Oxygen was scarce in Earth’s early reducing atmosphere."
+            },
+            {
+                question: "Which experiment supported the chemical evolution theory?",
+                options: [
+                    "Miller-Urey experiment",
+                    "Meselson-Stahl experiment",
+                    "Hershey-Chase experiment",
+                    "Griffith’s experiment"
+                ],
+                correct: 0,
+                answer: "The Miller-Urey experiment synthesized organic molecules under early Earth conditions."
+            },
+            {
+                question: "What are vestigial structures in evolutionary biology?",
+                options: [
+                    "Fully functional organs",
+                    "Structures with reduced function",
+                    "Homologous structures",
+                    "Analogous structures"
+                ],
+                correct: 1,
+                answer: "Vestigial structures, like the human appendix, have reduced function but show evolutionary history."
+            },
+            {
+                question: "Which molecular evidence shows close evolutionary relationships?",
+                options: [
+                    "Different protein structures",
+                    "Similar cytochrome c sequences",
+                    "Unique DNA mutations",
+                    "Random RNA sequences"
+                ],
+                correct: 1,
+                answer: "Similar cytochrome c sequences across species indicate close evolutionary relationships."
+            },
+            {
+                question: "What did Darwin observe on the Galápagos Islands?",
+                options: [
+                    "Identical species everywhere",
+                    "Unique species adapted to each island",
+                    "No variation in species",
+                    "Fossils of dinosaurs"
+                ],
+                correct: 1,
+                answer: "Darwin observed unique species, like finches, adapted to each Galápagos island."
+            },
+            {
+                question: "What is a key component of the Modern Synthetic Theory?",
+                options: [
+                    "Inheritance of acquired traits",
+                    "Population genetics",
+                    "Fixed species",
+                    "Environmental determinism"
+                ],
+                correct: 1,
+                answer: "Population genetics is a key component of the Modern Synthetic Theory."
+            },
+            {
+                question: "What is a frameshift mutation?",
+                options: [
+                    "Substitution of one base",
+                    "Insertion or deletion of bases",
+                    "Silent mutation",
+                    "Reversal of a gene"
+                ],
+                correct: 1,
+                answer: "A frameshift mutation involves insertion or deletion, altering the reading frame."
+            },
+            {
+                question: "What is an example of stabilizing selection?",
+                options: [
+                    "Human birth weight",
+                    "Giraffe neck length",
+                    "Finch beak size",
+                    "Moth color change"
+                ],
+                correct: 0,
+                answer: "Human birth weight is stabilized around an optimal range for survival."
+            },
+            {
+                question: "What is an example of directional selection?",
+                options: [
+                    "Antibiotic resistance in bacteria",
+                    "Human height variation",
+                    "Peppered moth color",
+                    "Both A and C"
+                ],
+                correct: 3,
+                answer: "Antibiotic resistance and peppered moth color shifts are examples of directional selection."
+            },
+            {
+                question: "What is an example of disruptive selection?",
+                options: [
+                    "Finch beak size in Galápagos",
+                    "Human birth weight",
+                    "Moth color",
+                    "Giraffe neck length"
+                ],
+                correct: 0,
+                answer: "Finch beak sizes diverged to extremes, an example of disruptive selection."
+            },
+            {
+                question: "What is the bottleneck effect in genetic drift?",
+                options: [
+                    "Increase in population size",
+                    "Loss of genetic variation due to a population reduction",
+                    "Introduction of new alleles",
+                    "Stabilization of allele frequencies"
+                ],
+                correct: 1,
+                answer: "The bottleneck effect reduces genetic variation after a sharp population decline."
+            },
+            {
+                question: "What is the founder effect in genetic drift?",
+                options: [
+                    "Random allele frequency change in a large population",
+                    "Genetic variation in a new, small population",
+                    "Complete loss of alleles",
+                    "Increased mutation rate"
+                ],
+                correct: 1,
+                answer: "The founder effect occurs when a small group starts a new population with limited genetic variation."
+            },
+            {
+                question: "Which factor violates Hardy-Weinberg equilibrium?",
+                options: [
+                    "Large population",
+                    "Random mating",
+                    "Natural selection",
+                    "No migration"
+                ],
+                correct: 2,
+                answer: "Natural selection disrupts Hardy-Weinberg equilibrium by favoring certain alleles."
+            },
+            {
+                question: "What is an example of gene flow?",
+                options: [
+                    "Pollen transfer between plant populations",
+                    "Random loss of alleles",
+                    "Mutation in a gene",
+                    "Selection of traits"
+                ],
+                correct: 0,
+                answer: "Pollen transfer between plant populations introduces alleles, an example of gene flow."
+            },
+            {
+                question: "Which fossil is a transitional form in evolution?",
+                options: [
+                    "Trilobite",
+                    "Archaeopteryx",
+                    "Mammoth",
+                    "Dinosaur bones"
+                ],
+                correct: 1,
+                answer: "Archaeopteryx, with reptile and bird features, is a transitional fossil."
+            },
+            {
+                question: "What are analogous structures in evolution?",
+                options: [
+                    "Structures with same origin",
+                    "Structures with different origins but same function",
+                    "Vestigial structures",
+                    "Identical structures"
+                ],
+                correct: 1,
+                answer: "Analogous structures, like bird and insect wings, have different origins but similar functions."
+            },
+            {
+                question: "Which hominid is known for using tools?",
+                options: [
+                    "Australopithecus",
+                    "Homo habilis",
+                    "Homo neanderthalensis",
+                    "Both B and C"
+                ],
+                correct: 3,
+                answer: "Homo habilis and Homo neanderthalensis are known for tool use."
+            },
+            {
+                question: "What is the role of natural selection in adaptive radiation?",
+                options: [
+                    "Reduces variation",
+                    "Drives divergence of species",
+                    "Prevents evolution",
+                    "Fixes all alleles"
+                ],
+                correct: 1,
+                answer: "Natural selection drives the divergence of species in adaptive radiation."
+            },
+            {
+                question: "Which scientist co-proposed natural selection with Darwin?",
+                options: [
+                    "Lamarck",
+                    "Wallace",
+                    "Mendel",
+                    "Haldane"
+                ],
+                correct: 1,
+                answer: "Alfred Russel Wallace co-proposed the theory of natural selection with Darwin."
+            },
+            {
+                question: "What is a molecular clock in evolutionary biology?",
+                options: [
+                    "Measures fossil age",
+                    "Estimates divergence time using DNA mutations",
+                    "Tracks embryonic development",
+                    "Measures population size"
+                ],
+                correct: 1,
+                answer: "A molecular clock estimates divergence time based on DNA mutation rates."
+            },
+            {
+                question: "Which evidence supports human evolution?",
+                options: [
+                    "Fossils of Homo species",
+                    "DNA similarity with chimpanzees",
+                    "Skull size changes",
+                    "All of the above"
+                ],
+                correct: 3,
+                answer: "Fossils, DNA similarities, and skull size changes all support human evolution."
+            },
+            {
+                question: "What is the significance of the Burgess Shale fossils?",
+                options: [
+                    "Show early human evolution",
+                    "Reveal Cambrian biodiversity",
+                    "Prove Lamarckism",
+                    "Show modern species"
+                ],
+                correct: 1,
+                answer: "The Burgess Shale fossils reveal the biodiversity of the Cambrian explosion."
+            },
+            {
+                question: "What is convergent evolution?",
+                options: [
+                    "Evolution of similar traits in unrelated species",
+                    "Evolution of identical species",
+                    "Loss of traits",
+                    "Divergence from a common ancestor"
+                ],
+                correct: 0,
+                answer: "Convergent evolution produces similar traits in unrelated species, like wings in birds and bats."
+            },
+            {
+                question: "Which hominid had a bipedal posture?",
+                options: [
+                    "Homo sapiens",
+                    "Australopithecus afarensis",
+                    "Homo erectus",
+                    "All of the above"
+                ],
+                correct: 3,
+                answer: "Homo sapiens, Australopithecus afarensis, and Homo erectus were all bipedal."
+            },
+            {
+                question: "What is the role of genetic drift in small populations?",
+                options: [
+                    "Increases genetic variation",
+                    "Causes random allele frequency changes",
+                    "Selects favorable traits",
+                    "Prevents mutations"
+                ],
+                correct: 1,
+                answer: "Genetic drift causes random allele frequency changes, especially in small populations."
+            },
+            {
+                question: "What is the primary driver of evolution according to Darwin?",
+                options: [
+                    "Genetic drift",
+                    "Natural selection",
+                    "Gene flow",
+                    "Mutation"
+                ],
+                correct: 1,
+                answer: "Natural selection is the primary driver of evolution in Darwin’s theory."
+            },
+            {
+                question: "Which of the following is a condition for Hardy-Weinberg equilibrium?",
+                options: [
+                    "No natural selection",
+                    "High mutation rate",
+                    "Small population size",
+                    "Non-random mating"
+                ],
+                correct: 0,
+                answer: "No natural selection is required for Hardy-Weinberg equilibrium."
+            },
+            {
+                question: "What is the significance of Tiktaalik in evolution?",
+                options: [
+                    "First mammal",
+                    "Transitional form between fish and tetrapods",
+                    "Early bird",
+                    "Modern reptile"
+                ],
+                correct: 1,
+                answer: "Tiktaalik is a transitional fossil between fish and tetrapods."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

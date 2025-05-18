@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodiversity and Conservation MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Biodiversity and Conservation MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is biodiversity?",
+                options: [
+                    "The number of ecosystems",
+                    "The variety of life forms in an area",
+                    "The total biomass of a species",
+                    "The population size of a species"
+                ],
+                correct: 1,
+                answer: "Biodiversity is the variety of life forms, including species, genes, and ecosystems, in an area."
+            },
+            {
+                question: "Which level of biodiversity includes genetic variation?",
+                options: [
+                    "Species diversity",
+                    "Genetic diversity",
+                    "Ecosystem diversity",
+                    "Functional diversity"
+                ],
+                correct: 1,
+                answer: "Genetic diversity includes the genetic variation within and between species."
+            },
+            {
+                question: "What is species diversity?",
+                options: [
+                    "Variety of ecosystems",
+                    "Variety of species in an area",
+                    "Genetic variation in a species",
+                    "Number of individuals in a population"
+                ],
+                correct: 1,
+                answer: "Species diversity refers to the variety and abundance of species in an area."
+            },
+            {
+                question: "What is ecosystem diversity?",
+                options: [
+                    "Variety of genes",
+                    "Variety of habitats and ecological processes",
+                    "Variety of species",
+                    "Variety of populations"
+                ],
+                correct: 1,
+                answer: "Ecosystem diversity includes the variety of habitats, communities, and ecological processes."
+            },
+            {
+                question: "Which pattern of biodiversity is highest at the equator?",
+                options: [
+                    "Latitudinal gradient",
+                    "Altitudinal gradient",
+                    "Longitudinal gradient",
+                    "Depth gradient"
+                ],
+                correct: 0,
+                answer: "The latitudinal gradient shows higher biodiversity at the equator due to favorable conditions."
+            },
+            {
+                question: "What is alpha diversity?",
+                options: [
+                    "Diversity across ecosystems",
+                    "Diversity within a single ecosystem",
+                    "Global species diversity",
+                    "Genetic diversity"
+                ],
+                correct: 1,
+                answer: "Alpha diversity is the species diversity within a single ecosystem or habitat."
+            },
+            {
+                question: "What is beta diversity?",
+                options: [
+                    "Diversity within a habitat",
+                    "Diversity between habitats",
+                    "Global biodiversity",
+                    "Genetic variation"
+                ],
+                correct: 1,
+                answer: "Beta diversity measures the difference in species composition between habitats."
+            },
+            {
+                question: "What is gamma diversity?",
+                options: [
+                    "Diversity within a small area",
+                    "Diversity across a large region",
+                    "Diversity of genes",
+                    "Diversity of populations"
+                ],
+                correct: 1,
+                answer: "Gamma diversity is the total species diversity across a large region or landscape."
+            },
+            {
+                question: "Why is biodiversity important for ecosystems?",
+                options: [
+                    "Increases pollution",
+                    "Enhances ecosystem stability",
+                    "Reduces productivity",
+                    "Decreases resilience"
+                ],
+                correct: 1,
+                answer: "Biodiversity enhances ecosystem stability and resilience to changes."
+            },
+            {
+                question: "What is an economic benefit of biodiversity?",
+                options: [
+                    "Loss of resources",
+                    "Provision of medicines and food",
+                    "Increased deforestation",
+                    "Reduced crop yield"
+                ],
+                correct: 1,
+                answer: "Biodiversity provides resources like medicines, food, and raw materials."
+            },
+            {
+                question: "What is a cultural benefit of biodiversity?",
+                options: [
+                    "Inspiration for art and traditions",
+                    "Increased industrialization",
+                    "Loss of species",
+                    "Habitat destruction"
+                ],
+                correct: 0,
+                answer: "Biodiversity inspires art, traditions, and spiritual values in cultures."
+            },
+            {
+                question: "What is a major cause of biodiversity loss?",
+                options: [
+                    "Conservation efforts",
+                    "Habitat destruction",
+                    "Protected areas",
+                    "Reforestation"
+                ],
+                correct: 1,
+                answer: "Habitat destruction, like deforestation, is a major cause of biodiversity loss."
+            },
+            {
+                question: "Which human activity contributes to biodiversity loss?",
+                options: [
+                    "Afforestation",
+                    "Overexploitation",
+                    "Wildlife sanctuaries",
+                    "Organic farming"
+                ],
+                correct: 1,
+                answer: "Overexploitation, like overhunting, leads to biodiversity loss."
+            },
+            {
+                question: "How does invasive species affect biodiversity?",
+                options: [
+                    "Enhances native species",
+                    "Competes with native species",
+                    "Increases genetic diversity",
+                    "Stabilizes ecosystems"
+                ],
+                correct: 1,
+                answer: "Invasive species compete with native species, reducing biodiversity."
+            },
+            {
+                question: "What is a consequence of climate change on biodiversity?",
+                options: [
+                    "Increased species diversity",
+                    "Shift in species distribution",
+                    "Stable ecosystems",
+                    "No effect"
+                ],
+                correct: 1,
+                answer: "Climate change causes shifts in species distribution, affecting biodiversity."
+            },
+            {
+                question: "What is in-situ conservation?",
+                options: [
+                    "Conserving species in zoos",
+                    "Conserving species in their natural habitat",
+                    "Breeding species in labs",
+                    "Storing seeds in banks"
+                ],
+                correct: 1,
+                answer: "In-situ conservation protects species in their natural habitats."
+            },
+            {
+                question: "What is ex-situ conservation?",
+                options: [
+                    "Protecting species in the wild",
+                    "Conserving species outside their natural habitat",
+                    "Restoring habitats",
+                    "Preventing extinction"
+                ],
+                correct: 1,
+                answer: "Ex-situ conservation involves conserving species outside their natural habitats, like in zoos."
+            },
+            {
+                question: "Which is an example of ex-situ conservation?",
+                options: [
+                    "National park",
+                    "Seed bank",
+                    "Biosphere reserve",
+                    "Wildlife sanctuary"
+                ],
+                correct: 1,
+                answer: "Seed banks store plant genetic material, an example of ex-situ conservation."
+            },
+            {
+                question: "What is a biodiversity hotspot?",
+                options: [
+                    "Area with low species diversity",
+                    "Area with high species richness and endemism",
+                    "Area with no conservation",
+                    "Area with stable ecosystems"
+                ],
+                correct: 1,
+                answer: "A biodiversity hotspot has high species richness, endemism, and significant threats."
+            },
+            {
+                question: "Which region is a biodiversity hotspot?",
+                options: [
+                    "Sahara Desert",
+                    "Western Ghats",
+                    "Arctic Tundra",
+                    "Great Plains"
+                ],
+                correct: 1,
+                answer: "The Western Ghats in India is a biodiversity hotspot with high endemism."
+            },
+            {
+                question: "How many biodiversity hotspots are recognized globally?",
+                options: [
+                    "10",
+                    "25",
+                    "36",
+                    "50"
+                ],
+                correct: 2,
+                answer: "There are 36 recognized biodiversity hotspots globally."
+            },
+            {
+                question: "What is an endangered species?",
+                options: [
+                    "Species with stable populations",
+                    "Species at high risk of extinction",
+                    "Species with large populations",
+                    "Species in protected areas"
+                ],
+                correct: 1,
+                answer: "An endangered species is at high risk of extinction due to low population or threats."
+            },
+            {
+                question: "Which is an example of an endangered species?",
+                options: [
+                    "House sparrow",
+                    "Bengal tiger",
+                    "Pigeon",
+                    "Crow"
+                ],
+                correct: 1,
+                answer: "The Bengal tiger is an endangered species due to habitat loss and poaching."
+            },
+            {
+                question: "What is extinction?",
+                options: [
+                    "Increase in population",
+                    "Complete loss of a species",
+                    "Migration of species",
+                    "Adaptation of species"
+                ],
+                correct: 1,
+                answer: "Extinction is the complete loss of a species from the planet."
+            },
+            {
+                question: "Which species is extinct?",
+                options: [
+                    "Dodo",
+                    "Giant panda",
+                    "Blue whale",
+                    "Bald eagle"
+                ],
+                correct: 0,
+                answer: "The dodo is an extinct species, lost due to human activities."
+            },
+            {
+                question: "What is the Red Data Book?",
+                options: [
+                    "A list of all species",
+                    "A record of threatened species",
+                    "A book on ecosystems",
+                    "A guide to conservation laws"
+                ],
+                correct: 1,
+                answer: "The Red Data Book is a record of threatened species, published by IUCN."
+            },
+            {
+                question: "Who maintains the Red Data Book?",
+                options: [
+                    "WHO",
+                    "IUCN",
+                    "UNEP",
+                    "WWF"
+                ],
+                correct: 1,
+                answer: "The International Union for Conservation of Nature (IUCN) maintains the Red Data Book."
+            },
+            {
+                question: "What is a biosphere reserve?",
+                options: [
+                    "A zoo for endangered species",
+                    "An area for biodiversity conservation and research",
+                    "A tourist park",
+                    "An agricultural field"
+                ],
+                correct: 1,
+                answer: "A biosphere reserve conserves biodiversity while supporting research and sustainable development."
+            },
+            {
+                question: "Which is an example of a biosphere reserve in India?",
+                options: [
+                    "Jim Corbett National Park",
+                    "Sundarbans",
+                    "Ranthambore",
+                    "Kaziranga"
+                ],
+                correct: 1,
+                answer: "The Sundarbans is a biosphere reserve in India, known for its mangrove ecosystem."
+            },
+            {
+                question: "What is the main goal of a national park?",
+                options: [
+                    "Promote tourism",
+                    "Protect wildlife and habitats",
+                    "Allow hunting",
+                    "Support agriculture"
+                ],
+                correct: 1,
+                answer: "National parks aim to protect wildlife and their habitats."
+            },
+            {
+                question: "Which is an example of a national park in India?",
+                options: [
+                    "Nanda Devi",
+                    "Western Ghats",
+                    "Himalayas",
+                    "Ganges River"
+                ],
+                correct: 0,
+                answer: "Nanda Devi is a national park in India, protecting unique biodiversity."
+            },
+            {
+                question: "What is a wildlife sanctuary?",
+                options: [
+                    "An area for public recreation",
+                    "An area for protecting wild animals",
+                    "A botanical garden",
+                    "An agricultural reserve"
+                ],
+                correct: 1,
+                answer: "A wildlife sanctuary is an area dedicated to protecting wild animals and their habitats."
+            },
+            {
+                question: "Which is an example of a wildlife sanctuary in India?",
+                options: [
+                    "Gir Forest",
+                    "Nilgiri Hills",
+                    "Deccan Plateau",
+                    "Thar Desert"
+                ],
+                correct: 0,
+                answer: "Gir Forest is a wildlife sanctuary, home to the Asiatic lion."
+            },
+            {
+                question: "What is a critically endangered species?",
+                options: [
+                    "Species with stable populations",
+                    "Species at extremely high risk of extinction",
+                    "Species with large populations",
+                    "Species in protected areas"
+                ],
+                correct: 1,
+                answer: "A critically endangered species faces an extremely high risk of extinction."
+            },
+            {
+                question: "Which is a critically endangered species in India?",
+                options: [
+                    "Indian elephant",
+                    "Gharial",
+                    "Peacock",
+                    "Common leopard"
+                ],
+                correct: 1,
+                answer: "The gharial is a critically endangered species due to habitat loss."
+            },
+            {
+                question: "What is the role of protected areas in conservation?",
+                options: [
+                    "Promote deforestation",
+                    "Preserve biodiversity",
+                    "Encourage hunting",
+                    "Support urbanization"
+                ],
+                correct: 1,
+                answer: "Protected areas like national parks preserve biodiversity by safeguarding habitats."
+            },
+            {
+                question: "What is endemism in biodiversity?",
+                options: [
+                    "Species found globally",
+                    "Species restricted to a specific region",
+                    "Species with large populations",
+                    "Species that migrate"
+                ],
+                correct: 1,
+                answer: "Endemism refers to species restricted to a specific geographic region."
+            },
+            {
+                question: "Which region has high endemism?",
+                options: [
+                    "Himalayan foothills",
+                    "Siberian tundra",
+                    "Sahara Desert",
+                    "Great Plains"
+                ],
+                correct: 0,
+                answer: "The Himalayan foothills have high endemism due to unique ecological conditions."
+            },
+            {
+                question: "What is a mass extinction event?",
+                options: [
+                    "Loss of a single species",
+                    "Rapid loss of many species",
+                    "Population growth",
+                    "Species migration"
+                ],
+                correct: 1,
+                answer: "A mass extinction event involves the rapid loss of many species globally."
+            },
+            {
+                question: "How many major mass extinction events have occurred in Earth’s history?",
+                options: [
+                    "Three",
+                    "Five",
+                    "Seven",
+                    "Ten"
+                ],
+                correct: 1,
+                answer: "Five major mass extinction events have occurred in Earth’s history."
+            },
+            {
+                question: "What is the primary cause of the current biodiversity loss?",
+                options: [
+                    "Natural disasters",
+                    "Human activities",
+                    "Climate stability",
+                    "Species adaptation"
+                ],
+                correct: 1,
+                answer: "Human activities, like deforestation and pollution, are the primary cause of current biodiversity loss."
+            },
+            {
+                question: "What is the role of the Convention on Biological Diversity (CBD)?",
+                options: [
+                    "Promote hunting",
+                    "Conserve biodiversity globally",
+                    "Increase pollution",
+                    "Support deforestation"
+                ],
+                correct: 1,
+                answer: "The CBD aims to conserve biodiversity and promote sustainable use globally."
+            },
+            {
+                question: "Which is a strategy for biodiversity conservation?",
+                options: [
+                    "Habitat restoration",
+                    "Overexploitation",
+                    "Pollution",
+                    "Invasive species introduction"
+                ],
+                correct: 0,
+                answer: "Habitat restoration is a key strategy for conserving biodiversity."
+            },
+            {
+                question: "What is a keystone species?",
+                options: [
+                    "Species with large populations",
+                    "Species critical to ecosystem function",
+                    "Species with no ecological role",
+                    "Species that migrate"
+                ],
+                correct: 1,
+                answer: "A keystone species has a disproportionate impact on ecosystem function."
+            },
+            {
+                question: "Which is an example of a keystone species?",
+                options: [
+                    "House sparrow",
+                    "Sea otter",
+                    "Pigeon",
+                    "Rat"
+                ],
+                correct: 1,
+                answer: "Sea otters are keystone species, maintaining kelp forest ecosystems."
+            },
+            {
+                question: "What is the significance of biodiversity hotspots?",
+                options: [
+                    "Low conservation priority",
+                    "High conservation priority",
+                    "Stable ecosystems",
+                    "No species diversity"
+                ],
+                correct: 1,
+                answer: "Biodiversity hotspots are high conservation priorities due to their richness and threats."
+            },
+            {
+                question: "Which is a characteristic of biodiversity hotspots?",
+                options: [
+                    "Low endemism",
+                    "High habitat loss",
+                    "Stable populations",
+                    "No conservation need"
+                ],
+                correct: 1,
+                answer: "High habitat loss is a characteristic of biodiversity hotspots."
+            },
+            {
+                question: "What is the role of zoos in ex-situ conservation?",
+                options: [
+                    "Habitat destruction",
+                    "Breeding endangered species",
+                    "Promoting hunting",
+                    "Reducing biodiversity"
+                ],
+                correct: 1,
+                answer: "Zoos breed endangered species to prevent extinction, an ex-situ conservation method."
+            },
+            {
+                question: "Which is an example of in-situ conservation?",
+                options: [
+                    "Botanical garden",
+                    "Wildlife sanctuary",
+                    "Gene bank",
+                    "Cryopreservation"
+                ],
+                correct: 1,
+                answer: "Wildlife sanctuaries protect species in their natural habitats, an in-situ method."
+            },
+            {
+                question: "What is the purpose of the Red List by IUCN?",
+                options: [
+                    "Promote species trade",
+                    "Assess species extinction risk",
+                    "Increase deforestation",
+                    "Support poaching"
+                ],
+                correct: 1,
+                answer: "The IUCN Red List assesses the extinction risk of species."
+            },
+            {
+                question: "Which category in the Red Data Book indicates the highest risk?",
+                options: [
+                    "Vulnerable",
+                    "Endangered",
+                    "Critically Endangered",
+                    "Near Threatened"
+                ],
+                correct: 2,
+                answer: "Critically Endangered indicates the highest risk of extinction in the Red Data Book."
+            },
+            {
+                question: "What is a biosphere reserve’s role in conservation?",
+                options: [
+                    "Promote urbanization",
+                    "Balance conservation and sustainable use",
+                    "Allow unrestricted hunting",
+                    "Support deforestation"
+                ],
+                correct: 1,
+                answer: "Biosphere reserves balance biodiversity conservation with sustainable human use."
+            },
+            {
+                question: "Which is a biosphere reserve in India?",
+                options: [
+                    "Corbett National Park",
+                    "Nilgiri",
+                    "Ranthambore",
+                    "Bandipur"
+                ],
+                correct: 1,
+                answer: "The Nilgiri Biosphere Reserve supports conservation and sustainable development."
+            },
+            {
+                question: "What restricts human activities in national parks?",
+                options: [
+                    "Conservation laws",
+                    "Tourism promotion",
+                    "Industrial development",
+                    "Agricultural expansion"
+                ],
+                correct: 0,
+                answer: "Conservation laws restrict human activities in national parks to protect biodiversity."
+            },
+            {
+                question: "Which national park is known for rhinoceros conservation?",
+                options: [
+                    "Kaziranga",
+                    "Sundarbans",
+                    "Gir Forest",
+                    "Jim Corbett"
+                ],
+                correct: 0,
+                answer: "Kaziranga National Park is known for conserving the one-horned rhinoceros."
+            },
+            {
+                question: "Which sanctuary protects migratory birds?",
+                options: [
+                    "Bharatpur Bird Sanctuary",
+                    "Gir Forest",
+                    "Periyar",
+                    "Sariska"
+                ],
+                correct: 0,
+                answer: "Bharatpur Bird Sanctuary protects migratory birds like Siberian cranes."
+            },
+            {
+                question: "What is a vulnerable species?",
+                options: [
+                    "Species with stable populations",
+                    "Species at moderate risk of extinction",
+                    "Species with large populations",
+                    "Extinct species"
+                ],
+                correct: 1,
+                answer: "A vulnerable species is at moderate risk of extinction due to declining populations."
+            },
+            {
+                question: "Which is a vulnerable species in India?",
+                options: [
+                    "Indian vulture",
+                    "Common crow",
+                    "House sparrow",
+                    "Parrot"
+                ],
+                correct: 0,
+                answer: "The Indian vulture is a vulnerable species due to population declines."
+            },
+            {
+                question: "What is a cause of extinction?",
+                options: [
+                    "Habitat restoration",
+                    "Poaching",
+                    "Protected areas",
+                    "Reforestation"
+                ],
+                correct: 1,
+                answer: "Poaching is a major cause of extinction for many species."
+            },
+            {
+                question: "What is the role of botanical gardens in conservation?",
+                options: [
+                    "Promote deforestation",
+                    "Conserve plant species ex-situ",
+                    "Increase pollution",
+                    "Support hunting"
+                ],
+                correct: 1,
+                answer: "Botanical gardens conserve plant species ex-situ, protecting genetic diversity."
+            },
+            {
+                question: "Which is a global biodiversity hotspot?",
+                options: [
+                    "Amazon Rainforest",
+                    "Antarctic Ice Sheet",
+                    "Gobi Desert",
+                    "Arctic Ocean"
+                ],
+                correct: 0,
+                answer: "The Amazon Rainforest is a global biodiversity hotspot with high species richness."
+            },
+            {
+                question: "What is the significance of the Red Data Book?",
+                options: [
+                    "Guides conservation priorities",
+                    "Promotes species trade",
+                    "Increases poaching",
+                    "Reduces biodiversity"
+                ],
+                correct: 0,
+                answer: "The Red Data Book guides conservation priorities by identifying threatened species."
+            },
+            {
+                question: "Which organization supports biosphere reserves?",
+                options: [
+                    "UNESCO",
+                    "WHO",
+                    "FAO",
+                    "UNICEF"
+                ],
+                correct: 0,
+                answer: "UNESCO supports biosphere reserves through the Man and Biosphere Programme."
+            },
+            {
+                question: "What is a threat to biodiversity hotspots?",
+                options: [
+                    "Conservation efforts",
+                    "Deforestation",
+                    "Protected areas",
+                    "Sustainable farming"
+                ],
+                correct: 1,
+                answer: "Deforestation is a major threat to biodiversity hotspots."
+            },
+            {
+                question: "Which is a characteristic of endangered species?",
+                options: [
+                    "Large population size",
+                    "Low population size",
+                    "Stable habitats",
+                    "High genetic diversity"
+                ],
+                correct: 1,
+                answer: "Endangered species have low population sizes, increasing extinction risk."
+            },
+            {
+                question: "What is the role of community participation in conservation?",
+                options: [
+                    "Increases deforestation",
+                    "Enhances conservation success",
+                    "Promotes poaching",
+                    "Reduces biodiversity"
+                ],
+                correct: 1,
+                answer: "Community participation enhances conservation success through sustainable practices."
+            },
+            {
+                question: "Which is an example of a conservation success story?",
+                options: [
+                    "Extinction of the dodo",
+                    "Recovery of the bald eagle",
+                    "Loss of the passenger pigeon",
+                    "Decline of the black rhino"
+                ],
+                correct: 1,
+                answer: "The recovery of the bald eagle is a conservation success due to protective measures."
+            },
+            {
+                question: "What is a benefit of biodiversity to agriculture?",
+                options: [
+                    "Reduced crop diversity",
+                    "Pollination services",
+                    "Increased pesticide use",
+                    "Soil degradation"
+                ],
+                correct: 1,
+                answer: "Biodiversity provides pollination services, supporting agricultural productivity."
+            },
+            {
+                question: "Which is a pattern of biodiversity in mountains?",
+                options: [
+                    "Uniform diversity",
+                    "Decreasing diversity with altitude",
+                    "Increasing diversity with altitude",
+                    "No diversity"
+                ],
+                correct: 1,
+                answer: "Biodiversity typically decreases with altitude in mountain ecosystems."
+            },
+            {
+                question: "What is the role of seed banks in conservation?",
+                options: [
+                    "Promote deforestation",
+                    "Store plant genetic material",
+                    "Increase poaching",
+                    "Reduce biodiversity"
+                ],
+                correct: 1,
+                answer: "Seed banks store plant genetic material for ex-situ conservation."
+            },
+            {
+                question: "Which is a national park in India for tiger conservation?",
+                options: [
+                    "Ranthambore",
+                    "Sundarbans",
+                    "Kaziranga",
+                    "Gir Forest"
+                ],
+                correct: 0,
+                answer: "Ranthambore National Park is known for tiger conservation."
+            },
+            {
+                question: "What is a challenge in biodiversity conservation?",
+                options: [
+                    "Protected areas",
+                    "Funding shortages",
+                    "Reforestation",
+                    "Community support"
+                ],
+                correct: 1,
+                answer: "Funding shortages are a major challenge in biodiversity conservation."
+            },
+            {
+                question: "Which species is protected in Kaziranga National Park?",
+                options: [
+                    "Asiatic lion",
+                    "One-horned rhinoceros",
+                    "Bengal tiger",
+                    "Snow leopard"
+                ],
+                correct: 1,
+                answer: "Kaziranga National Park protects the one-horned rhinoceros."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

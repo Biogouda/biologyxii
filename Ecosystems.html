@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecosystems MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Ecosystems MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is an ecosystem?",
+                options: [
+                    "A single species in an area",
+                    "A community of organisms and their environment",
+                    "Only the physical environment",
+                    "A group of habitats"
+                ],
+                correct: 1,
+                answer: "An ecosystem includes a community of organisms interacting with their physical environment."
+            },
+            {
+                question: "Which is a biotic component of an ecosystem?",
+                options: [
+                    "Water",
+                    "Plants",
+                    "Sunlight",
+                    "Soil"
+                ],
+                correct: 1,
+                answer: "Plants are biotic components, as they are living organisms in the ecosystem."
+            },
+            {
+                question: "Which is an abiotic component of an ecosystem?",
+                options: [
+                    "Bacteria",
+                    "Fungi",
+                    "Temperature",
+                    "Animals"
+                ],
+                correct: 2,
+                answer: "Temperature is an abiotic component, as it is a non-living factor."
+            },
+            {
+                question: "What is primary productivity in an ecosystem?",
+                options: [
+                    "Energy stored by consumers",
+                    "Rate of biomass production by producers",
+                    "Decomposition rate",
+                    "Nutrient recycling rate"
+                ],
+                correct: 1,
+                answer: "Primary productivity is the rate at which producers create biomass via photosynthesis."
+            },
+            {
+                question: "What is gross primary productivity (GPP)?",
+                options: [
+                    "Total energy lost",
+                    "Total biomass produced by producers",
+                    "Energy after respiration",
+                    "Energy consumed by decomposers"
+                ],
+                correct: 1,
+                answer: "GPP is the total biomass produced by producers through photosynthesis."
+            },
+            {
+                question: "What is net primary productivity (NPP)?",
+                options: [
+                    "Total biomass produced",
+                    "Biomass after respiration",
+                    "Energy lost to decomposers",
+                    "Energy stored by consumers"
+                ],
+                correct: 1,
+                answer: "NPP is the biomass remaining after producers use energy for respiration."
+            },
+            {
+                question: "Which organisms are primarily responsible for decomposition?",
+                options: [
+                    "Producers",
+                    "Consumers",
+                    "Decomposers",
+                    "Predators"
+                ],
+                correct: 2,
+                answer: "Decomposers, like bacteria and fungi, break down dead organic matter."
+            },
+            {
+                question: "What is the role of decomposers in an ecosystem?",
+                options: [
+                    "Produce energy",
+                    "Recycle nutrients",
+                    "Consume plants",
+                    "Fix carbon"
+                ],
+                correct: 1,
+                answer: "Decomposers recycle nutrients by breaking down dead organisms."
+            },
+            {
+                question: "What is energy flow in an ecosystem?",
+                options: [
+                    "Movement of nutrients",
+                    "Transfer of energy through trophic levels",
+                    "Recycling of carbon",
+                    "Loss of biomass"
+                ],
+                correct: 1,
+                answer: "Energy flow is the transfer of energy from producers to consumers through trophic levels."
+            },
+            {
+                question: "What is the primary source of energy in most ecosystems?",
+                options: [
+                    "Wind",
+                    "Sunlight",
+                    "Geothermal heat",
+                    "Chemical reactions"
+                ],
+                correct: 1,
+                answer: "Sunlight is the primary energy source, captured by producers via photosynthesis."
+            },
+            {
+                question: "What percentage of energy is typically transferred between trophic levels?",
+                options: [
+                    "10%",
+                    "50%",
+                    "75%",
+                    "100%"
+                ],
+                correct: 0,
+                answer: "Approximately 10% of energy is transferred between trophic levels, per the 10% rule."
+            },
+            {
+                question: "What is a trophic level?",
+                options: [
+                    "A habitat type",
+                    "A feeding level in a food chain",
+                    "A nutrient cycle",
+                    "A type of succession"
+                ],
+                correct: 1,
+                answer: "A trophic level is a feeding level in a food chain, like producers or consumers."
+            },
+            {
+                question: "What is a pyramid of numbers?",
+                options: [
+                    "Number of organisms at each trophic level",
+                    "Biomass at each trophic level",
+                    "Energy at each trophic level",
+                    "Nutrients in an ecosystem"
+                ],
+                correct: 0,
+                answer: "A pyramid of numbers shows the number of organisms at each trophic level."
+            },
+            {
+                question: "What is a pyramid of biomass?",
+                options: [
+                    "Number of organisms",
+                    "Total dry weight of organisms at each trophic level",
+                    "Energy stored in organisms",
+                    "Nutrient content"
+                ],
+                correct: 1,
+                answer: "A pyramid of biomass represents the dry weight of organisms at each trophic level."
+            },
+            {
+                question: "What is a pyramid of energy?",
+                options: [
+                    "Number of organisms",
+                    "Biomass of organisms",
+                    "Energy content at each trophic level",
+                    "Nutrient cycling rate"
+                ],
+                correct: 2,
+                answer: "A pyramid of energy shows the energy content at each trophic level."
+            },
+            {
+                question: "Which pyramid is always upright?",
+                options: [
+                    "Pyramid of numbers",
+                    "Pyramid of biomass",
+                    "Pyramid of energy",
+                    "All of the above"
+                ],
+                correct: 2,
+                answer: "The pyramid of energy is always upright due to energy loss at each trophic level."
+            },
+            {
+                question: "What can cause an inverted pyramid of numbers?",
+                options: [
+                    "Large predators",
+                    "Few producers supporting many consumers",
+                    "High energy transfer",
+                    "No decomposers"
+                ],
+                correct: 1,
+                answer: "Few producers, like a tree, supporting many consumers can cause an inverted pyramid of numbers."
+            },
+            {
+                question: "What is the carbon cycle?",
+                options: [
+                    "Movement of carbon through ecosystems",
+                    "Recycling of energy",
+                    "Transfer of phosphorus",
+                    "Flow of nitrogen"
+                ],
+                correct: 0,
+                answer: "The carbon cycle is the movement of carbon through living and non-living components of ecosystems."
+            },
+            {
+                question: "Which process adds carbon to the atmosphere?",
+                options: [
+                    "Photosynthesis",
+                    "Respiration",
+                    "Carbon fixation",
+                    "Sedimentation"
+                ],
+                correct: 1,
+                answer: "Respiration releases carbon dioxide into the atmosphere."
+            },
+            {
+                question: "What is the role of photosynthesis in the carbon cycle?",
+                options: [
+                    "Releases carbon dioxide",
+                    "Fixes carbon into organic compounds",
+                    "Decomposes organic matter",
+                    "Burns fossil fuels"
+                ],
+                correct: 1,
+                answer: "Photosynthesis fixes carbon dioxide into organic compounds like glucose."
+            },
+            {
+                question: "What is the phosphorus cycle?",
+                options: [
+                    "Movement of phosphorus through ecosystems",
+                    "Recycling of energy",
+                    "Transfer of carbon",
+                    "Flow of nitrogen"
+                ],
+                correct: 0,
+                answer: "The phosphorus cycle involves the movement of phosphorus through ecosystems."
+            },
+            {
+                question: "Where is phosphorus primarily stored in ecosystems?",
+                options: [
+                    "Atmosphere",
+                    "Rocks and sediments",
+                    "Plants",
+                    "Water"
+                ],
+                correct: 1,
+                answer: "Phosphorus is primarily stored in rocks and sediments, released by weathering."
+            },
+            {
+                question: "Which process makes phosphorus available to plants?",
+                options: [
+                    "Burning fossil fuels",
+                    "Weathering of rocks",
+                    "Photosynthesis",
+                    "Respiration"
+                ],
+                correct: 1,
+                answer: "Weathering of rocks releases phosphorus for plant uptake."
+            },
+            {
+                question: "What is ecological succession?",
+                options: [
+                    "Stable ecosystem state",
+                    "Gradual change in species composition",
+                    "Sudden population decline",
+                    "Energy flow"
+                ],
+                correct: 1,
+                answer: "Ecological succession is the gradual change in species composition over time."
+            },
+            {
+                question: "What is primary succession?",
+                options: [
+                    "Succession on bare rock or new land",
+                    "Succession after a forest fire",
+                    "Succession in stable ecosystems",
+                    "Succession with existing soil"
+                ],
+                correct: 0,
+                answer: "Primary succession occurs on bare rock or new land with no prior soil."
+            },
+            {
+                question: "What is secondary succession?",
+                options: [
+                    "Succession on bare rock",
+                    "Succession after disturbance with existing soil",
+                    "Succession in water",
+                    "Succession without plants"
+                ],
+                correct: 1,
+                answer: "Secondary succession occurs after a disturbance, like a fire, where soil remains."
+            },
+            {
+                question: "Which is a pioneer species in primary succession?",
+                options: [
+                    "Trees",
+                    "Grasses",
+                    "Lichens",
+                    "Shrubs"
+                ],
+                correct: 2,
+                answer: "Lichens are pioneer species, breaking down rock to form soil in primary succession."
+            },
+            {
+                question: "What is a climax community?",
+                options: [
+                    "Initial species in succession",
+                    "Stable, mature ecosystem",
+                    "Temporary population",
+                    "Declining ecosystem"
+                ],
+                correct: 1,
+                answer: "A climax community is a stable, mature ecosystem at the end of succession."
+            },
+            {
+                question: "What is an ecological service?",
+                options: [
+                    "Human-made resources",
+                    "Benefits provided by ecosystems",
+                    "Energy loss",
+                    "Nutrient depletion"
+                ],
+                correct: 1,
+                answer: "Ecological services are benefits like pollination provided by ecosystems."
+            },
+            {
+                question: "Which is an example of an ecological service?",
+                options: [
+                    "Fossil fuel burning",
+                    "Pollination by bees",
+                    "Deforestation",
+                    "Industrial production"
+                ],
+                correct: 1,
+                answer: "Pollination by bees is an ecological service supporting plant reproduction."
+            },
+            {
+                question: "What is carbon fixation?",
+                options: [
+                    "Releasing carbon dioxide",
+                    "Converting carbon dioxide into organic compounds",
+                    "Burning fossil fuels",
+                    "Decomposing organic matter"
+                ],
+                correct: 1,
+                answer: "Carbon fixation converts carbon dioxide into organic compounds via photosynthesis."
+            },
+            {
+                question: "Which organisms perform carbon fixation?",
+                options: [
+                    "Consumers",
+                    "Decomposers",
+                    "Producers",
+                    "Predators"
+                ],
+                correct: 2,
+                answer: "Producers, like plants, perform carbon fixation through photosynthesis."
+            },
+            {
+                question: "What is the role of oxygen release in ecosystems?",
+                options: [
+                    "Depletes atmosphere",
+                    "Supports respiration",
+                    "Reduces biomass",
+                    "Increases decomposition"
+                ],
+                correct: 1,
+                answer: "Oxygen release by plants during photosynthesis supports respiration in organisms."
+            },
+            {
+                question: "Which ecosystem has the highest primary productivity?",
+                options: [
+                    "Desert",
+                    "Tropical rainforest",
+                    "Tundra",
+                    "Grassland"
+                ],
+                correct: 1,
+                answer: "Tropical rainforests have the highest primary productivity due to abundant resources."
+            },
+            {
+                question: "What is a food chain?",
+                options: [
+                    "All species in an ecosystem",
+                    "Linear sequence of energy transfer",
+                    "Nutrient cycle",
+                    "Population growth"
+                ],
+                correct: 1,
+                answer: "A food chain is a linear sequence showing energy transfer between organisms."
+            },
+            {
+                question: "What is a food web?",
+                options: [
+                    "Single food chain",
+                    "Interconnected food chains",
+                    "Nutrient cycle",
+                    "Energy loss"
+                ],
+                correct: 1,
+                answer: "A food web is a network of interconnected food chains in an ecosystem."
+            },
+            {
+                question: "What is the role of consumers in energy flow?",
+                options: [
+                    "Produce energy",
+                    "Transfer energy by feeding",
+                    "Fix carbon",
+                    "Decompose matter"
+                ],
+                correct: 1,
+                answer: "Consumers transfer energy by feeding on other organisms."
+            },
+            {
+                question: "What happens to energy as it moves up trophic levels?",
+                options: [
+                    "Increases",
+                    "Decreases",
+                    "Remains constant",
+                    "Becomes nutrients"
+                ],
+                correct: 1,
+                answer: "Energy decreases as it moves up trophic levels due to heat loss."
+            },
+            {
+                question: "Which process removes carbon from the atmosphere?",
+                options: [
+                    "Respiration",
+                    "Combustion",
+                    "Photosynthesis",
+                    "Decomposition"
+                ],
+                correct: 2,
+                answer: "Photosynthesis removes carbon dioxide from the atmosphere."
+            },
+            {
+                question: "What is a reservoir in the phosphorus cycle?",
+                options: [
+                    "Atmosphere",
+                    "Rocks and sediments",
+                    "Plants",
+                    "Animals"
+                ],
+                correct: 1,
+                answer: "Rocks and sediments are the main reservoirs for phosphorus."
+            },
+            {
+                question: "Which human activity disrupts the carbon cycle?",
+                options: [
+                    "Planting trees",
+                    "Burning fossil fuels",
+                    "Pollination",
+                    "Oxygen release"
+                ],
+                correct: 1,
+                answer: "Burning fossil fuels releases excess carbon dioxide, disrupting the carbon cycle."
+            },
+            {
+                question: "What is an example of secondary succession?",
+                options: [
+                    "Lichens on bare rock",
+                    "Forest regrowth after a fire",
+                    "New volcanic island",
+                    "Glacier retreat"
+                ],
+                correct: 1,
+                answer: "Forest regrowth after a fire is an example of secondary succession."
+            },
+            {
+                question: "Which organisms benefit from pollination services?",
+                options: [
+                    "Animals",
+                    "Plants",
+                    "Decomposers",
+                    "Consumers"
+                ],
+                correct: 1,
+                answer: "Plants benefit from pollination, which aids reproduction."
+            },
+            {
+                question: "What is the role of detritivores in decomposition?",
+                options: [
+                    "Produce energy",
+                    "Break down dead matter physically",
+                    "Fix carbon",
+                    "Consume plants"
+                ],
+                correct: 1,
+                answer: "Detritivores, like earthworms, physically break down dead matter."
+            },
+            {
+                question: "Which trophic level has the most biomass in a typical ecosystem?",
+                options: [
+                    "Producers",
+                    "Primary consumers",
+                    "Secondary consumers",
+                    "Tertiary consumers"
+                ],
+                correct: 0,
+                answer: "Producers typically have the most biomass in an ecosystem."
+            },
+            {
+                question: "What is an inverted pyramid of biomass?",
+                options: [
+                    "More biomass at higher trophic levels",
+                    "More biomass at lower trophic levels",
+                    "Equal biomass at all levels",
+                    "No biomass"
+                ],
+                correct: 0,
+                answer: "An inverted pyramid of biomass occurs when higher trophic levels have more biomass, like in aquatic ecosystems."
+            },
+            {
+                question: "Which nutrient cycle lacks an atmospheric component?",
+                options: [
+                    "Carbon cycle",
+                    "Nitrogen cycle",
+                    "Phosphorus cycle",
+                    "Water cycle"
+                ],
+                correct: 2,
+                answer: "The phosphorus cycle lacks a significant atmospheric component."
+            },
+            {
+                question: "What is the significance of ecological services?",
+                options: [
+                    "Increase pollution",
+                    "Support human well-being",
+                    "Reduce biodiversity",
+                    "Deplete resources"
+                ],
+                correct: 1,
+                answer: "Ecological services, like pollination, support human well-being."
+            },
+            {
+                question: "Which ecosystem component is essential for energy flow?",
+                options: [
+                    "Producers",
+                    "Soil",
+                    "Water",
+                    "Rocks"
+                ],
+                correct: 0,
+                answer: "Producers capture energy from sunlight, initiating energy flow."
+            },
+            {
+                question: "What is the role of fungi in nutrient cycling?",
+                options: [
+                    "Fix carbon",
+                    "Decompose organic matter",
+                    "Produce energy",
+                    "Consume plants"
+                ],
+                correct: 1,
+                answer: "Fungi decompose organic matter, recycling nutrients like carbon and phosphorus."
+            },
+            {
+                question: "Which process is part of ecological succession?",
+                options: [
+                    "Soil formation",
+                    "Fossil fuel burning",
+                    "Energy loss",
+                    "Population decline"
+                ],
+                correct: 0,
+                answer: "Soil formation is a key process in primary ecological succession."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

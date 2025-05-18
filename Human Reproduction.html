@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Reproduction MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: pink;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+           spenderflex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Human Reproduction MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Which structure in the male reproductive system produces sperm?",
+                options: [
+                    "Epididymis",
+                    "Seminiferous tubules",
+                    "Vas deferens",
+                    "Prostate gland"
+                ],
+                correct: 1,
+                answer: "Seminiferous tubules in the testes are the site of sperm production."
+            },
+            {
+                question: "What is the primary female reproductive organ?",
+                options: [
+                    "Uterus",
+                    "Oviduct",
+                    "Ovary",
+                    "Cervix"
+                ],
+                correct: 2,
+                answer: "The ovary produces eggs and female sex hormones."
+            },
+            {
+                question: "Which cells in the testis provide nourishment to developing sperm?",
+                options: [
+                    "Leydig cells",
+                    "Sertoli cells",
+                    "Spermatogonia",
+                    "Interstitial cells"
+                ],
+                correct: 1,
+                answer: "Sertoli cells support and nourish developing sperm cells."
+            },
+            {
+                question: "What is the outermost layer of the ovary called?",
+                options: [
+                    "Tunica albuginea",
+                    "Germinal epithelium",
+                    "Cortex",
+                    "Medulla"
+                ],
+                correct: 1,
+                answer: "The germinal epithelium is the outermost layer of the ovary."
+            },
+            {
+                question: "What is the process of sperm formation called?",
+                options: [
+                    "Oogenesis",
+                    "Spermatogenesis",
+                    "Gametogenesis",
+                    "Meiosis"
+                ],
+                correct: 1,
+                answer: "Spermatogenesis is the process of sperm formation in the testes."
+            },
+            {
+                question: "Which hormone triggers ovulation in the menstrual cycle?",
+                options: [
+                    "Estrogen",
+                    "Progesterone",
+                    "Luteinizing hormone (LH)",
+                    "Follicle-stimulating hormone (FSH)"
+                ],
+                correct: 2,
+                answer: "A surge in LH triggers ovulation, releasing the mature egg."
+            },
+            {
+                question: "Where does fertilization typically occur in the female reproductive system?",
+                options: [
+                    "Uterus",
+                    "Ovary",
+                    "Fallopian tube",
+                    "Cervix"
+                ],
+                correct: 2,
+                answer: "Fertilization occurs in the fallopian tube, where sperm meets the egg."
+            },
+            {
+                question: "What is the blastocyst stage of embryo development?",
+                options: [
+                    "A single cell",
+                    "A fluid-filled cavity with an inner cell mass",
+                    "A solid ball of cells",
+                    "A gastrula"
+                ],
+                correct: 1,
+                answer: "The blastocyst is a fluid-filled structure with an inner cell mass that forms the embryo."
+            },
+            {
+                question: "What is implantation in human reproduction?",
+                options: [
+                    "Sperm penetration of the egg",
+                    "Blastocyst embedding in the uterine wall",
+                    "Placenta formation",
+                    "Embryo gastrulation"
+                ],
+                correct: 1,
+                answer: "Implantation is the process where the blastocyst embeds into the endometrium."
+            },
+            {
+                question: "What is the primary function of the placenta during pregnancy?",
+                options: [
+                    "Produces eggs",
+                    "Provides nutrients and oxygen to the fetus",
+                    "Triggers parturition",
+                    "Secretes milk"
+                ],
+                correct: 1,
+                answer: "The placenta facilitates nutrient and oxygen exchange between mother and fetus."
+            },
+            {
+                question: "Which cells in the testis produce testosterone?",
+                options: [
+                    "Sertoli cells",
+                    "Leydig cells",
+                    "Spermatids",
+                    "Spermatocytes"
+                ],
+                correct: 1,
+                answer: "Leydig cells produce testosterone in the testes."
+            },
+            {
+                question: "What is the role of the corpus luteum in the ovary?",
+                options: [
+                    "Produces the egg",
+                    "Secretes progesterone",
+                    "Forms the follicle",
+                    "Guides sperm"
+                ],
+                correct: 1,
+                answer: "The corpus luteum secretes progesterone to maintain pregnancy."
+            },
+            {
+                question: "Which stage of spermatogenesis results in haploid cells?",
+                options: [
+                    "Spermatogonia",
+                    "Primary spermatocyte",
+                    "Secondary spermatocyte",
+                    "Spermatid"
+                ],
+                correct: 3,
+                answer: "Spermatids are haploid cells formed after meiosis in spermatogenesis."
+            },
+            {
+                question: "What is the primary oocyte in oogenesis?",
+                options: [
+                    "A mature egg",
+                    "A diploid cell before meiosis",
+                    "A haploid cell after meiosis",
+                    "A polar body"
+                ],
+                correct: 1,
+                answer: "The primary oocyte is a diploid cell that undergoes meiosis to form the egg."
+            },
+            {
+                question: "Which phase of the menstrual cycle involves endometrial growth?",
+                options: [
+                    "Menstrual phase",
+                    "Follicular phase",
+                    "Ovulatory phase",
+                    "Luteal phase"
+                ],
+                correct: 1,
+                answer: "The follicular phase involves endometrial growth due to estrogen."
+            },
+            {
+                question: "What is the role of the acrosome in a sperm cell?",
+                options: [
+                    "Provides energy",
+                    "Contains enzymes to penetrate the egg",
+                    "Stores genetic material",
+                    "Propels the sperm"
+                ],
+                correct: 1,
+                answer: "The acrosome contains enzymes that help the sperm penetrate the egg."
+            },
+            {
+                question: "Which structure in the female reproductive system connects the ovary to the uterus?",
+                options: [
+                    "Cervix",
+                    "Fallopian tube",
+                    "Vagina",
+                    "Endometrium"
+                ],
+                correct: 1,
+                answer: "The fallopian tube connects the ovary to the uterus."
+            },
+            {
+                question: "What is the morula stage in embryo development?",
+                options: [
+                    "A single cell",
+                    "A solid ball of 16-32 cells",
+                    "A fluid-filled blastocyst",
+                    "A gastrula"
+                ],
+                correct: 1,
+                answer: "The morula is a solid ball of 16-32 cells formed after cleavage."
+            },
+            {
+                question: "Which hormone maintains pregnancy by preventing uterine contractions?",
+                options: [
+                    "Estrogen",
+                    "Progesterone",
+                    "Oxytocin",
+                    "FSH"
+                ],
+                correct: 1,
+                answer: "Progesterone prevents uterine contractions to maintain pregnancy."
+            },
+            {
+                question: "What is parturition in human reproduction?",
+                options: [
+                    "Fertilization",
+                    "Implantation",
+                    "Childbirth",
+                    "Lactation"
+                ],
+                correct: 2,
+                answer: "Parturition is the process of childbirth."
+            },
+            {
+                question: "Which hormone stimulates milk production during lactation?",
+                options: [
+                    "Prolactin",
+                    "Oxytocin",
+                    "Estrogen",
+                    "Progesterone"
+                ],
+                correct: 0,
+                answer: "Prolactin stimulates milk production in the mammary glands."
+            },
+            {
+                question: "What is the function of the epididymis in the male reproductive system?",
+                options: [
+                    "Produces sperm",
+                    "Stores and matures sperm",
+                    "Secretes testosterone",
+                    "Transports semen"
+                ],
+                correct: 1,
+                answer: "The epididymis stores and matures sperm before ejaculation."
+            },
+            {
+                question: "Which layer of the uterus is shed during menstruation?",
+                options: [
+                    "Myometrium",
+                    "Endometrium",
+                    "Perimetrium",
+                    "Cervix"
+                ],
+                correct: 1,
+                answer: "The endometrium is shed during the menstrual phase."
+            },
+            {
+                question: "What is the role of polar bodies in oogenesis?",
+                options: [
+                    "Develop into eggs",
+                    "Provide nutrients",
+                    "Receive unequal cytoplasm",
+                    "Form the corpus luteum"
+                ],
+                correct: 2,
+                answer: "Polar bodies receive minimal cytoplasm and degenerate, ensuring the egg gets most resources."
+            },
+            {
+                question: "Which hormone is responsible for follicle development in the ovary?",
+                options: [
+                    "LH",
+                    "FSH",
+                    "Progesterone",
+                    "Oxytocin"
+                ],
+                correct: 1,
+                answer: "FSH stimulates follicle development in the ovary."
+            },
+            {
+                question: "What is the zona pellucida in human reproduction?",
+                options: [
+                    "A layer around the ovary",
+                    "A membrane around the egg",
+                    "A part of the placenta",
+                    "A uterine layer"
+                ],
+                correct: 1,
+                answer: "The zona pellucida is a glycoprotein layer surrounding the egg."
+            },
+            {
+                question: "Which structure in the embryo forms the placenta?",
+                options: [
+                    "Inner cell mass",
+                    "Trophoblast",
+                    "Blastocoel",
+                    "Morula"
+                ],
+                correct: 1,
+                answer: "The trophoblast forms the outer layer of the placenta."
+            },
+            {
+                question: "What triggers uterine contractions during parturition?",
+                options: [
+                    "Progesterone",
+                    "Estrogen",
+                    "Oxytocin",
+                    "Prolactin"
+                ],
+                correct: 2,
+                answer: "Oxytocin triggers uterine contractions during childbirth."
+            },
+            {
+                question: "Which cells in the ovary surround the developing oocyte?",
+                options: [
+                    "Granulosa cells",
+                    "Theca cells",
+                    "Leydig cells",
+                    "Sertoli cells"
+                ],
+                correct: 0,
+                answer: "Granulosa cells surround and nourish the developing oocyte."
+            },
+            {
+                question: "What is the function of the vas deferens in the male reproductive system?",
+                options: [
+                    "Produces sperm",
+                    "Transports sperm to the urethra",
+                    "Secretes seminal fluid",
+                    "Stores testosterone"
+                ],
+                correct: 1,
+                answer: "The vas deferens transports sperm from the epididymis to the urethra."
+            },
+            {
+                question: "Which phase of the menstrual cycle follows ovulation?",
+                options: [
+                    "Follicular phase",
+                    "Ovulatory phase",
+                    "Luteal phase",
+                    "Menstrual phase"
+                ],
+                correct: 2,
+                answer: "The luteal phase follows ovulation, preparing the uterus for implantation."
+            },
+            {
+                question: "What is the cleavage stage in embryo development?",
+                options: [
+                    "Rapid cell division after fertilization",
+                    "Implantation in the uterus",
+                    "Formation of the blastocyst",
+                    "Gastrulation"
+                ],
+                correct: 0,
+                answer: "Cleavage involves rapid cell division after fertilization, forming the morula."
+            },
+            {
+                question: "Which structure in the male reproductive system secretes seminal fluid?",
+                options: [
+                    "Prostate gland",
+                    "Epididymis",
+                    "Seminiferous tubules",
+                    "Vas deferens"
+                ],
+                correct: 0,
+                answer: "The prostate gland secretes seminal fluid to nourish and transport sperm."
+            },
+            {
+                question: "What is the role of human chorionic gonadotropin (hCG) in pregnancy?",
+                options: [
+                    "Triggers ovulation",
+                    "Maintains the corpus luteum",
+                    "Stimulates milk production",
+                    "Induces parturition"
+                ],
+                correct: 1,
+                answer: "hCG maintains the corpus luteum to produce progesterone during early pregnancy."
+            },
+            {
+                question: "Which part of the sperm contains the genetic material?",
+                options: [
+                    "Acrosome",
+                    "Midpiece",
+                    "Head",
+                    "Tail"
+                ],
+                correct: 2,
+                answer: "The head of the sperm contains the nucleus with genetic material."
+            },
+            {
+                question: "What is the function of the cervix in the female reproductive system?",
+                options: [
+                    "Produces eggs",
+                    "Connects uterus to vagina",
+                    "Site of fertilization",
+                    "Forms the placenta"
+                ],
+                correct: 1,
+                answer: "The cervix connects the uterus to the vagina and allows passage of sperm and menstrual blood."
+            },
+            {
+                question: "Which hormone causes milk ejection during lactation?",
+                options: [
+                    "Prolactin",
+                    "Oxytocin",
+                    "Estrogen",
+                    "hCG"
+                ],
+                correct: 1,
+                answer: "Oxytocin causes milk ejection from the mammary glands during lactation."
+            },
+            {
+                question: "What is the primary source of estrogen during pregnancy?",
+                options: [
+                    "Ovary",
+                    "Placenta",
+                    "Corpus luteum",
+                    "Pituitary gland"
+                ],
+                correct: 1,
+                answer: "The placenta produces estrogen during pregnancy."
+            },
+            {
+                question: "Which structure in the ovary contains the developing egg?",
+                options: [
+                    "Corpus luteum",
+                    "Follicle",
+                    "Tunica albuginea",
+                    "Medulla"
+                ],
+                correct: 1,
+                answer: "The follicle contains the developing egg in the ovary."
+            },
+            {
+                question: "What is the role of the midpiece in a sperm cell?",
+                options: [
+                    "Contains enzymes",
+                    "Provides energy via mitochondria",
+                    "Stores genetic material",
+                    "Propels the sperm"
+                ],
+                correct: 1,
+                answer: "The midpiece contains mitochondria that provide energy for sperm motility."
+            },
+            {
+                question: "Which phase of the menstrual cycle is characterized by low hormone levels?",
+                options: [
+                    "Follicular phase",
+                    "Ovulatory phase",
+                    "Luteal phase",
+                    "Menstrual phase"
+                ],
+                correct: 3,
+                answer: "The menstrual phase has low levels of estrogen and progesterone."
+            },
+            {
+                question: "What is the inner cell mass in the blastocyst?",
+                options: [
+                    "Forms the placenta",
+                    "Develops into the embryo",
+                    "Provides nutrients",
+                    "Forms the blastocoel"
+                ],
+                correct: 1,
+                answer: "The inner cell mass develops into the embryo."
+            },
+            {
+                question: "Which structure in the female reproductive system is the site of implantation?",
+                options: [
+                    "Fallopian tube",
+                    "Endometrium",
+                    "Cervix",
+                    "Ovary"
+                ],
+                correct: 1,
+                answer: "The endometrium is the uterine lining where implantation occurs."
+            },
+            {
+                question: "What is the role of the umbilical cord during pregnancy?",
+                options: [
+                    "Produces hormones",
+                    "Connects fetus to placenta",
+                    "Triggers parturition",
+                    "Forms the embryo"
+                ],
+                correct: 1,
+                answer: "The umbilical cord connects the fetus to the placenta for nutrient and oxygen exchange."
+            },
+            {
+                question: "Which cells in the testis undergo meiosis to form sperm?",
+                options: [
+                    "Spermatogonia",
+                    "Primary spermatocytes",
+                    "Spermatids",
+                    "Sertoli cells"
+                ],
+                correct: 1,
+                answer: "Primary spermatocytes undergo meiosis to form haploid spermatids."
+            },
+            {
+                question: "What is the function of the fimbriae in the female reproductive system?",
+                options: [
+                    "Produce eggs",
+                    "Guide the egg into the fallopian tube",
+                    "Secrete hormones",
+                    "Form the placenta"
+                ],
+                correct: 1,
+                answer: "The fimbriae sweep the egg into the fallopian tube after ovulation."
+            },
+            {
+                question: "Which hormone decreases at the end of pregnancy to allow parturition?",
+                options: [
+                    "Estrogen",
+                    "Progesterone",
+                    "Oxytocin",
+                    "Prolactin"
+                ],
+                correct: 1,
+                answer: "A decrease in progesterone allows uterine contractions for parturition."
+            },
+            {
+                question: "What is the significance of the blastocoel in the blastocyst?",
+                options: [
+                    "Forms the embryo",
+                    "Provides a fluid-filled cavity",
+                    "Develops into the placenta",
+                    "Stores genetic material"
+                ],
+                correct: 1,
+                answer: "The blastocoel is a fluid-filled cavity that supports blastocyst structure."
+            },
+            {
+                question: "Which structure in the male reproductive system carries both urine and semen?",
+                options: [
+                    "Vas deferens",
+                    "Urethra",
+                    "Epididymis",
+                    "Seminal vesicle"
+                ],
+                correct: 1,
+                answer: "The urethra carries both urine and semen out of the body."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

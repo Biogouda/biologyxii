@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theories of Evolution MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Theories of Evolution MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Who proposed the theory of inheritance of acquired characteristics?",
+                options: [
+                    "Charles Darwin",
+                    "Jean-Baptiste Lamarck",
+                    "Alfred Russel Wallace",
+                    "Gregor Mendel"
+                ],
+                correct: 1,
+                answer: "Jean-Baptiste Lamarck proposed that acquired traits are inherited by offspring."
+            },
+            {
+                question: "What is a key principle of Lamarckism?",
+                options: [
+                    "Natural selection",
+                    "Use and disuse of organs",
+                    "Genetic drift",
+                    "Mutation"
+                ],
+                correct: 1,
+                answer: "Lamarckism suggests that organs used frequently develop, while unused ones degenerate."
+            },
+            {
+                question: "What is the main mechanism of evolution in Darwinism?",
+                options: [
+                    "Inheritance of acquired traits",
+                    "Natural selection",
+                    "Genetic drift",
+                    "Gene flow"
+                ],
+                correct: 1,
+                answer: "Darwinism emphasizes natural selection as the primary mechanism of evolution."
+            },
+            {
+                question: "Who co-developed the theory of natural selection with Darwin?",
+                options: [
+                    "Lamarck",
+                    "Wallace",
+                    "Haldane",
+                    "Mendel"
+                ],
+                correct: 1,
+                answer: "Alfred Russel Wallace independently proposed natural selection, prompting Darwin’s publication."
+            },
+            {
+                question: "What does the Modern Synthetic Theory of Evolution combine?",
+                options: [
+                    "Lamarckism and fossils",
+                    "Darwinism and Mendelian genetics",
+                    "Natural selection and embryology",
+                    "Mutation and acquired traits"
+                ],
+                correct: 1,
+                answer: "The Modern Synthetic Theory integrates Darwinism with Mendelian genetics."
+            },
+            {
+                question: "What is natural selection according to Darwin?",
+                options: [
+                    "Random allele frequency change",
+                    "Survival and reproduction of the fittest",
+                    "Inheritance of acquired traits",
+                    "Fixation of all alleles"
+                ],
+                correct: 1,
+                answer: "Natural selection involves the survival and reproduction of individuals best adapted to their environment."
+            },
+            {
+                question: "Which book by Darwin outlined his theory of evolution?",
+                options: [
+                    "The Origin of Life",
+                    "On the Origin of Species",
+                    "The Descent of Man",
+                    "Voyage of the Beagle"
+                ],
+                correct: 1,
+                answer: "On the Origin of Species outlined Darwin’s theory of evolution by natural selection."
+            },
+            {
+                question: "What is a limitation of Lamarck’s theory?",
+                options: [
+                    "It explains genetic variation",
+                    "It lacks genetic evidence",
+                    "It supports natural selection",
+                    "It predicts fossil records"
+                ],
+                correct: 1,
+                answer: "Lamarck’s theory lacks genetic evidence, as acquired traits are not inherited."
+            },
+            {
+                question: "What is a key feature of the Modern Synthetic Theory?",
+                options: [
+                    "Fixed species",
+                    "Population genetics",
+                    "Inheritance of acquired traits",
+                    "No mutations"
+                ],
+                correct: 1,
+                answer: "Population genetics is a cornerstone of the Modern Synthetic Theory."
+            },
+            {
+                question: "What is the role of mutation in evolution?",
+                options: [
+                    "Reduces variation",
+                    "Introduces new alleles",
+                    "Fixes all traits",
+                    "Prevents selection"
+                ],
+                correct: 1,
+                answer: "Mutation introduces new alleles, providing raw material for evolution."
+            },
+            {
+                question: "What is genetic recombination in the context of evolution?",
+                options: [
+                    "Random loss of alleles",
+                    "Shuffling of alleles during meiosis",
+                    "Selection of traits",
+                    "Migration of populations"
+                ],
+                correct: 1,
+                answer: "Recombination shuffles alleles during meiosis, increasing genetic diversity."
+            },
+            {
+                question: "Which type of natural selection favors intermediate phenotypes?",
+                options: [
+                    "Directional selection",
+                    "Stabilizing selection",
+                    "Disruptive selection",
+                    "Random selection"
+                ],
+                correct: 1,
+                answer: "Stabilizing selection favors intermediate phenotypes, reducing variation."
+            },
+            {
+                question: "Which type of natural selection shifts the population toward one extreme phenotype?",
+                options: [
+                    "Stabilizing selection",
+                    "Directional selection",
+                    "Disruptive selection",
+                    "Neutral selection"
+                ],
+                correct: 1,
+                answer: "Directional selection shifts the population toward one extreme phenotype."
+            },
+            {
+                question: "Which type of natural selection favors both extreme phenotypes?",
+                options: [
+                    "Stabilizing selection",
+                    "Directional selection",
+                    "Disruptive selection",
+                    "Balanced selection"
+                ],
+                correct: 2,
+                answer: "Disruptive selection favors both extreme phenotypes, increasing variation."
+            },
+            {
+                question: "What is an example of directional selection?",
+                options: [
+                    "Human birth weight",
+                    "Antibiotic resistance in bacteria",
+                    "Finch beak size variation",
+                    "Peppered moth color"
+                ],
+                correct: 1,
+                answer: "Antibiotic resistance in bacteria is driven by directional selection for resistant strains."
+            },
+            {
+                question: "What is gene flow in evolutionary theory?",
+                options: [
+                    "Random allele loss",
+                    "Movement of alleles between populations",
+                    "Fixation of mutations",
+                    "Selection of traits"
+                ],
+                correct: 1,
+                answer: "Gene flow involves the movement of alleles between populations via migration."
+            },
+            {
+                question: "What is genetic drift in the Modern Synthetic Theory?",
+                options: [
+                    "Directed allele frequency change",
+                    "Random allele frequency change",
+                    "Selection of favorable traits",
+                    "Introduction of new genes"
+                ],
+                correct: 1,
+                answer: "Genetic drift is the random change in allele frequencies, especially in small populations."
+            },
+            {
+                question: "What does Hardy-Weinberg’s principle assume about a population?",
+                options: [
+                    "It is evolving rapidly",
+                    "It is in genetic equilibrium",
+                    "It has high mutation rates",
+                    "It undergoes natural selection"
+                ],
+                correct: 1,
+                answer: "Hardy-Weinberg’s principle assumes a population is in genetic equilibrium with no evolutionary forces."
+            },
+            {
+                question: "Which condition is required for Hardy-Weinberg equilibrium?",
+                options: [
+                    "Small population size",
+                    "No natural selection",
+                    "High mutation rate",
+                    "Non-random mating"
+                ],
+                correct: 1,
+                answer: "No natural selection is a condition for Hardy-Weinberg equilibrium."
+            },
+            {
+                question: "What is adaptive radiation in evolutionary theory?",
+                options: [
+                    "Loss of species diversity",
+                    "Divergence of species from a common ancestor",
+                    "Random allele changes",
+                    "Fixation of all traits"
+                ],
+                correct: 1,
+                answer: "Adaptive radiation is the divergence of multiple species from a common ancestor."
+            },
+            {
+                question: "Which observation inspired Darwin’s theory of natural selection?",
+                options: [
+                    "Fossil records",
+                    "Galápagos finch diversity",
+                    "Mendelian genetics",
+                    "DNA sequencing"
+                ],
+                correct: 1,
+                answer: "The diversity of Galápagos finches inspired Darwin’s ideas on natural selection."
+            },
+            {
+                question: "What is a criticism of Lamarck’s theory of evolution?",
+                options: [
+                    "It explains genetic variation",
+                    "It contradicts Mendelian genetics",
+                    "It supports natural selection",
+                    "It predicts molecular evidence"
+                ],
+                correct: 1,
+                answer: "Lamarck’s theory contradicts Mendelian genetics, as traits are not inherited via use."
+            },
+            {
+                question: "What is the struggle for existence in Darwinism?",
+                options: [
+                    "Competition for limited resources",
+                    "Random mating",
+                    "Genetic equilibrium",
+                    "Inheritance of acquired traits"
+                ],
+                correct: 0,
+                answer: "The struggle for existence refers to competition for limited resources in Darwin’s theory."
+            },
+            {
+                question: "What role does variation play in natural selection?",
+                options: [
+                    "Prevents evolution",
+                    "Provides material for selection",
+                    "Fixes all alleles",
+                    "Reduces population size"
+                ],
+                correct: 1,
+                answer: "Variation provides the raw material for natural selection to act upon."
+            },
+            {
+                question: "Which scientist contributed to the Modern Synthetic Theory?",
+                options: [
+                    "Lamarck",
+                    "Dobzhansky",
+                    "Wallace",
+                    "Mendel"
+                ],
+                correct: 1,
+                answer: "Theodosius Dobzhansky helped develop the Modern Synthetic Theory by integrating genetics."
+            },
+            {
+                question: "What is an example of stabilizing selection?",
+                options: [
+                    "Giraffe neck length",
+                    "Human birth weight",
+                    "Moth color change",
+                    "Antibiotic resistance"
+                ],
+                correct: 1,
+                answer: "Human birth weight is stabilized around an optimal range for survival."
+            },
+            {
+                question: "What is the bottleneck effect in genetic drift?",
+                options: [
+                    "Increase in genetic variation",
+                    "Loss of variation due to population reduction",
+                    "Introduction of new alleles",
+                    "Stabilization of traits"
+                ],
+                correct: 1,
+                answer: "The bottleneck effect reduces genetic variation after a sharp population decline."
+            },
+            {
+                question: "What is the founder effect in genetic drift?",
+                options: [
+                    "Random allele loss in large populations",
+                    "Limited variation in a new population",
+                    "Complete allele fixation",
+                    "Increased mutation rate"
+                ],
+                correct: 1,
+                answer: "The founder effect occurs when a small group starts a population with limited variation."
+            },
+            {
+                question: "What is an example of adaptive radiation?",
+                options: [
+                    "Human height variation",
+                    "Darwin’s finches",
+                    "Peppered moth color",
+                    "Bacterial resistance"
+                ],
+                correct: 1,
+                answer: "Darwin’s finches diversified into multiple species, exemplifying adaptive radiation."
+            },
+            {
+                question: "What is a key difference between Lamarckism and Darwinism?",
+                options: [
+                    "Lamarckism involves natural selection",
+                    "Darwinism involves acquired traits",
+                    "Lamarckism involves use and disuse",
+                    "Darwinism ignores variation"
+                ],
+                correct: 2,
+                answer: "Lamarckism involves use and disuse, while Darwinism relies on natural selection."
+            },
+            {
+                question: "What is survival of the fittest in Darwin’s theory?",
+                options: [
+                    "Random survival",
+                    "Reproduction of best-adapted individuals",
+                    "Loss of all traits",
+                    "Inheritance of acquired traits"
+                ],
+                correct: 1,
+                answer: "Survival of the fittest refers to the reproduction of individuals best adapted to their environment."
+            },
+            {
+                question: "What is the role of gene flow in the Modern Synthetic Theory?",
+                options: [
+                    "Reduces genetic variation",
+                    "Introduces alleles between populations",
+                    "Fixes all mutations",
+                    "Prevents recombination"
+                ],
+                correct: 1,
+                answer: "Gene flow introduces alleles between populations, increasing variation."
+            },
+            {
+                question: "Which factor disrupts Hardy-Weinberg equilibrium?",
+                options: [
+                    "Large population",
+                    "Random mating",
+                    "Mutation",
+                    "No migration"
+                ],
+                correct: 2,
+                answer: "Mutation disrupts Hardy-Weinberg equilibrium by introducing new alleles."
+            },
+            {
+                question: "What is the significance of natural selection in the Modern Synthetic Theory?",
+                options: [
+                    "It prevents evolution",
+                    "It drives adaptive changes",
+                    "It eliminates all variation",
+                    "It causes random drift"
+                ],
+                correct: 1,
+                answer: "Natural selection drives adaptive changes in populations."
+            },
+            {
+                question: "What is an example of disruptive selection?",
+                options: [
+                    "Human birth weight",
+                    "Finch beak size variation",
+                    "Moth color change",
+                    "Giraffe neck length"
+                ],
+                correct: 1,
+                answer: "Finch beak size variation, favoring extremes, is an example of disruptive selection."
+            },
+            {
+                question: "What is the role of genetic drift in small populations?",
+                options: [
+                    "Increases variation",
+                    "Causes random allele changes",
+                    "Selects favorable traits",
+                    "Prevents mutations"
+                ],
+                correct: 1,
+                answer: "Genetic drift causes random allele frequency changes in small populations."
+            },
+            {
+                question: "What did Lamarck propose about giraffe neck length?",
+                options: [
+                    "Natural selection lengthened necks",
+                    "Necks stretched from reaching high leaves",
+                    "Random mutations caused variation",
+                    "Genetic drift fixed long necks"
+                ],
+                correct: 1,
+                answer: "Lamarck proposed that giraffes stretched their necks, passing longer necks to offspring."
+            },
+            {
+                question: "What is a key contribution of the Modern Synthetic Theory?",
+                options: [
+                    "Explains acquired traits",
+                    "Integrates genetics with evolution",
+                    "Supports Lamarckism",
+                    "Denies natural selection"
+                ],
+                correct: 1,
+                answer: "The Modern Synthetic Theory integrates genetics with evolutionary mechanisms."
+            },
+            {
+                question: "What is the role of variation in Darwin’s theory?",
+                options: [
+                    "Prevents adaptation",
+                    "Provides traits for selection",
+                    "Fixes all alleles",
+                    "Reduces population size"
+                ],
+                correct: 1,
+                answer: "Variation provides the traits upon which natural selection acts."
+            },
+            {
+                question: "Which scientist disproved Lamarck’s theory experimentally?",
+                options: [
+                    "Darwin",
+                    "Weismann",
+                    "Wallace",
+                    "Haldane"
+                ],
+                correct: 1,
+                answer: "August Weismann’s experiments, like cutting mouse tails, disproved Lamarck’s theory."
+            },
+            {
+                question: "What is the p² term in the Hardy-Weinberg equation?",
+                options: [
+                    "Heterozygous frequency",
+                    "Homozygous dominant frequency",
+                    "Homozygous recessive frequency",
+                    "Allele frequency"
+                ],
+                correct: 1,
+                answer: "p² represents the frequency of the homozygous dominant genotype."
+            },
+            {
+                question: "What is the significance of the Galápagos Islands in Darwin’s theory?",
+                options: [
+                    "Showed fixed species",
+                    "Demonstrated species adaptation",
+                    "Proved Lamarckism",
+                    "Lacked variation"
+                ],
+                correct: 1,
+                answer: "The Galápagos Islands showed species adapted to specific environments, supporting Darwin’s theory."
+            },
+            {
+                question: "What is an example of natural selection in Darwinism?",
+                options: [
+                    "Random mating",
+                    "Peppered moth color change",
+                    "Genetic drift",
+                    "Inheritance of acquired traits"
+                ],
+                correct: 1,
+                answer: "The peppered moth’s color change during industrialization is an example of natural selection."
+            },
+            {
+                question: "What is the role of adaptive radiation in Darwin’s observations?",
+                options: [
+                    "Reduces species diversity",
+                    "Explains species diversification",
+                    "Prevents evolution",
+                    "Fixes all alleles"
+                ],
+                correct: 1,
+                answer: "Adaptive radiation explains the diversification of species, as seen in Darwin’s finches."
+            },
+            {
+                question: "What is a key assumption of the Modern Synthetic Theory?",
+                options: [
+                    "Species are fixed",
+                    "Evolution occurs gradually",
+                    "Acquired traits are inherited",
+                    "No genetic variation"
+                ],
+                correct: 1,
+                answer: "The Modern Synthetic Theory assumes evolution occurs gradually through genetic changes."
+            },
+            {
+                question: "What is the role of natural selection in Lamarck’s theory?",
+                options: [
+                    "Primary mechanism",
+                    "Secondary mechanism",
+                    "Not involved",
+                    "Causes random changes"
+                ],
+                correct: 2,
+                answer: "Natural selection is not involved in Lamarck’s theory, which relies on acquired traits."
+            },
+            {
+                question: "What is the 2pq term in the Hardy-Weinberg equation?",
+                options: [
+                    "Homozygous dominant frequency",
+                    "Homozygous recessive frequency",
+                    "Heterozygous frequency",
+                    "Allele frequency"
+                ],
+                correct: 2,
+                answer: "2pq represents the frequency of the heterozygous genotype."
+            },
+            {
+                question: "What is the significance of genetic drift in the Modern Synthetic Theory?",
+                options: [
+                    "Drives adaptation",
+                    "Causes random evolutionary changes",
+                    "Prevents variation",
+                    "Fixes all traits"
+                ],
+                correct: 1,
+                answer: "Genetic drift causes random evolutionary changes, especially in small populations."
+            },
+            {
+                question: "What is the main source of variation in the Modern Synthetic Theory?",
+                options: [
+                    "Acquired traits",
+                    "Mutation and recombination",
+                    "Natural selection",
+                    "Random mating"
+                ],
+                correct: 1,
+                answer: "Mutation and recombination are the main sources of genetic variation."
+            },
+            {
+                question: "What is the role of Wallace in evolutionary theory?",
+                options: [
+                    "Proposed Lamarckism",
+                    "Co-proposed natural selection",
+                    "Developed population genetics",
+                    "Disproved Darwinism"
+                ],
+                correct: 1,
+                answer: "Wallace co-proposed natural selection with Darwin."
+            },
+            {
+                question: "What is the significance of Hardy-Weinberg equilibrium in evolution?",
+                options: [
+                    "Proves rapid evolution",
+                    "Provides a baseline for no evolution",
+                    "Explains acquired traits",
+                    "Supports Lamarckism"
+                ],
+                correct: 1,
+                answer: "Hardy-Weinberg equilibrium provides a baseline to detect evolutionary changes."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

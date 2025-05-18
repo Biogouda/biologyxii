@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Biology and Environmental Science MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Comprehensive Biology and Environmental Science MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            // Applications of Biotechnology in Health and Agriculture (20 questions)
+            {
+                question: "Which enzyme is critical for inserting the insulin gene into a plasmid during recombinant insulin production?",
+                options: [
+                    "Polymerase",
+                    "Ligase",
+                    "Restrictase",
+                    "Helicase"
+                ],
+                correct: 1,
+                answer: "DNA ligase seals the insulin gene into the plasmid by forming phosphodiester bonds."
+            },
+            {
+                question: "Why is Saccharomyces cerevisiae preferred over E. coli for hepatitis B vaccine production?",
+                options: [
+                    "Faster growth rate",
+                    "Better post-translational modifications",
+                    "Higher plasmid stability",
+                    "Lower production costs"
+                ],
+                correct: 1,
+                answer: "Saccharomyces cerevisiae performs eukaryotic post-translational modifications, ensuring functional vaccine proteins."
+            },
+            {
+                question: "In gene therapy for SCID, what is the primary challenge with retroviral vectors?",
+                options: [
+                    "Low transduction efficiency",
+                    "Insertional mutagenesis",
+                    "High immune response",
+                    "Poor gene expression"
+                ],
+                correct: 1,
+                answer: "Insertional mutagenesis, where retroviral vectors disrupt host genes, is a major risk in SCID gene therapy."
+            },
+            {
+                question: "How does the Bt toxin in Bt crops achieve specificity against target pests?",
+                options: [
+                    "Activates in acidic gut pH",
+                    "Binds to specific gut receptors",
+                    "Inhibits general metabolism",
+                    "Degrades pest exoskeleton"
+                ],
+                correct: 1,
+                answer: "Bt toxin binds to specific receptors in the pest’s gut, causing selective toxicity."
+            },
+            {
+                question: "Which transgenic animal model is used to study Huntington’s disease, and why?",
+                options: [
+                    "Mouse; small size",
+                    "Pig; brain similarity",
+                    "Fish; rapid reproduction",
+                    "Goat; protein production"
+                ],
+                correct: 1,
+                answer: "Pigs are used due to their brain structure similarity to humans, aiding Huntington’s disease research."
+            },
+            {
+                question: "What is a key biosafety concern with Bt crops under the Cartagena Protocol?",
+                options: [
+                    "Increased pesticide use",
+                    "Gene flow to wild relatives",
+                    "Soil nutrient depletion",
+                    "Reduced yield"
+                ],
+                correct: 1,
+                answer: "Gene flow to wild relatives can create resistant weeds, a biosafety concern under the Cartagena Protocol."
+            },
+            {
+                question: "In insulin production, why is CHO cell culture preferred for large-scale bioreactors?",
+                options: [
+                    "High growth rate",
+                    "Proper protein glycosylation",
+                    "Low maintenance cost",
+                    "Resistance to contamination"
+                ],
+                correct: 1,
+                answer: "CHO cells ensure proper glycosylation of insulin, critical for its functionality."
+            },
+            {
+                question: "Which vector modification improves safety in cystic fibrosis gene therapy?",
+                options: [
+                    "Increased viral replication",
+                    "Gutted adenoviral vectors",
+                    "Higher capsid size",
+                    "Reduced gene capacity"
+                ],
+                correct: 1,
+                answer: "Gutted adenoviral vectors lack viral genes, reducing immune responses in cystic fibrosis therapy."
+            },
+            {
+                question: "What is a major ethical issue with biopiracy in neem-based products?",
+                options: [
+                    "Overuse of resources",
+                    "Lack of benefit sharing",
+                    "Genetic modification",
+                    "Excessive patents"
+                ],
+                correct: 1,
+                answer: "Biopiracy often involves lack of benefit sharing with indigenous communities, as seen with neem products."
+            },
+            {
+                question: "Why are transgenic goats used for antithrombin production?",
+                options: [
+                    "High milk yield",
+                    "Fast reproduction",
+                    "Low maintenance",
+                    "Small genome"
+                ],
+                correct: 0,
+                answer: "Transgenic goats produce antithrombin in high milk yields, facilitating efficient protein extraction."
+            },
+            {
+                question: "What is a limitation of CRISPR-based gene therapy for sickle cell anemia?",
+                options: [
+                    "High specificity",
+                    "Off-target mutations",
+                    "Low cost",
+                    "Permanent cure"
+                ],
+                correct: 1,
+                answer: "Off-target mutations remain a challenge in CRISPR-based therapies for sickle cell anemia."
+            },
+            {
+                question: "How does Agrobacterium tumefaciens facilitate Bt crop development?",
+                options: [
+                    "Amplifies Bt gene",
+                    "Transfers T-DNA to plant cells",
+                    "Produces Bt toxin",
+                    "Mutates plant genome"
+                ],
+                correct: 1,
+                answer: "Agrobacterium tumefaciens transfers T-DNA containing the Bt gene into plant cells."
+            },
+            {
+                question: "What is a biosafety issue with transgenic fish like GloFish?",
+                options: [
+                    "Reduced growth rate",
+                    "Interbreeding with wild stocks",
+                    "Lower reproduction",
+                    "No ecological impact"
+                ],
+                correct: 1,
+                answer: "Interbreeding with wild stocks can disrupt ecosystems, a biosafety concern with transgenic fish."
+            },
+            {
+                question: "Which patent controversy arose with the Oncomouse?",
+                options: [
+                    "Patenting a natural species",
+                    "Patenting a transgenic animal",
+                    "Patenting a plant gene",
+                    "Patenting a vaccine"
+                ],
+                correct: 1,
+                answer: "The Oncomouse, a transgenic animal for cancer research, sparked ethical debates on patenting life forms."
+            },
+            {
+                question: "Why is Pichia pastoris used for recombinant vaccine production?",
+                options: [
+                    "Low protein yield",
+                    "High methanol tolerance",
+                    "Poor scalability",
+                    "Complex glycosylation"
+                ],
+                correct: 1,
+                answer: "Pichia pastoris has high methanol tolerance, enabling efficient recombinant protein production."
+            },
+            {
+                question: "What is a challenge in scaling up insulin production in bioreactors?",
+                options: [
+                    "High yield",
+                    "Protein misfolding",
+                    "Low cost",
+                    "No contamination"
+                ],
+                correct: 1,
+                answer: "Protein misfolding can reduce functional insulin yield in bioreactors."
+            },
+            {
+                question: "Which gene therapy approach targets Duchenne muscular dystrophy?",
+                options: [
+                    "Silencing mutant genes",
+                    "Inserting dystrophin gene",
+                    "Amplifying insulin gene",
+                    "Deleting CFTR gene"
+                ],
+                correct: 1,
+                answer: "Inserting a functional dystrophin gene corrects muscle defects in Duchenne muscular dystrophy."
+            },
+            {
+                question: "What is a social impact of GMO seed patents?",
+                options: [
+                    "Farmer independence",
+                    "Corporate control over seeds",
+                    "Increased biodiversity",
+                    "Lower seed costs"
+                ],
+                correct: 1,
+                answer: "GMO seed patents lead to corporate control, limiting farmer autonomy."
+            },
+            {
+                question: "Why are transgenic pigs explored for xenotransplantation?",
+                options: [
+                    "Small organ size",
+                    "Physiological similarity to humans",
+                    "High reproduction rate",
+                    "Low immune response"
+                ],
+                correct: 1,
+                answer: "Transgenic pigs have physiological similarity to humans, making them suitable for xenotransplantation."
+            },
+            {
+                question: "What is a biosafety protocol for GMO field trials?",
+                options: [
+                    "Open cultivation",
+                    "Buffer zones",
+                    "No monitoring",
+                    "Cross-breeding"
+                ],
+                correct: 1,
+                answer: "Buffer zones prevent gene flow during GMO field trials, ensuring biosafety."
+            },
+            // Organisms and Environment (20 questions)
+            {
+                question: "How does niche partitioning reduce interspecific competition?",
+                options: [
+                    "Increases resource overlap",
+                    "Divides resources among species",
+                    "Eliminates predators",
+                    "Reduces population size"
+                ],
+                correct: 1,
+                answer: "Niche partitioning divides resources like food or space, reducing competition between species."
+            },
+            {
+                question: "Which adaptation in xerophytes minimizes transpiration under high salinity?",
+                options: [
+                    "Broad leaves",
+                    "Sunken stomata",
+                    "Shallow roots",
+                    "Thin cuticle"
+                ],
+                correct: 1,
+                answer: "Sunken stomata reduce water loss in xerophytes under saline conditions."
+            },
+            {
+                question: "In a predator-prey model, what stabilizes population oscillations?",
+                options: [
+                    "High prey mortality",
+                    "Density-dependent predation",
+                    "Constant birth rate",
+                    "No competition"
+                ],
+                correct: 1,
+                answer: "Density-dependent predation stabilizes oscillations by balancing predator and prey populations."
+            },
+            {
+                question: "Why is amensalism less common than mutualism in ecosystems?",
+                options: [
+                    "No species benefit",
+                    "One species is harmed",
+                    "High energy cost",
+                    "Rare ecological niches"
+                ],
+                correct: 1,
+                answer: "Amensalism, where one species is harmed and the other unaffected, is less common due to limited selective pressure."
+            },
+            {
+                question: "What does a bell-shaped age pyramid indicate about a population?",
+                options: [
+                    "Rapid growth",
+                    "Stable population",
+                    "Declining population",
+                    "No reproduction"
+                ],
+                correct: 1,
+                answer: "A bell-shaped age pyramid indicates a stable population with balanced birth and death rates."
+            },
+            {
+                question: "How does crypsis differ from mimicry in ecological adaptations?",
+                options: [
+                    "Crypsis enhances visibility",
+                    "Mimicry involves blending into the environment",
+                    "Crypsis involves resembling another species",
+                    "Mimicry avoids detection"
+                ],
+                correct: 0,
+                answer: "Crypsis involves blending into the environment, while mimicry involves resembling another species."
+            },
+            {
+                question: "What is the significance of r-selected species in disturbed habitats?",
+                options: [
+                    "Long lifespan",
+                    "High reproductive rate",
+                    "Low population density",
+                    "Stable growth"
+                ],
+                correct: 1,
+                answer: "r-selected species have high reproductive rates, thriving in disturbed habitats."
+            },
+            {
+                question: "Which interaction best describes mycorrhizal fungi and plant roots?",
+                options: [
+                    "Parasitism",
+                    "Mutualism",
+                    "Commensalism",
+                    "Competition"
+                ],
+                correct: 1,
+                answer: "Mycorrhizal fungi and plant roots exhibit mutualism, with fungi aiding nutrient uptake and plants providing sugars."
+            },
+            {
+                question: "What limits exponential population growth in nature?",
+                options: [
+                    "Unlimited resources",
+                    "Carrying capacity",
+                    "High birth rate",
+                    "No predation"
+                ],
+                correct: 1,
+                answer: "Carrying capacity limits exponential growth by restricting resources."
+            },
+            {
+                question: "Why do epiphytes exhibit commensalism with host trees?",
+                options: [
+                    "Harm the host",
+                    "Benefit without affecting host",
+                    "Compete for nutrients",
+                    "Provide nutrients to host"
+                ],
+                correct: 1,
+                answer: "Epiphytes benefit by using trees for support without affecting the host."
+            },
+            {
+                question: "What is a density-dependent factor in a crowded deer population?",
+                options: [
+                    "Forest fire",
+                    "Disease spread",
+                    "Flood",
+                    "Drought"
+                ],
+                correct: 1,
+                answer: "Disease spread increases in crowded populations, a density-dependent factor."
+            },
+            {
+                question: "Which adaptation allows mangroves to thrive in saline habitats?",
+                options: [
+                    "Pneumatophores",
+                    "Broad leaves",
+                    "Shallow roots",
+                    "Thin bark"
+                ],
+                correct: 0,
+                answer: "Pneumatophores allow mangroves to access oxygen in saline, waterlogged soils."
+            },
+            {
+                question: "How does intraspecific competition affect population growth rate?",
+                options: [
+                    "Increases birth rate",
+                    "Reduces growth rate",
+                    "No effect",
+                    "Eliminates predation"
+                ],
+                correct: 1,
+                answer: "Intraspecific competition reduces growth rate by limiting resource access."
+            },
+            {
+                question: "What is the role of keystone predators in maintaining niche diversity?",
+                options: [
+                    "Increase competition",
+                    "Control prey populations",
+                    "Reduce biodiversity",
+                    "Eliminate niches"
+                ],
+                correct: 1,
+                answer: "Keystone predators control prey populations, maintaining niche diversity."
+            },
+            {
+                question: "Why is a logistic growth model more realistic than an exponential one?",
+                options: [
+                    "Assumes unlimited resources",
+                    "Includes carrying capacity",
+                    "Ignores birth rate",
+                    "Excludes death rate"
+                ],
+                correct: 1,
+                answer: "The logistic model includes carrying capacity, reflecting resource limitations."
+            },
+            {
+                question: "What adaptation enhances survival of Arctic foxes in tundra habitats?",
+                options: [
+                    "Thin fur",
+                    "White fur for camouflage",
+                    "Large ears",
+                    "No hibernation"
+                ],
+                correct: 1,
+                answer: "White fur provides camouflage against snow, enhancing Arctic fox survival."
+            },
+            {
+                question: "How does parasitism differ from predation in population dynamics?",
+                options: [
+                    "Parasites kill hosts",
+                    "Predators live inside hosts",
+                    "Parasites harm without immediate death",
+                    "Predators benefit hosts"
+                ],
+                correct: 2,
+                answer: "Parasites harm hosts without immediate death, unlike predators that kill prey."
+            },
+            {
+                question: "What does a high death rate in a young age group indicate?",
+                options: [
+                    "Stable population",
+                    "High predation pressure",
+                    "Low birth rate",
+                    "Long lifespan"
+                ],
+                correct: 1,
+                answer: "High death rates in young age groups often indicate high predation or environmental stress."
+            },
+            {
+                question: "Which mutualistic interaction involves nitrogen fixation?",
+                options: [
+                    "Bees and flowers",
+                    "Rhizobium and legumes",
+                    "Clownfish and anemones",
+                    "Lichens and trees"
+                ],
+                correct: 1,
+                answer: "Rhizobium bacteria fix nitrogen for legumes, receiving nutrients in return."
+            },
+            {
+                question: "What is the ecological significance of a narrow niche?",
+                options: [
+                    "High competition",
+                    "Specialized resource use",
+                    "Broad habitat range",
+                    "Low adaptability"
+                ],
+                correct: 1,
+                answer: "A narrow niche indicates specialized resource use, often with high efficiency."
+            },
+            // Ecosystems (20 questions)
+            {
+                question: "Why is net primary productivity (NPP) lower in deserts than in rainforests?",
+                options: [
+                    "Higher sunlight",
+                    "Limited water and nutrients",
+                    "More decomposers",
+                    "Fewer consumers"
+                ],
+                correct: 1,
+                answer: "Limited water and nutrients in deserts reduce NPP compared to resource-rich rainforests."
+            },
+            {
+                question: "How does detritivore activity influence decomposition rates in tropical ecosystems?",
+                options: [
+                    "Slows decomposition",
+                    "Fragments organic matter",
+                    "Reduces nutrient cycling",
+                    "Inhibits microbial action"
+                ],
+                correct: 1,
+                answer: "Detritivores fragment organic matter, accelerating decomposition in tropical ecosystems."
+            },
+            {
+                question: "What causes an inverted pyramid of biomass in phytoplankton-based aquatic ecosystems?",
+                options: [
+                    "Slow phytoplankton turnover",
+                    "High consumer biomass",
+                    "Rapid phytoplankton reproduction",
+                    "Low energy transfer"
+                ],
+                correct: 2,
+                answer: "Rapid phytoplankton reproduction supports large consumer biomass, causing an inverted pyramid."
+            },
+            {
+                question: "Why is the phosphorus cycle slower than the carbon cycle?",
+                options: [
+                    "Atmospheric reservoir",
+                    "Sedimentary reservoir",
+                    "High solubility",
+                    "Rapid plant uptake"
+                ],
+                correct: 1,
+                answer: "Phosphorus is stored in sedimentary reservoirs, slowing its cycling compared to carbon."
+            },
+            {
+                question: "In ecological succession, why do pioneer species facilitate later colonizers?",
+                options: [
+                    "Increase competition",
+                    "Modify the environment",
+                    "Reduce nutrients",
+                    "Eliminate predators"
+                ],
+                correct: 1,
+                answer: "Pioneer species modify the environment, creating conditions for later colonizers."
+            },
+            {
+                question: "What is the primary energy loss mechanism between trophic levels?",
+                options: [
+                    "Biomass accumulation",
+                    "Heat dissipation",
+                    "Nutrient recycling",
+                    "Photosynthesis"
+                ],
+                correct: 1,
+                answer: "Heat dissipation during metabolic processes causes energy loss between trophic levels."
+            },
+            {
+                question: "How does a high detritus input affect carbon cycling in wetlands?",
+                options: [
+                    "Reduces carbon storage",
+                    "Increases methane emissions",
+                    "Decreases decomposition",
+                    "No effect"
+                ],
+                correct: 1,
+                answer: "High detritus input in wetlands increases methane emissions due to anaerobic decomposition."
+            },
+            {
+                question: "Why are climax communities resistant to small disturbances?",
+                options: [
+                    "Low biodiversity",
+                    "High species diversity",
+                    "No predators",
+                    "Simple food chains"
+                ],
+                correct: 1,
+                answer: "High species diversity in climax communities enhances resilience to small disturbances."
+            },
+            {
+                question: "What is the ecological service provided by coral reefs?",
+                options: [
+                    "Carbon fixation",
+                    "Coastal protection",
+                    "Ozone production",
+                    "Soil formation"
+                ],
+                correct: 1,
+                answer: "Coral reefs provide coastal protection by buffering waves and storms."
+            },
+            {
+                question: "Why does the pyramid of energy never invert?",
+                options: [
+                    "Constant energy input",
+                    "Energy loss at each level",
+                    "High biomass",
+                    "No decomposers"
+                ],
+                correct: 1,
+                answer: "Energy loss at each trophic level ensures the pyramid of energy remains upright."
+            },
+            {
+                question: "What is the role of nitrogen-fixing bacteria in nutrient cycling?",
+                options: [
+                    "Decompose organic matter",
+                    "Convert N2 to ammonia",
+                    "Fix carbon",
+                    "Release phosphorus"
+                ],
+                correct: 1,
+                answer: "Nitrogen-fixing bacteria convert atmospheric N2 to ammonia, aiding nutrient cycling."
+            },
+            {
+                question: "How does secondary succession differ from primary succession in soil availability?",
+                options: [
+                    "No soil in secondary",
+                    "Soil present in secondary",
+                    "Soil in both",
+                    "No soil in either"
+                ],
+                correct: 1,
+                answer: "Secondary succession occurs with pre-existing soil, unlike primary succession."
+            },
+            {
+                question: "What limits primary productivity in deep ocean ecosystems?",
+                options: [
+                    "Excess nutrients",
+                    "Limited sunlight",
+                    "High oxygen",
+                    "Abundant producers"
+                ],
+                correct: 1,
+                answer: "Limited sunlight restricts photosynthesis, limiting primary productivity in deep oceans."
+            },
+            {
+                question: "Why is the food web more stable than a food chain?",
+                options: [
+                    "Single energy path",
+                    "Multiple energy pathways",
+                    "No predators",
+                    "Less biodiversity"
+                ],
+                correct: 1,
+                answer: "Multiple energy pathways in a food web enhance stability compared to a single-path food chain."
+            },
+            {
+                question: "What is the impact of high phosphorus input in aquatic systems?",
+                options: [
+                    "Reduced algal growth",
+                    "Eutrophication",
+                    "Increased oxygen",
+                    "No effect"
+                ],
+                correct: 1,
+                answer: "High phosphorus input causes eutrophication, leading to algal blooms and oxygen depletion."
+            },
+            {
+                question: "How do mangroves contribute to carbon fixation?",
+                options: [
+                    "Release CO2",
+                    "Store carbon in biomass",
+                    "Reduce photosynthesis",
+                    "Increase methane"
+                ],
+                correct: 1,
+                answer: "Mangroves store carbon in their biomass, contributing to carbon fixation."
+            },
+            {
+                question: "What is the role of keystone species in energy flow?",
+                options: [
+                    "Increase energy loss",
+                    "Regulate trophic interactions",
+                    "Reduce biomass",
+                    "Eliminate producers"
+                ],
+                correct: 1,
+                answer: "Keystone species regulate trophic interactions, stabilizing energy flow."
+            },
+            {
+                question: "Why is decomposition faster in tropical forests than in tundras?",
+                options: [
+                    "Low moisture",
+                    "High temperature and humidity",
+                    "Fewer decomposers",
+                    "No detritivores"
+                ],
+                correct: 1,
+                answer: "High temperature and humidity in tropical forests accelerate decomposition."
+            },
+            {
+                question: "What is the significance of pollination as an ecological service?",
+                options: [
+                    "Reduces biodiversity",
+                    "Supports plant reproduction",
+                    "Increases CO2",
+                    "Depletes nutrients"
+                ],
+                correct: 1,
+                answer: "Pollination supports plant reproduction, maintaining biodiversity and food production."
+            },
+            {
+                question: "How does a high trophic efficiency affect ecosystem stability?",
+                options: [
+                    "Decreases stability",
+                    "Increases stability",
+                    "No effect",
+                    "Eliminates predators"
+                ],
+                correct: 1,
+                answer: "High trophic efficiency increases ecosystem stability by optimizing energy transfer."
+            },
+            // Biodiversity and Its Conservation (20 questions)
+            {
+                question: "Why are biodiversity hotspots prioritized for conservation over other regions?",
+                options: [
+                    "Low species richness",
+                    "High endemism and threats",
+                    "Stable ecosystems",
+                    "No human impact"
+                ],
+                correct: 1,
+                answer: "Biodiversity hotspots have high endemism and face significant threats, prioritizing them for conservation."
+            },
+            {
+                question: "What is the role of beta diversity in assessing habitat fragmentation?",
+                options: [
+                    "Measures genetic diversity",
+                    "Compares species between habitats",
+                    "Counts total species",
+                    "Assesses ecosystem services"
+                ],
+                correct: 1,
+                answer: "Beta diversity compares species composition between habitats, indicating fragmentation effects."
+            },
+            {
+                question: "How does habitat fragmentation amplify biodiversity loss?",
+                options: [
+                    "Increases connectivity",
+                    "Reduces population viability",
+                    "Enhances gene flow",
+                    "Stabilizes ecosystems"
+                ],
+                correct: 1,
+                answer: "Habitat fragmentation reduces population viability by isolating species."
+            },
+            {
+                question: "What is the ecological impact of losing a keystone species like bees?",
+                options: [
+                    "No effect",
+                    "Reduced pollination",
+                    "Increased biodiversity",
+                    "Stable ecosystems"
+                ],
+                correct: 1,
+                answer: "Loss of bees reduces pollination, disrupting plant reproduction and ecosystems."
+            },
+            {
+                question: "Why is the Red List’s ‘Data Deficient’ category significant?",
+                options: [
+                    "Indicates extinct species",
+                    "Highlights conservation gaps",
+                    "Marks stable populations",
+                    "Lists invasive species"
+                ],
+                correct: 1,
+                answer: "The ‘Data Deficient’ category highlights gaps in knowledge, complicating conservation efforts."
+            },
+            {
+                question: "What is a challenge in ex-situ conservation of large mammals?",
+                options: [
+                    "High genetic diversity",
+                    "Limited breeding space",
+                    "Low cost",
+                    "No ethical issues"
+                ],
+                correct: 1,
+                answer: "Limited breeding space in zoos or sanctuaries challenges ex-situ conservation of large mammals."
+            },
+            {
+                question: "How does the Convention on Biological Diversity (CBD) address invasive species?",
+                options: [
+                    "Promotes their spread",
+                    "Sets control guidelines",
+                    "Ignores them",
+                    "Encourages trade"
+                ],
+                correct: 1,
+                answer: "The CBD sets guidelines to control invasive species, protecting native biodiversity."
+            },
+            {
+                question: "Why is the Nilgiri Biosphere Reserve critical for endemism?",
+                options: [
+                    "Low species diversity",
+                    "High unique species",
+                    "No conservation",
+                    "Stable climate"
+                ],
+                correct: 1,
+                answer: "The Nilgiri Biosphere Reserve has high endemism, hosting unique species."
+            },
+            {
+                question: "What is the primary driver of the sixth mass extinction?",
+                options: [
+                    "Natural climate shifts",
+                    "Human-induced habitat loss",
+                    "Asteroid impacts",
+                    "Volcanic eruptions"
+                ],
+                correct: 1,
+                answer: "Human-induced habitat loss is the primary driver of the ongoing sixth mass extinction."
+            },
+            {
+                question: "How does in-situ conservation differ from ex-situ in genetic diversity?",
+                options: [
+                    "In-situ reduces diversity",
+                    "Ex-situ maintains natural diversity",
+                    "In-situ maintains natural diversity",
+                    "No difference"
+                ],
+                correct: 2,
+                answer: "In-situ conservation maintains natural genetic diversity in wild populations."
+            },
+            {
+                question: "What is a limitation of national parks in biodiversity conservation?",
+                options: [
+                    "Complete protection",
+                    "Edge effects",
+                    "No human impact",
+                    "Full connectivity"
+                ],
+                correct: 1,
+                answer: "Edge effects at park boundaries reduce habitat quality, limiting conservation."
+            },
+            {
+                question: "Why are amphibians highly vulnerable to extinction?",
+                options: [
+                    "High reproductive rate",
+                    "Sensitivity to environmental changes",
+                    "Large population sizes",
+                    "Broad habitat range"
+                ],
+                correct: 1,
+                answer: "Amphibians’ sensitivity to environmental changes like pollution makes them vulnerable."
+            },
+            {
+                question: "What is the role of corridors in biodiversity conservation?",
+                options: [
+                    "Increase fragmentation",
+                    "Connect fragmented habitats",
+                    "Reduce species diversity",
+                    "Promote poaching"
+                ],
+                correct: 1,
+                answer: "Corridors connect fragmented habitats, enhancing gene flow and biodiversity."
+            },
+            {
+                question: "How does overexploitation affect marine biodiversity?",
+                options: [
+                    "Increases fish stocks",
+                    "Collapses fish populations",
+                    "Enhances coral reefs",
+                    "Stabilizes ecosystems"
+                ],
+                correct: 1,
+                answer: "Overexploitation, like overfishing, collapses fish populations, reducing marine biodiversity."
+            },
+            {
+                question: "What is a benefit of community-based conservation in biosphere reserves?",
+                options: [
+                    "Increased poaching",
+                    "Sustainable resource use",
+                    "Habitat destruction",
+                    "No biodiversity gain"
+                ],
+                correct: 1,
+                answer: "Community-based conservation promotes sustainable resource use, supporting biodiversity."
+            },
+            {
+                question: "Why is the Western Ghats a biodiversity hotspot?",
+                options: [
+                    "Low endemism",
+                    "High species richness",
+                    "No threats",
+                    "Stable climate"
+                ],
+                correct: 1,
+                answer: "The Western Ghats has high species richness and endemism, qualifying as a hotspot."
+            },
+            {
+                question: "What is the ecological role of vultures as a vulnerable species?",
+                options: [
+                    "Pollinate plants",
+                    "Scavenge carcasses",
+                    "Predate small mammals",
+                    "Fix nitrogen"
+                ],
+                correct: 1,
+                answer: "Vultures scavenge carcasses, preventing disease spread in ecosystems."
+            },
+            {
+                question: "How does climate change exacerbate biodiversity loss in coral reefs?",
+                options: [
+                    "Increases coral growth",
+                    "Causes coral bleaching",
+                    "Stabilizes temperatures",
+                    "Reduces acidity"
+                ],
+                correct: 1,
+                answer: "Climate change causes coral bleaching by increasing ocean temperatures."
+            },
+            {
+                question: "What is a challenge in Red Data Book assessments?",
+                options: [
+                    "Excessive data",
+                    "Incomplete species data",
+                    "No funding",
+                    "Too many species"
+                ],
+                correct: 1,
+                answer: "Incomplete species data hinders accurate Red Data Book assessments."
+            },
+            {
+                question: "Why are seed banks critical for agrobiodiversity?",
+                options: [
+                    "Promote monoculture",
+                    "Preserve genetic diversity",
+                    "Reduce crop yield",
+                    "Increase pesticide use"
+                ],
+                correct: 1,
+                answer: "Seed banks preserve genetic diversity of crops, ensuring agrobiodiversity."
+            },
+            // Environmental Issues (20 questions)
+            {
+                question: "How does photochemical smog differ from classical smog?",
+                options: [
+                    "Classical involves ozone",
+                    "Photochemical involves sulfur",
+                    "Photochemical involves sunlight",
+                    "No difference"
+                ],
+                correct: 2,
+                answer: "Photochemical smog forms with sunlight, producing ozone, unlike sulfur-based classical smog."
+            },
+            {
+                question: "Why is bioremediation effective for heavy metal water pollution?",
+                options: [
+                    "Increases toxicity",
+                    "Microbes bind metals",
+                    "No degradation",
+                    "High cost"
+                ],
+                correct: 1,
+                answer: "Microbes bind or transform heavy metals, reducing toxicity in bioremediation."
+            },
+            {
+                question: "What is the primary source of nitrous oxide emissions in agriculture?",
+                options: [
+                    "Pesticide application",
+                    "Nitrogen fertilizers",
+                    "Crop burning",
+                    "Irrigation"
+                ],
+                correct: 1,
+                answer: "Nitrogen fertilizers release nitrous oxide, a potent greenhouse gas."
+            },
+            {
+                question: "How does incineration in solid waste management impact air quality?",
+                options: [
+                    "No effect",
+                    "Releases dioxins",
+                    "Reduces pollutants",
+                    "Increases oxygen"
+                ],
+                correct: 1,
+                answer: "Incineration releases dioxins and other pollutants, impacting air quality."
+            },
+            {
+                question: "Why is deep geological disposal preferred for high-level radioactive waste?",
+                options: [
+                    "Low cost",
+                    "Long-term isolation",
+                    "Surface accessibility",
+                    "No shielding"
+                ],
+                correct: 1,
+                answer: "Deep geological disposal ensures long-term isolation of radioactive waste."
+            },
+            {
+                question: "What is the feedback mechanism amplifying global warming in Arctic regions?",
+                options: [
+                    "Increased albedo",
+                    "Ice-albedo feedback",
+                    "Stable ice cover",
+                    "Reduced methane"
+                ],
+                correct: 1,
+                answer: "Ice-albedo feedback reduces reflectivity as ice melts, amplifying warming."
+            },
+            {
+                question: "How does the Montreal Protocol’s success impact UV radiation?",
+                options: [
+                    "Increases UV exposure",
+                    "Reduces UV exposure",
+                    "No effect",
+                    "Increases ozone depletion"
+                ],
+                correct: 1,
+                answer: "The Montreal Protocol reduced ozone depletion, decreasing UV exposure."
+            },
+            {
+                question: "What is a long-term consequence of deforestation on carbon sinks?",
+                options: [
+                    "Increased carbon storage",
+                    "Reduced carbon sequestration",
+                    "No effect",
+                    "Enhanced biodiversity"
+                ],
+                correct: 1,
+                answer: "Deforestation reduces carbon sequestration by diminishing forest carbon sinks."
+            },
+            {
+                question: "Why is integrated pest management (IPM) environmentally sustainable?",
+                options: [
+                    "Increases pesticide use",
+                    "Balances pest control methods",
+                    "Promotes monoculture",
+                    "Ignores natural predators"
+                ],
+                correct: 1,
+                answer: "IPM balances chemical and biological pest control, reducing environmental harm."
+            },
+            {
+                question: "What is a challenge in managing plastic waste in oceans?",
+                options: [
+                    "Easy degradation",
+                    "Microplastic persistence",
+                    "High recycling rate",
+                    "No ecological impact"
+                ],
+                correct: 1,
+                answer: "Microplastic persistence in oceans is a major waste management challenge."
+            },
+            {
+                question: "How does eutrophication affect dissolved oxygen in lakes?",
+                options: [
+                    "Increases oxygen",
+                    "Depletes oxygen",
+                    "No effect",
+                    "Stabilizes oxygen"
+                ],
+                correct: 1,
+                answer: "Eutrophication causes algal blooms, depleting dissolved oxygen as algae decompose."
+            },
+            {
+                question: "What was a key factor in the River Thames cleanup success?",
+                options: [
+                    "Increased industrial discharge",
+                    "Stricter sewage regulations",
+                    "No monitoring",
+                    "Open dumping"
+                ],
+                correct: 1,
+                answer: "Stricter sewage regulations reduced pollution, aiding the River Thames cleanup."
+            },
+            {
+                question: "Why is tropospheric ozone a pollutant unlike stratospheric ozone?",
+                options: [
+                    "Protects UV radiation",
+                    "Causes respiratory issues",
+                    "Stabilizes climate",
+                    "No effect"
+                ],
+                correct: 1,
+                answer: "Tropospheric ozone causes respiratory issues, unlike protective stratospheric ozone."
+            },
+            {
+                question: "What is a socio-economic impact of air pollution in urban areas?",
+                options: [
+                    "Increased productivity",
+                    "Higher healthcare costs",
+                    "Improved air quality",
+                    "No economic loss"
+                ],
+                correct: 1,
+                answer: "Air pollution increases healthcare costs due to respiratory and cardiovascular diseases."
+            },
+            {
+                question: "How does afforestation mitigate greenhouse gas emissions?",
+                options: [
+                    "Releases CO2",
+                    "Sequesters carbon",
+                    "Increases methane",
+                    "No effect"
+                ],
+                correct: 1,
+                answer: "Afforestation sequesters carbon in tree biomass, mitigating emissions."
+            },
+            {
+                question: "What is a limitation of electrostatic precipitators in air pollution control?",
+                options: [
+                    "High efficiency",
+                    "Inability to remove gases",
+                    "Low maintenance",
+                    "No energy use"
+                ],
+                correct: 1,
+                answer: "Electrostatic precipitators cannot remove gaseous pollutants, only particulates."
+            },
+            {
+                question: "Why is biomagnification a concern with agrochemicals like DDT?",
+                options: [
+                    "Reduces toxicity",
+                    "Accumulates in top predators",
+                    "Degrades quickly",
+                    "No ecological impact"
+                ],
+                correct: 1,
+                answer: "Biomagnification causes DDT to accumulate in top predators, harming ecosystems."
+            },
+            {
+                question: "What is a benefit of the London Smog Reduction case study?",
+                options: [
+                    "Increased coal use",
+                    "Improved public health",
+                    "More smog events",
+                    "No regulations"
+                ],
+                correct: 1,
+                answer: "The London Smog Reduction improved public health by reducing air pollution."
+            },
+            {
+                question: "How does ocean acidification from CO2 affect marine biodiversity?",
+                options: [
+                    "Enhances coral growth",
+                    "Impairs shell formation",
+                    "Increases fish populations",
+                    "No effect"
+                ],
+                correct: 1,
+                answer: "Ocean acidification impairs shell formation in marine organisms like corals."
+            },
+            {
+                question: "What is a strategy to manage radioactive waste from medical facilities?",
+                options: [
+                    "Open disposal",
+                    "Vitrification",
+                    "Dumping in rivers",
+                    "No treatment"
+                ],
+                correct: 1,
+                answer: "Vitrification encases radioactive waste in glass for safe storage."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

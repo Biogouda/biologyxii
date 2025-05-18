@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductive Health MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: pink;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Reproductive Health MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the primary goal of reproductive health programs?",
+                options: [
+                    "Promote cosmetic surgeries",
+                    "Ensure healthy reproduction and well-being",
+                    "Increase population growth",
+                    "Treat non-reproductive diseases"
+                ],
+                correct: 1,
+                answer: "Reproductive health programs aim to ensure healthy reproduction and overall well-being."
+            },
+            {
+                question: "Which of the following is a sexually transmitted disease (STD)?",
+                options: [
+                    "Diabetes",
+                    "HIV/AIDS",
+                    "Hypertension",
+                    "Malaria"
+                ],
+                correct: 1,
+                answer: "HIV/AIDS is a sexually transmitted disease caused by a virus."
+            },
+            {
+                question: "What is a key method to prevent STDs?",
+                options: [
+                    "Regular exercise",
+                    "Use of condoms",
+                    "High-calorie diet",
+                    "Avoiding vaccinations"
+                ],
+                correct: 1,
+                answer: "Condoms act as a barrier to prevent the transmission of STDs."
+            },
+            {
+                question: "Why is birth control important in reproductive health?",
+                options: [
+                    "Prevents all diseases",
+                    "Regulates population and promotes family planning",
+                    "Increases fertility",
+                    "Eliminates the need for vaccinations"
+                ],
+                correct: 1,
+                answer: "Birth control helps regulate population growth and supports family planning."
+            },
+            {
+                question: "Which of the following is a barrier method of contraception?",
+                options: [
+                    "Oral contraceptive pills",
+                    "Intrauterine device (IUD)",
+                    "Diaphragm",
+                    "Tubectomy"
+                ],
+                correct: 2,
+                answer: "The diaphragm is a barrier method that prevents sperm from entering the uterus."
+            },
+            {
+                question: "What is Medical Termination of Pregnancy (MTP)?",
+                options: [
+                    "A surgical procedure to enhance fertility",
+                    "Intentional termination of pregnancy",
+                    "A method to prevent STDs",
+                    "A diagnostic test for fetal health"
+                ],
+                correct: 1,
+                answer: "MTP is the intentional termination of pregnancy under medical supervision."
+            },
+            {
+                question: "What is amniocentesis used for?",
+                options: [
+                    "Preventing STDs",
+                    "Diagnosing fetal genetic disorders",
+                    "Inducing labor",
+                    "Treating infertility"
+                ],
+                correct: 1,
+                answer: "Amniocentesis tests amniotic fluid to diagnose fetal genetic disorders."
+            },
+            {
+                question: "Which assisted reproductive technology involves fertilizing an egg outside the body?",
+                options: [
+                    "ZIFT",
+                    "GIFT",
+                    "IVF",
+                    "IUD"
+                ],
+                correct: 2,
+                answer: "In vitro fertilization (IVF) involves fertilizing an egg outside the body."
+            },
+            {
+                question: "What is a common cause of infertility in women?",
+                options: [
+                    "Regular exercise",
+                    "Polycystic ovary syndrome (PCOS)",
+                    "High cholesterol",
+                    "Frequent vaccinations"
+                ],
+                correct: 1,
+                answer: "PCOS is a hormonal disorder that can cause infertility in women."
+            },
+            {
+                question: "Which of the following is a hormonal method of contraception?",
+                options: [
+                    "Condom",
+                    "Oral contraceptive pills",
+                    "Copper IUD",
+                    "Vasectomy"
+                ],
+                correct: 1,
+                answer: "Oral contraceptive pills use hormones to prevent ovulation."
+            },
+            {
+                question: "Which STD is caused by the bacterium Treponema pallidum?",
+                options: [
+                    "Gonorrhea",
+                    "Syphilis",
+                    "Chlamydia",
+                    "Herpes"
+                ],
+                correct: 1,
+                answer: "Syphilis is caused by the bacterium Treponema pallidum."
+            },
+            {
+                question: "What is the role of counseling in reproductive health?",
+                options: [
+                    "Prescribing medications",
+                    "Educating about safe practices and family planning",
+                    "Performing surgeries",
+                    "Diagnosing genetic disorders"
+                ],
+                correct: 1,
+                answer: "Counseling educates individuals about safe reproductive practices and family planning."
+            },
+            {
+                question: "Which contraceptive method is considered permanent?",
+                options: [
+                    "Condom",
+                    "Tubectomy",
+                    "IUD",
+                    "Birth control pills"
+                ],
+                correct: 1,
+                answer: "Tubectomy is a permanent surgical method of contraception in females."
+            },
+            {
+                question: "What is a potential risk of untreated STDs?",
+                options: [
+                    "Improved fertility",
+                    "Infertility or organ damage",
+                    "Enhanced immunity",
+                    "Weight loss"
+                ],
+                correct: 1,
+                answer: "Untreated STDs can lead to infertility, organ damage, or other complications."
+            },
+            {
+                question: "Which assisted reproductive technology transfers gametes into the fallopian tube?",
+                options: [
+                    "IVF",
+                    "ZIFT",
+                    "GIFT",
+                    "MTP"
+                ],
+                correct: 2,
+                answer: "Gamete intrafallopian transfer (GIFT) involves placing gametes in the fallopian tube."
+            },
+            {
+                question: "What is a common symptom of chlamydia?",
+                options: [
+                    "High fever",
+                    "Abnormal genital discharge",
+                    "Hair loss",
+                    "Joint pain"
+                ],
+                correct: 1,
+                answer: "Chlamydia often causes abnormal genital discharge or burning during urination."
+            },
+            {
+                question: "Which contraceptive method also protects against STDs?",
+                options: [
+                    "IUD",
+                    "Condom",
+                    "Birth control pills",
+                    "Implant"
+                ],
+                correct: 1,
+                answer: "Condoms provide protection against STDs in addition to contraception."
+            },
+            {
+                question: "What is the primary purpose of MTP in reproductive health?",
+                options: [
+                    "Enhance fertility",
+                    "Terminate unwanted pregnancies",
+                    "Prevent STDs",
+                    "Diagnose infertility"
+                ],
+                correct: 1,
+                answer: "MTP is used to terminate unwanted pregnancies under medical supervision."
+            },
+            {
+                question: "Which of the following is a natural method of contraception?",
+                options: [
+                    "Condom",
+                    "Rhythm method",
+                    "IUD",
+                    "Vasectomy"
+                ],
+                correct: 1,
+                answer: "The rhythm method involves tracking the menstrual cycle to avoid intercourse during fertile periods."
+            },
+            {
+                question: "What is a potential ethical concern with amniocentesis?",
+                options: [
+                    "It prevents STDs",
+                    "It may lead to sex-selective abortions",
+                    "It causes infertility",
+                    "It is a contraceptive method"
+                ],
+                correct: 1,
+                answer: "Amniocentesis can reveal fetal sex, raising concerns about sex-selective abortions."
+            },
+            {
+                question: "Which STD is caused by a virus?",
+                options: [
+                    "Gonorrhea",
+                    "Herpes",
+                    "Syphilis",
+                    "Chlamydia"
+                ],
+                correct: 1,
+                answer: "Herpes is caused by the herpes simplex virus (HSV)."
+            },
+            {
+                question: "What is the primary cause of infertility in men?",
+                options: [
+                    "Low sperm count",
+                    "High blood pressure",
+                    "Excessive exercise",
+                    "Vitamin deficiency"
+                ],
+                correct: 0,
+                answer: "Low sperm count is a common cause of male infertility."
+            },
+            {
+                question: "Which contraceptive method involves surgical cutting of the vas deferens?",
+                options: [
+                    "Tubectomy",
+                    "Vasectomy",
+                    "IUD insertion",
+                    "Condom use"
+                ],
+                correct: 1,
+                answer: "Vasectomy is a surgical procedure that cuts the vas deferens to prevent sperm release."
+            },
+            {
+                question: "What is ZIFT in assisted reproductive technologies?",
+                options: [
+                    "Transfer of zygote into the fallopian tube",
+                    "Transfer of gametes into the uterus",
+                    "Fertilization outside the body",
+                    "Surgical termination of pregnancy"
+                ],
+                correct: 0,
+                answer: "Zygote intrafallopian transfer (ZIFT) involves placing a zygote in the fallopian tube."
+            },
+            {
+                question: "Which of the following promotes reproductive health awareness?",
+                options: [
+                    "Ignoring STD symptoms",
+                    "Regular health check-ups",
+                    "Avoiding vaccinations",
+                    "Unprotected intercourse"
+                ],
+                correct: 1,
+                answer: "Regular health check-ups promote early detection and awareness of reproductive health issues."
+            },
+            {
+                question: "Which contraceptive method is inserted into the uterus?",
+                options: [
+                    "Condom",
+                    "IUD",
+                    "Birth control pills",
+                    "Diaphragm"
+                ],
+                correct: 1,
+                answer: "The intrauterine device (IUD) is inserted into the uterus to prevent pregnancy."
+            },
+            {
+                question: "What is a common complication of gonorrhea if untreated?",
+                options: [
+                    "Improved fertility",
+                    "Pelvic inflammatory disease",
+                    "Weight gain",
+                    "Enhanced immunity"
+                ],
+                correct: 1,
+                answer: "Untreated gonorrhea can lead to pelvic inflammatory disease in women."
+            },
+            {
+                question: "Which of the following is a temporary contraceptive method?",
+                options: [
+                    "Vasectomy",
+                    "Tubectomy",
+                    "Condom",
+                    "MTP"
+                ],
+                correct: 2,
+                answer: "Condoms are a temporary contraceptive method used during intercourse."
+            },
+            {
+                question: "What is the main objective of STD prevention programs?",
+                options: [
+                    "Increase population",
+                    "Reduce transmission of infections",
+                    "Promote infertility",
+                    "Eliminate contraception"
+                ],
+                correct: 1,
+                answer: "STD prevention programs aim to reduce the transmission of infections."
+            },
+            {
+                question: "Which assisted reproductive technology is most similar to natural conception?",
+                options: [
+                    "IVF",
+                    "ZIFT",
+                    "GIFT",
+                    "MTP"
+                ],
+                correct: 2,
+                answer: "GIFT is similar to natural conception as it involves placing gametes in the fallopian tube."
+            },
+            {
+                question: "What is a key benefit of using oral contraceptive pills?",
+                options: [
+                    "Prevents STDs",
+                    "Regulates menstrual cycles",
+                    "Increases sperm count",
+                    "Eliminates the need for check-ups"
+                ],
+                correct: 1,
+                answer: "Oral contraceptive pills help regulate menstrual cycles and prevent ovulation."
+            },
+            {
+                question: "Which STD can lead to cervical cancer if untreated?",
+                options: [
+                    "Syphilis",
+                    "Human papillomavirus (HPV)",
+                    "Chlamydia",
+                    "Gonorrhea"
+                ],
+                correct: 1,
+                answer: "Certain strains of HPV can lead to cervical cancer if untreated."
+            },
+            {
+                question: "What is a limitation of the rhythm method of contraception?",
+                options: [
+                    "High cost",
+                    "Requires surgery",
+                    "Low reliability due to cycle variability",
+                    "Causes infertility"
+                ],
+                correct: 2,
+                answer: "The rhythm method is less reliable due to variations in menstrual cycles."
+            },
+            {
+                question: "Which of the following is a non-surgical contraceptive method?",
+                options: [
+                    "Tubectomy",
+                    "Vasectomy",
+                    "Condom",
+                    "MTP"
+                ],
+                correct: 2,
+                answer: "Condoms are a non-surgical contraceptive method."
+            },
+            {
+                question: "What is a potential side effect of hormonal contraceptives?",
+                options: [
+                    "Permanent infertility",
+                    "Mood changes",
+                    "Complete STD protection",
+                    "Bone loss"
+                ],
+                correct: 1,
+                answer: "Hormonal contraceptives can cause mood changes in some users."
+            },
+            {
+                question: "Which test can detect fetal abnormalities besides amniocentesis?",
+                options: [
+                    "Blood sugar test",
+                    "Chorionic villus sampling (CVS)",
+                    "Urine test",
+                    "X-ray"
+                ],
+                correct: 1,
+                answer: "CVS is a prenatal test that detects fetal abnormalities similar to amniocentesis."
+            },
+            {
+                question: "Which of the following is a behavioral method to prevent STDs?",
+                options: [
+                    "Using IUDs",
+                    "Practicing abstinence",
+                    "Taking antibiotics",
+                    "Undergoing surgery"
+                ],
+                correct: 1,
+                answer: "Practicing abstinence is a behavioral method to prevent STDs."
+            },
+            {
+                question: "What is a common reason for MTP?",
+                options: [
+                    "Enhance fertility",
+                    "Unwanted pregnancy",
+                    "Prevent STDs",
+                    "Treat infertility"
+                ],
+                correct: 1,
+                answer: "MTP is commonly performed to terminate unwanted pregnancies."
+            },
+            {
+                question: "Which contraceptive method has a high failure rate if not used correctly?",
+                options: [
+                    "IUD",
+                    "Condom",
+                    "Tubectomy",
+                    "Implant"
+                ],
+                correct: 1,
+                answer: "Condoms have a higher failure rate if not used correctly."
+            },
+            {
+                question: "What is a key component of IVF?",
+                options: [
+                    "Surgical removal of the uterus",
+                    "Fertilization in a laboratory",
+                    "Transfer of gametes to the ovary",
+                    "Termination of pregnancy"
+                ],
+                correct: 1,
+                answer: "IVF involves fertilization of an egg in a laboratory."
+            },
+            {
+                question: "Which STD is characterized by painful sores in the genital area?",
+                options: [
+                    "Chlamydia",
+                    "Gonorrhea",
+                    "Herpes",
+                    "Syphilis"
+                ],
+                correct: 2,
+                answer: "Herpes causes painful sores in the genital area."
+            },
+            {
+                question: "What is a benefit of using an IUD for contraception?",
+                options: [
+                    "Prevents STDs",
+                    "Long-term protection",
+                    "Increases fertility",
+                    "Requires daily use"
+                ],
+                correct: 1,
+                answer: "IUDs provide long-term contraception, lasting several years."
+            },
+            {
+                question: "Which of the following promotes early detection of STDs?",
+                options: [
+                    "Avoiding medical check-ups",
+                    "Regular screening",
+                    "Unprotected intercourse",
+                    "Ignoring symptoms"
+                ],
+                correct: 1,
+                answer: "Regular screening promotes early detection and treatment of STDs."
+            },
+            {
+                question: "What is a common cause of female infertility?",
+                options: [
+                    "Blocked fallopian tubes",
+                    "High sperm count",
+                    "Regular menstruation",
+                    "Low cholesterol"
+                ],
+                correct: 0,
+                answer: "Blocked fallopian tubes can prevent the egg from meeting the sperm."
+            },
+            {
+                question: "Which contraceptive method involves a hormonal implant under the skin?",
+                options: [
+                    "Condom",
+                    "IUD",
+                    "Implant",
+                    "Diaphragm"
+                ],
+                correct: 2,
+                answer: "The implant is a hormonal device placed under the skin for contraception."
+            },
+            {
+                question: "What is a potential complication of MTP if not performed safely?",
+                options: [
+                    "Improved fertility",
+                    "Infection or hemorrhage",
+                    "Enhanced immunity",
+                    "Weight loss"
+                ],
+                correct: 1,
+                answer: "Unsafe MTP can lead to infection or hemorrhage."
+            },
+            {
+                question: "Which assisted reproductive technology transfers an embryo to the uterus?",
+                options: [
+                    "GIFT",
+                    "ZIFT",
+                    "IVF",
+                    "MTP"
+                ],
+                correct: 2,
+                answer: "IVF often involves transferring an embryo to the uterus."
+            },
+            {
+                question: "What is a key strategy for reproductive health education?",
+                options: [
+                    "Promoting unprotected intercourse",
+                    "Providing accurate information",
+                    "Avoiding vaccinations",
+                    "Ignoring STD symptoms"
+                ],
+                correct: 1,
+                answer: "Providing accurate information is essential for reproductive health education."
+            },
+            {
+                question: "Which of the following is a reversible contraceptive method?",
+                options: [
+                    "Vasectomy",
+                    "Tubectomy",
+                    "IUD",
+                    "MTP"
+                ],
+                correct: 2,
+                answer: "IUDs are reversible, as they can be removed to restore fertility."
+            },
+            {
+                question: "What is the primary benefit of reproductive health programs?",
+                options: [
+                    "Increased population growth",
+                    "Improved maternal and child health",
+                    "Elimination of all diseases",
+                    "Reduced need for contraception"
+                ],
+                correct: 1,
+                answer: "Reproductive health programs improve maternal and child health outcomes."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

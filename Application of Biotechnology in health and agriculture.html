@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications of Biotechnology MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Applications of Biotechnology MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Which organism is commonly used to produce human insulin?",
+                options: [
+                    "Saccharomyces cerevisiae",
+                    "Escherichia coli",
+                    "Bacillus subtilis",
+                    "Aspergillus niger"
+                ],
+                correct: 1,
+                answer: "Escherichia coli is genetically engineered to produce human insulin."
+            },
+            {
+                question: "What is the source of the gene for human insulin production?",
+                options: [
+                    "Human pancreatic cells",
+                    "Yeast cells",
+                    "Bacterial cells",
+                    "Plant cells"
+                ],
+                correct: 0,
+                answer: "The insulin gene is sourced from human pancreatic cells for recombinant production."
+            },
+            {
+                question: "What is the role of a plasmid in insulin production?",
+                options: [
+                    "Cuts DNA",
+                    "Carries the insulin gene",
+                    "Synthesizes protein",
+                    "Sequences DNA"
+                ],
+                correct: 1,
+                answer: "Plasmids carry the insulin gene into host cells for expression."
+            },
+            {
+                question: "Which biotechnology technique is used to produce human insulin?",
+                options: [
+                    "PCR amplification",
+                    "Recombinant DNA technology",
+                    "Hybridoma technology",
+                    "CRISPR editing"
+                ],
+                correct: 1,
+                answer: "Recombinant DNA technology is used to produce human insulin."
+            },
+            {
+                question: "What is the advantage of recombinant human insulin?",
+                options: [
+                    "Causes allergies",
+                    "Identical to human insulin",
+                    "Slower action",
+                    "Less effective"
+                ],
+                correct: 1,
+                answer: "Recombinant human insulin is identical to human insulin, reducing allergic reactions."
+            },
+            {
+                question: "Which microbe is used for hepatitis B vaccine production?",
+                options: [
+                    "Escherichia coli",
+                    "Saccharomyces cerevisiae",
+                    "Lactobacillus",
+                    "Pseudomonas"
+                ],
+                correct: 1,
+                answer: "Saccharomyces cerevisiae is used to produce the hepatitis B vaccine."
+            },
+            {
+                question: "What is the key component of a recombinant vaccine?",
+                options: [
+                    "Live pathogen",
+                    "Antigenic protein",
+                    "Whole virus",
+                    "Bacterial cell"
+                ],
+                correct: 1,
+                answer: "Recombinant vaccines use antigenic proteins to stimulate immunity."
+            },
+            {
+                question: "Which technique is used to produce the HPV vaccine?",
+                options: [
+                    "Attenuation",
+                    "Recombinant DNA technology",
+                    "Inactivation",
+                    "Mutagenesis"
+                ],
+                correct: 1,
+                answer: "Recombinant DNA technology produces the HPV vaccine using viral proteins."
+            },
+            {
+                question: "What is the purpose of vaccine production in biotechnology?",
+                options: [
+                    "Cure diseases",
+                    "Prevent infections",
+                    "Diagnose infections",
+                    "Treat allergies"
+                ],
+                correct: 1,
+                answer: "Vaccines are produced to prevent infections by stimulating immunity."
+            },
+            {
+                question: "Which host is used for producing the insulin protein?",
+                options: [
+                    "Plant cells",
+                    "E. coli",
+                    "Human cells",
+                    "Fungal cells"
+                ],
+                correct: 1,
+                answer: "E. coli is a common host for producing the insulin protein."
+            },
+            {
+                question: "What is gene therapy?",
+                options: [
+                    "Synthesizing proteins",
+                    "Correcting defective genes",
+                    "Cloning organisms",
+                    "Sequencing genomes"
+                ],
+                correct: 1,
+                answer: "Gene therapy corrects defective genes to treat genetic disorders."
+            },
+            {
+                question: "Which vector is commonly used in gene therapy?",
+                options: [
+                    "Plasmid",
+                    "Adenovirus",
+                    "Cosmid",
+                    "BAC"
+                ],
+                correct: 1,
+                answer: "Adenoviruses are commonly used as vectors in gene therapy."
+            },
+            {
+                question: "What is the target of gene therapy for SCID?",
+                options: [
+                    "Immune system",
+                    "Nervous system",
+                    "Digestive system",
+                    "Respiratory system"
+                ],
+                correct: 0,
+                answer: "Gene therapy for SCID targets the immune system to restore function."
+            },
+            {
+                question: "Which disease is treated using gene therapy?",
+                options: [
+                    "Diabetes",
+                    "Cystic fibrosis",
+                    "Hypertension",
+                    "Arthritis"
+                ],
+                correct: 1,
+                answer: "Cystic fibrosis is a target for gene therapy to correct CFTR gene defects."
+            },
+            {
+                question: "What is a challenge in gene therapy?",
+                options: [
+                    "High success rate",
+                    "Immune response to vectors",
+                    "No side effects",
+                    "Easy delivery"
+                ],
+                correct: 1,
+                answer: "Immune responses to viral vectors are a challenge in gene therapy."
+            },
+            {
+                question: "What is a genetically modified organism (GMO)?",
+                options: [
+                    "Naturally mutated organism",
+                    "Organism with altered genes",
+                    "Cloned organism",
+                    "Hybrid organism"
+                ],
+                correct: 1,
+                answer: "A GMO has genes altered through biotechnology for desired traits."
+            },
+            {
+                question: "What is the source of the Bt gene in Bt crops?",
+                options: [
+                    "Escherichia coli",
+                    "Bacillus thuringiensis",
+                    "Saccharomyces cerevisiae",
+                    "Rhizobium"
+                ],
+                correct: 1,
+                answer: "The Bt gene is sourced from Bacillus thuringiensis for pest resistance."
+            },
+            {
+                question: "Which crop is commonly engineered with the Bt gene?",
+                options: [
+                    "Wheat",
+                    "Corn",
+                    "Barley",
+                    "Oats"
+                ],
+                correct: 1,
+                answer: "Corn is commonly engineered with the Bt gene for pest resistance."
+            },
+            {
+                question: "What is the function of the Bt toxin in crops?",
+                options: [
+                    "Enhances growth",
+                    "Kills insect pests",
+                    "Improves flavor",
+                    "Increases yield"
+                ],
+                correct: 1,
+                answer: "Bt toxin kills insect pests, protecting crops from damage."
+            },
+            {
+                question: "Which pest is targeted by Bt crops?",
+                options: [
+                    "Aphids",
+                    "European corn borer",
+                    "Whiteflies",
+                    "Spider mites"
+                ],
+                correct: 1,
+                answer: "Bt crops target pests like the European corn borer."
+            },
+            {
+                question: "What is an advantage of Bt crops?",
+                options: [
+                    "Increased pesticide use",
+                    "Reduced pesticide use",
+                    "Lower yield",
+                    "Higher cost"
+                ],
+                correct: 1,
+                answer: "Bt crops reduce the need for chemical pesticides."
+            },
+            {
+                question: "Which Bt crop is resistant to bollworms?",
+                options: [
+                    "Bt cotton",
+                    "Bt rice",
+                    "Bt wheat",
+                    "Bt potato"
+                ],
+                correct: 0,
+                answer: "Bt cotton is engineered to resist bollworms."
+            },
+            {
+                question: "What is a transgenic animal?",
+                options: [
+                    "Naturally bred animal",
+                    "Animal with foreign genes",
+                    "Cloned animal",
+                    "Mutated animal"
+                ],
+                correct: 1,
+                answer: "A transgenic animal contains foreign genes introduced via biotechnology."
+            },
+            {
+                question: "Which animal is used as a model for transgenic studies?",
+                options: [
+                    "Mouse",
+                    "Elephant",
+                    "Tiger",
+                    "Whale"
+                ],
+                correct: 0,
+                answer: "Mice are commonly used as transgenic models for research."
+            },
+            {
+                question: "What is the purpose of transgenic animals in biotechnology?",
+                options: [
+                    "Food production",
+                    "Disease model studies",
+                    "Pet breeding",
+                    "Wildlife conservation"
+                ],
+                correct: 1,
+                answer: "Transgenic animals are used as disease models for research."
+            },
+            {
+                question: "Which transgenic animal produces human proteins in milk?",
+                options: [
+                    "Transgenic cow",
+                    "Transgenic mouse",
+                    "Transgenic fish",
+                    "Transgenic pig"
+                ],
+                correct: 0,
+                answer: "Transgenic cows produce human proteins, like insulin, in their milk."
+            },
+            {
+                question: "What is an example of a transgenic animal product?",
+                options: [
+                    "Human growth hormone",
+                    "Plant pesticide",
+                    "Bacterial enzyme",
+                    "Viral vaccine"
+                ],
+                correct: 0,
+                answer: "Transgenic animals produce human growth hormone for medical use."
+            },
+            {
+                question: "What is biopiracy in biotechnology?",
+                options: [
+                    "Patenting genes",
+                    "Unauthorized use of bioresources",
+                    "Cloning organisms",
+                    "Producing vaccines"
+                ],
+                correct: 1,
+                answer: "Biopiracy is the unauthorized use of biological resources or knowledge."
+            },
+            {
+                question: "What is an example of biopiracy?",
+                options: [
+                    "Patenting penicillin",
+                    "Exploiting neem without permission",
+                    "Developing Bt crops",
+                    "Producing insulin"
+                ],
+                correct: 1,
+                answer: "Exploiting neem without permission is an example of biopiracy."
+            },
+            {
+                question: "What is a patent in biotechnology?",
+                options: [
+                    "A research paper",
+                    "Legal protection for inventions",
+                    "A genetic sequence",
+                    "A cloning technique"
+                ],
+                correct: 1,
+                answer: "A patent grants legal protection for biotechnological inventions."
+            },
+            {
+                question: "What is a biosafety issue related to GMOs?",
+                options: [
+                    "Improved yield",
+                    "Environmental impact",
+                    "Reduced pesticide use",
+                    "Enhanced nutrition"
+                ],
+                correct: 1,
+                answer: "Environmental impact, like gene flow, is a biosafety issue with GMOs."
+            },
+            {
+                question: "Which organization regulates biosafety for GMOs?",
+                options: [
+                    "WHO",
+                    "GEAC",
+                    "FDA",
+                    "UNESCO"
+                ],
+                correct: 1,
+                answer: "The Genetic Engineering Appraisal Committee (GEAC) regulates GMOs in India."
+            },
+            {
+                question: "What is a health concern with GMOs?",
+                options: [
+                    "Allergenicity",
+                    "Improved nutrition",
+                    "Faster growth",
+                    "Higher yield"
+                ],
+                correct: 0,
+                answer: "Allergenicity is a potential health concern with GMOs."
+            },
+            {
+                question: "Which technique is used to introduce genes in transgenic animals?",
+                options: [
+                    "Microinjection",
+                    "PCR",
+                    "Gel electrophoresis",
+                    "Hybridization"
+                ],
+                correct: 0,
+                answer: "Microinjection introduces foreign genes into animal embryos."
+            },
+            {
+                question: "What is the role of E. coli in insulin production?",
+                options: [
+                    "Synthesizes insulin protein",
+                    "Cuts DNA",
+                    "Amplifies DNA",
+                    "Sequences genes"
+                ],
+                correct: 0,
+                answer: "E. coli synthesizes the insulin protein from the inserted gene."
+            },
+            {
+                question: "Which vaccine is produced using recombinant technology?",
+                options: [
+                    "Polio vaccine",
+                    "Hepatitis B vaccine",
+                    "Smallpox vaccine",
+                    "BCG vaccine"
+                ],
+                correct: 1,
+                answer: "The hepatitis B vaccine is produced using recombinant technology."
+            },
+            {
+                question: "What is the target of gene therapy for hemophilia?",
+                options: [
+                    "Clotting factor genes",
+                    "Insulin genes",
+                    "Growth hormone genes",
+                    "Antibiotic resistance genes"
+                ],
+                correct: 0,
+                answer: "Gene therapy for hemophilia targets clotting factor genes."
+            },
+            {
+                question: "Which Bt crop is resistant to stem borers?",
+                options: [
+                    "Bt rice",
+                    "Bt cotton",
+                    "Bt potato",
+                    "Bt tomato"
+                ],
+                correct: 0,
+                answer: "Bt rice is engineered to resist stem borers."
+            },
+            {
+                question: "What is a benefit of transgenic animals in research?",
+                options: [
+                    "Increased food production",
+                    "Modeling human diseases",
+                    "Enhanced growth rate",
+                    "Reduced lifespan"
+                ],
+                correct: 1,
+                answer: "Transgenic animals model human diseases for research."
+            },
+            {
+                question: "What is a biosafety protocol for GMOs?",
+                options: [
+                    "Cartagena Protocol",
+                    "Kyoto Protocol",
+                    "Paris Agreement",
+                    "Montreal Protocol"
+                ],
+                correct: 0,
+                answer: "The Cartagena Protocol regulates the safe handling of GMOs."
+            },
+            {
+                question: "What is a concern with biopiracy?",
+                options: [
+                    "Fair benefit sharing",
+                    "Increased biodiversity",
+                    "Improved crop yield",
+                    "Enhanced nutrition"
+                ],
+                correct: 0,
+                answer: "Biopiracy raises concerns about fair benefit sharing with indigenous communities."
+            },
+            {
+                question: "Which product is patented in biotechnology?",
+                options: [
+                    "Natural plant",
+                    "Recombinant insulin",
+                    "Wild bacteria",
+                    "Human DNA"
+                ],
+                correct: 1,
+                answer: "Recombinant insulin is a patented biotechnological product."
+            },
+            {
+                question: "What is the role of promoters in insulin production?",
+                options: [
+                    "Cut DNA",
+                    "Initiate transcription",
+                    "Join fragments",
+                    "Amplify DNA"
+                ],
+                correct: 1,
+                answer: "Promoters initiate transcription of the insulin gene in host cells."
+            },
+            {
+                question: "Which cell type is targeted in gene therapy for sickle cell anemia?",
+                options: [
+                    "Red blood cells",
+                    "Nerve cells",
+                    "Liver cells",
+                    "Muscle cells"
+                ],
+                correct: 0,
+                answer: "Gene therapy for sickle cell anemia targets red blood cells."
+            },
+            {
+                question: "What is a limitation of Bt crops?",
+                options: [
+                    "Pest resistance development",
+                    "Increased yield",
+                    "Reduced pesticide use",
+                    "Enhanced nutrition"
+                ],
+                correct: 0,
+                answer: "Pests may develop resistance to Bt toxins over time."
+            },
+            {
+                question: "Which transgenic animal is used for Alzheimer’s research?",
+                options: [
+                    "Transgenic mouse",
+                    "Transgenic cow",
+                    "Transgenic fish",
+                    "Transgenic goat"
+                ],
+                correct: 0,
+                answer: "Transgenic mice are used to study Alzheimer’s disease."
+            },
+            {
+                question: "What is a biosafety measure for GMO crops?",
+                options: [
+                    "Field trials",
+                    "Open cultivation",
+                    "No regulation",
+                    "Cross-breeding"
+                ],
+                correct: 0,
+                answer: "Field trials ensure the safety of GMO crops before commercial release."
+            },
+            {
+                question: "What is the purpose of the insulin gene in E. coli?",
+                options: [
+                    "Antibiotic resistance",
+                    "Protein production",
+                    "DNA replication",
+                    "Cell division"
+                ],
+                correct: 1,
+                answer: "The insulin gene in E. coli enables production of insulin protein."
+            },
+            {
+                question: "Which protein is used in the hepatitis B vaccine?",
+                options: [
+                    "Surface antigen",
+                    "Capsid protein",
+                    "Enzyme protein",
+                    "Structural protein"
+                ],
+                correct: 0,
+                answer: "The hepatitis B surface antigen is used in the recombinant vaccine."
+            },
+            {
+                question: "What is the delivery method for gene therapy?",
+                options: [
+                "Oral administration",
+                "Viral vectors",
+                "Direct injection",
+                "Both B and C"
+                ],
+                correct: 3,
+                answer: "Gene therapy uses viral vectors and direct injection to deliver genes."
+            },
+            {
+                question: "Which Bt crop is resistant to rootworms?",
+                options: [
+                "Bt corn",
+                "Bt cotton",
+                "Bt rice",
+                "Bt soybean"
+                ],
+                correct: 0,
+                answer: "Bt corn is engineered to resist rootworms."
+            },
+            {
+                question: "What is the role of transgenic goats in biotechnology?",
+                options: [
+                "Produce human proteins",
+                "Increase meat yield",
+                "Enhance wool production",
+                "Improve fertility"
+                ],
+                correct: 0,
+                answer: "Transgenic goats produce human proteins, like antithrombin, in milk."
+            },
+            {
+                question: "What is a consequence of biopiracy?",
+                options: [
+                "Loss of indigenous rights",
+                "Increased biodiversity",
+                "Improved crop yield",
+                "Enhanced nutrition"
+                ],
+                correct: 0,
+                answer: "Biopiracy leads to loss of indigenous rights over biological resources."
+            },
+            {
+                question: "Which biotechnology product requires a patent?",
+                options: [
+                "Natural enzyme",
+                "Genetically modified crop",
+                "Wild plant",
+                "Human cell"
+                ],
+                correct: 1,
+                answer: "Genetically modified crops are patented as biotechnological inventions."
+            },
+            {
+                question: "What is a method to produce recombinant vaccines?",
+                options: [
+                "Attenuating pathogens",
+                "Expressing antigens in hosts",
+                "Inactivating viruses",
+                "Mutating bacteria"
+                ],
+                correct: 1,
+                answer: "Recombinant vaccines are produced by expressing antigens in host organisms."
+            },
+            {
+                question: "Which disease is a candidate for gene therapy?",
+                options: [
+                "Leber’s congenital amaurosis",
+                "Common cold",
+                "Hypertension",
+                "Flu"
+                ],
+                correct: 0,
+                answer: "Leber’s congenital amaurosis is treated with gene therapy for vision loss."
+            },
+            {
+                question: "What is a benefit of Bt crops for farmers?",
+                options: [
+                "Increased pesticide costs",
+                "Higher crop protection",
+                "Lower yield",
+                "More labor"
+                ],
+                correct: 1,
+                answer: "Bt crops provide higher crop protection against pests."
+            },
+            {
+                question: "Which transgenic animal is used for cancer research?",
+                options: [
+                "Transgenic mouse",
+                "Transgenic cow",
+                "Transgenic pig",
+                "Transgenic fish"
+                ],
+                correct: 0,
+                answer: "Transgenic mice are used for cancer research as disease models."
+            },
+            {
+                question: "What is a biosafety concern with transgenic animals?",
+                options: [
+                "Gene escape",
+                "Increased fertility",
+                "Improved health",
+                "Enhanced growth"
+                ],
+                correct: 0,
+                answer: "Gene escape into wild populations is a biosafety concern."
+            },
+            {
+                question: "What is the role of yeast in vaccine production?",
+                options: [
+                "Cuts DNA",
+                "Expresses antigenic proteins",
+                "Amplifies DNA",
+                "Joins fragments"
+                ],
+                correct: 1,
+                answer: "Yeast expresses antigenic proteins for recombinant vaccines."
+            },
+            {
+                question: "Which technique is used to create Bt crops?",
+                options: [
+                "Hybridization",
+                "Recombinant DNA technology",
+                "Mutagenesis",
+                "Cross-breeding"
+                ],
+                correct: 1,
+                answer: "Recombinant DNA technology inserts the Bt gene into crops."
+            },
+            {
+                question: "What is a challenge in insulin production?",
+                options: [
+                "High cost",
+                "Easy purification",
+                "No side effects",
+                "Rapid production"
+                ],
+                correct: 0,
+                answer: "High cost of production and purification is a challenge in insulin production."
+            },
+            {
+                question: "Which vector is used for gene therapy in cystic fibrosis?",
+                options: [
+                "Adeno-associated virus",
+                "Plasmid",
+                "Cosmid",
+                "BAC"
+                ],
+                correct: 0,
+                answer: "Adeno-associated viruses are used for gene therapy in cystic fibrosis."
+            },
+            {
+                question: "What is a social issue with GMOs?",
+                options: [
+                "Farmer dependency on companies",
+                "Increased biodiversity",
+                "Reduced pesticide use",
+                "Enhanced nutrition"
+                ],
+                correct: 0,
+                answer: "Farmer dependency on seed companies is a social issue with GMOs."
+            },
+            {
+                question: "What is the purpose of transgenic fish in biotechnology?",
+                options: [
+                "Disease resistance",
+                "Faster growth",
+                "Improved taste",
+                "Reduced size"
+                ],
+                correct: 1,
+                answer: "Transgenic fish are engineered for faster growth rates."
+            },
+            {
+                question: "What is a patent issue in biotechnology?",
+                options: [
+                "Free access to genes",
+                "Monopoly on GMO seeds",
+                "No regulation",
+                "Open-source seeds"
+                ],
+                correct: 1,
+                answer: "Patents create monopolies on GMO seeds, limiting farmer access."
+            },
+            {
+                question: "Which protein is produced by transgenic sheep?",
+                options: [
+                "Human alpha-1-antitrypsin",
+                "Insulin",
+                "Bt toxin",
+                "Hepatitis B antigen"
+                ],
+                correct: 0,
+                answer: "Transgenic sheep produce human alpha-1-antitrypsin in milk."
+            },
+            {
+                question: "What is a biosafety issue with Bt crops?",
+                options: [
+                "Non-target species harm",
+                "Increased yield",
+                "Reduced pesticide use",
+                "Enhanced nutrition"
+                ],
+                correct: 0,
+                answer: "Harm to non-target species is a biosafety issue with Bt crops."
+            },
+            {
+                question: "What is the role of CHO cells in insulin production?",
+                options: [
+                "Cut DNA",
+                "Produce insulin protein",
+                "Amplify DNA",
+                "Sequence genes"
+                ],
+                correct: 1,
+                answer: "Chinese Hamster Ovary (CHO) cells produce insulin protein in bioreactors."
+            },
+            {
+                question: "Which disease is targeted by gene therapy for muscular dystrophy?",
+                options: [
+                "Duchenne muscular dystrophy",
+                "Diabetes",
+                "Hypertension",
+                "Asthma"
+                ],
+                correct: 0,
+                answer: "Gene therapy targets Duchenne muscular dystrophy to correct dystrophin genes."
+            },
+            {
+                question: "What is a benefit of transgenic animals in medicine?",
+                options: [
+                "Organ transplantation",
+                "Increased meat yield",
+                "Enhanced fertility",
+                "Improved wool"
+                ],
+                correct: 0,
+                answer: "Transgenic animals provide organs for transplantation research."
+            },
+            {
+                question: "What is a biopiracy case involving turmeric?",
+                options: [
+                "Patenting healing properties",
+                "Cloning turmeric",
+                "Producing turmeric vaccines",
+                "Cross-breeding turmeric"
+                ],
+                correct: 0,
+                answer: "Patenting turmeric’s healing properties without permission is a biopiracy case."
+            },
+            {
+                question: "What is a regulatory body for biotechnology patents?",
+                options: [
+                "WIPO",
+                "WHO",
+                "FAO",
+                "UNICEF"
+                ],
+                correct: 0,
+                answer: "The World Intellectual Property Organization (WIPO) regulates biotechnology patents."
+            },
+            {
+                question: "What is a method to deliver vaccines produced by biotechnology?",
+                options: [
+                "Oral administration",
+                "Injection",
+                "Inhalation",
+                "All of the above"
+                ],
+                correct: 3,
+                answer: "Biotechnology vaccines can be delivered via injection, oral administration, or inhalation."
+            },
+            {
+                question: "Which Bt crop is resistant to pink bollworm?",
+                options: [
+                "Bt cotton",
+                "Bt corn",
+                "Bt rice",
+                "Bt soybean"
+                ],
+                correct: 0,
+                answer: "Bt cotton is resistant to pink bollworm."
+            },
+            {
+                question: "What is a challenge in gene therapy for cancer?",
+                options: [
+                "Targeting specific cells",
+                "No side effects",
+                "Easy delivery",
+                "High success rate"
+                ],
+                correct: 0,
+                answer: "Targeting specific cancer cells is a challenge in gene therapy."
+            },
+            {
+                question: "What is a transgenic animal used for insulin production?",
+                options: [
+                "Transgenic pig",
+                "Transgenic mouse",
+                "Transgenic fish",
+                "Transgenic sheep"
+                ],
+                correct: 0,
+                answer: "Transgenic pigs are explored for insulin production in biotechnology."
+            },
+            {
+                question: "What is a biosafety concern with gene therapy?",
+                options: [
+                "Unintended gene mutations",
+                "Increased immunity",
+                "No side effects",
+                "Enhanced growth"
+                ],
+                correct: 0,
+                answer: "Unintended gene mutations are a biosafety concern in gene therapy."
+            },
+            {
+                question: "What is the role of agrobacterium in Bt crop production?",
+                options: [
+                "Cuts DNA",
+                "Transfers Bt gene to plants",
+                "Produces Bt toxin",
+                "Sequences DNA"
+                ],
+                correct: 1,
+                answer: "Agrobacterium tumefaciens transfers the Bt gene into plant cells."
+            },
+            {
+                question: "Which vaccine is produced using plant biotechnology?",
+                options: [
+                "Edible hepatitis B vaccine",
+                "Polio vaccine",
+                "Smallpox vaccine",
+                "BCG vaccine"
+                ],
+                correct: 0,
+                answer: "Edible hepatitis B vaccines are developed using plant biotechnology."
+            },
+            {
+                question: "What is a benefit of gene therapy?",
+                options: [
+                "Permanent cure for genetic disorders",
+                "Increased pesticide use",
+                "Reduced nutrition",
+                "Higher cost"
+                ],
+                correct: 0,
+                answer: "Gene therapy offers a potential permanent cure for genetic disorders."
+            },
+            {
+                question: "Which transgenic animal is used for heart disease research?",
+                options: [
+                "Transgenic pig",
+                "Transgenic mouse",
+                "Transgenic cow",
+                "Transgenic fish"
+                ],
+                correct: 0,
+                answer: "Transgenic pigs are used for heart disease research."
+            },
+            {
+                question: "What is a patent controversy in biotechnology?",
+                options: [
+                "Patenting human genes",
+                "Free access to seeds",
+                "No regulation",
+                "Open-source biotech"
+                ],
+                correct: 0,
+                answer: "Patenting human genes raises ethical and legal controversies."
+            },
+            {
+                question: "What is a biosafety issue with transgenic fish?",
+                options: [
+                "Interbreeding with wild species",
+                "Reduced growth",
+                "Improved taste",
+                "Enhanced nutrition"
+                ],
+                correct: 0,
+                answer: "Interbreeding with wild species is a biosafety issue with transgenic fish."
+            },
+            {
+                question: "What is the role of bioreactors in insulin production?",
+                options: [
+                "Cut DNA",
+                "Grow host cells",
+                "Amplify DNA",
+                "Sequence genes"
+                ],
+                correct: 1,
+                answer: "Bioreactors grow host cells for large-scale insulin production."
+            },
+            {
+                question: "Which Bt crop is resistant to Colorado potato beetle?",
+                options: [
+                "Bt potato",
+                "Bt corn",
+                "Bt cotton",
+                "Bt rice"
+                ],
+                correct: 0,
+                answer: "Bt potato is resistant to the Colorado potato beetle."
+            },
+            {
+                question: "What is a method to prevent biopiracy?",
+                options: [
+                "Benefit sharing agreements",
+                "Unregulated access",
+                "No patents",
+                "Open exploitation"
+                ],
+                correct: 0,
+                answer: "Benefit sharing agreements prevent biopiracy by ensuring fair use."
+            },
+            {
+                question: "What is a transgenic animal used for diabetes research?",
+                options: [
+                "Transgenic mouse",
+                "Transgenic cow",
+                "Transgenic fish",
+                "Transgenic goat"
+                ],
+                correct: 0,
+                answer: "Transgenic mice are used for diabetes research."
+            },
+            {
+                question: "What is a biosafety concern with vaccine production?",
+                options: [
+                "Contamination risks",
+                "Increased immunity",
+                "No side effects",
+                "Enhanced production"
+                ],
+                correct: 0,
+                answer: "Contamination risks are a biosafety concern in vaccine production."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

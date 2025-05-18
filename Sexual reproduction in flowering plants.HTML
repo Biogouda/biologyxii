@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botany MCQ Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .quiz-container {
+            background-color: pink;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            max-width: 90%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #e0e0e0;
+        }
+        .correct {
+            background-color: #90ee90;
+        }
+        .answer {
+            margin-top: 20px;
+            font-style: italic;
+            display: none;
+        }
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin-left: auto;
+        }
+        .next-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Botany MCQ Quiz</h1>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="answer" id="answer"></div>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is the primary function of the anther in a flower?",
+                options: [
+                    "Produces pollen grains",
+                    "Attracts pollinators",
+                    "Protects the ovule",
+                    "Supports the stigma"
+                ],
+                correct: 0,
+                answer: "The anther produces pollen grains, which contain the male gametophytes."
+            },
+            {
+                question: "Which structure in the female gametophyte contains the egg cell?",
+                options: [
+                    "Synergids",
+                    "Antipodal cells",
+                    "Embryo sac",
+                    "Central cell"
+                ],
+                correct: 2,
+                answer: "The embryo sac contains the egg cell, which is part of the female gametophyte."
+            },
+            {
+                question: "What type of pollination involves transfer of pollen within the same flower?",
+                options: [
+                    "Cross-pollination",
+                    "Self-pollination",
+                    "Wind pollination",
+                    "Insect pollination"
+                ],
+                correct: 1,
+                answer: "Self-pollination occurs when pollen is transferred within the same flower or plant."
+            },
+            {
+                question: "What is double fertilization in angiosperms?",
+                options: [
+                    "Fusion of two pollen grains with one ovule",
+                    "One sperm fertilizes the egg, another fertilizes the polar nuclei",
+                    "Two pollen tubes enter the ovule",
+                    "Fertilization of two ovules simultaneously"
+                ],
+                correct: 1,
+                answer: "Double fertilization involves one sperm fertilizing the egg to form the zygote and another fertilizing the polar nuclei to form the endosperm."
+            },
+            {
+                question: "What is apomixis in plants?",
+                options: [
+                    "Seed formation without fertilization",
+                    "Fruit development without fertilization",
+                    "Multiple embryo formation",
+                    "Pollen transfer by wind"
+                ],
+                correct: 0,
+                answer: "Apomixis is the formation of seeds without fertilization, resulting in offspring identical to the parent."
+            },
+            {
+                question: "Which part of the flower protects the developing bud?",
+                options: [
+                    "Petals",
+                    "Sepals",
+                    "Stamen",
+                    "Carpel"
+                ],
+                correct: 1,
+                answer: "Sepals form the calyx and protect the flower bud before it blooms."
+            },
+            {
+                question: "What is the male gametophyte in angiosperms?",
+                options: [
+                    "Pollen grain",
+                    "Anther",
+                    "Ovule",
+                    "Stigma"
+                ],
+                correct: 0,
+                answer: "The pollen grain is the male gametophyte, containing the male gametes."
+            },
+            {
+                question: "Which cells in the embryo sac guide the pollen tube?",
+                options: [
+                    "Antipodal cells",
+                    "Synergids",
+                    "Polar nuclei",
+                    "Egg cell"
+                ],
+                correct: 1,
+                answer: "Synergids produce signals to guide the pollen tube to the embryo sac."
+            },
+            {
+                question: "What is an example of an outbreeding device in plants?",
+                options: [
+                    "Self-pollination",
+                    "Dioecy",
+                    "Cleistogamy",
+                    "Homogamy"
+                ],
+                correct: 1,
+                answer: "Dioecy, where male and female flowers are on separate plants, promotes outbreeding."
+            },
+            {
+                question: "Which process ensures pollen compatibility with the pistil?",
+                options: [
+                    "Pollen-pistil interaction",
+                    "Double fertilization",
+                    "Embryo development",
+                    "Endosperm formation"
+                ],
+                correct: 0,
+                answer: "Pollen-pistil interaction determines whether pollen can germinate and fertilize the ovule."
+            },
+            {
+                question: "What is the primary role of the endosperm in a seed?",
+                options: [
+                    "Protects the embryo",
+                    "Provides nutrition to the embryo",
+                    "Forms the seed coat",
+                    "Develops into the fruit"
+                ],
+                correct: 1,
+                answer: "The endosperm provides nutrients to the developing embryo."
+            },
+            {
+                question: "Which type of pollination is facilitated by bees?",
+                options: [
+                    "Anemophily",
+                    "Hydrophily",
+                    "Entomophily",
+                    "Chiropterophily"
+                ],
+                correct: 2,
+                answer: "Entomophily is pollination by insects, such as bees."
+            },
+            {
+                question: "What is the result of the fusion of polar nuclei with a sperm cell?",
+                options: [
+                    "Zygote",
+                    "Endosperm",
+                    "Embryo",
+                    "Seed coat"
+                ],
+                correct: 1,
+                answer: "The fusion of polar nuclei with a sperm cell forms the triploid endosperm."
+            },
+            {
+                question: "Which floral structure receives pollen during pollination?",
+                options: [
+                    "Stigma",
+                    "Style",
+                    "Ovary",
+                    "Filament"
+                ],
+                correct: 0,
+                answer: "The stigma is the receptive surface for pollen grains."
+            },
+            {
+                question: "What is parthenocarpy in plants?",
+                options: [
+                    "Seed formation without fertilization",
+                    "Fruit development without fertilization",
+                    "Multiple embryos in one seed",
+                    "Pollen germination on stigma"
+                ],
+                correct: 1,
+                answer: "Parthenocarpy is the development of fruit without prior fertilization."
+            },
+            {
+                question: "Which of the following is a characteristic of wind-pollinated flowers?",
+                options: [
+                    "Brightly colored petals",
+                    "Large, feathery stigmas",
+                    "Strong fragrance",
+                    "Nectar production"
+                ],
+                correct: 1,
+                answer: "Wind-pollinated flowers have large, feathery stigmas to capture pollen."
+            },
+            {
+                question: "What is the role of the tapetum in anther development?",
+                options: [
+                    "Produces pollen",
+                    "Nourishes developing pollen grains",
+                    "Forms the pollen tube",
+                    "Protects the anther"
+                ],
+                correct: 1,
+                answer: "The tapetum provides nutrients to developing pollen grains."
+            },
+            {
+                question: "Which structure connects the stigma to the ovary?",
+                options: [
+                    "Filament",
+                    "Style",
+                    "Anther",
+                    "Ovule"
+                ],
+                correct: 1,
+                answer: "The style connects the stigma to the ovary, allowing pollen tubes to grow."
+            },
+            {
+                question: "What is polyembryony in plants?",
+                options: [
+                    "Multiple fruits from one flower",
+                    "Multiple embryos in one seed",
+                    "Multiple pollen tubes",
+                    "Multiple ovules in one ovary"
+                ],
+                correct: 1,
+                answer: "Polyembryony is the formation of multiple embryos within a single seed."
+            },
+            {
+                question: "Which of the following promotes cross-pollination?",
+                options: [
+                    "Cleistogamy",
+                    "Herkogamy",
+                    "Geitonogamy",
+                    "Autogamy"
+                ],
+                correct: 1,
+                answer: "Herkogamy, the spatial separation of anthers and stigmas, promotes cross-pollination."
+            },
+            {
+                question: "What is the significance of seed formation in plants?",
+                options: [
+                    "Attracts pollinators",
+                    "Ensures dispersal and survival of offspring",
+                    "Protects the flower",
+                    "Produces fruit"
+                ],
+                correct: 1,
+                answer: "Seed formation ensures dispersal and survival of the next generation."
+            },
+            {
+                question: "Which cells in the pollen grain divide to form sperm cells?",
+                options: [
+                    "Tube cell",
+                    "Generative cell",
+                    "Vegetative cell",
+                    "Microspore mother cell"
+                ],
+                correct: 1,
+                answer: "The generative cell divides to form two sperm cells."
+            },
+            {
+                question: "What is the primary function of the ovary in a flower?",
+                options: [
+                    "Produces pollen",
+                    "Receives pollen",
+                    "Contains ovules",
+                    "Attracts pollinators"
+                ],
+                correct: 2,
+                answer: "The ovary contains ovules, which develop into seeds after fertilization."
+            },
+            {
+                question: "Which type of pollination occurs in water lilies?",
+                options: [
+                    "Anemophily",
+                    "Hydrophily",
+                    "Entomophily",
+                    "Ornithophily"
+                ],
+                correct: 2,
+                answer: "Entomophily, as water lilies are pollinated by insects like beetles."
+            },
+            {
+                question: "What is the role of the integuments in the ovule?",
+                options: [
+                    "Produce the egg cell",
+                    "Form the seed coat",
+                    "Guide the pollen tube",
+                    "Nourish the embryo"
+                ],
+                correct: 1,
+                answer: "Integuments surround the ovule and develop into the seed coat."
+            },
+            {
+                question: "Which of the following is an example of an outbreeding device?",
+                options: [
+                    "Self-incompatibility",
+                    "Cleistogamy",
+                    "Homogamy",
+                    "Geitonogamy"
+                ],
+                correct: 0,
+                answer: "Self-incompatibility prevents self-pollination, promoting outbreeding."
+            },
+            {
+                question: "What is the primary source of energy for the developing embryo?",
+                options: [
+                    "Seed coat",
+                    "Endosperm",
+                    "Cotyledons",
+                    "Pericarp"
+                ],
+                correct: 1,
+                answer: "The endosperm provides energy and nutrients to the developing embryo."
+            },
+            {
+                question: "Which structure in the pollen grain forms the pollen tube?",
+                options: [
+                    "Generative cell",
+                    "Tube cell",
+                    "Sperm cell",
+                    "Microspore"
+                ],
+                correct: 1,
+                answer: "The tube cell forms the pollen tube to deliver sperm to the ovule."
+            },
+            {
+                question: "What is the significance of fruit formation in plants?",
+                options: [
+                    "Protects the flower",
+                    "Aids in seed dispersal",
+                    "Produces pollen",
+                    "Forms the embryo"
+                ],
+                correct: 1,
+                answer: "Fruit formation aids in seed dispersal by various mechanisms."
+            },
+            {
+                question: "Which of the following is a characteristic of insect-pollinated flowers?",
+                options: [
+                    "Small, inconspicuous petals",
+                    "Large amounts of pollen",
+                    "Bright colors and nectar",
+                    "Feathery stigmas"
+                ],
+                correct: 2,
+                answer: "Insect-pollinated flowers have bright colors and nectar to attract pollinators."
+            },
+            {
+                question: "What is the role of the micropyle in the ovule?",
+                options: [
+                    "Produces the egg",
+                    "Allows entry of the pollen tube",
+                    "Forms the seed coat",
+                    "Nourishes the embryo"
+                ],
+                correct: 1,
+                answer: "The micropyle is an opening that allows the pollen tube to enter the ovule."
+            },
+            {
+                question: "Which process follows double fertilization in angiosperms?",
+                options: [
+                    "Pollen germination",
+                    "Embryo and endosperm development",
+                    "Pollen tube growth",
+                    "Ovule formation"
+                ],
+                correct: 1,
+                answer: "Double fertilization leads to the development of the embryo and endosperm."
+            },
+            {
+                question: "What is the term for flowers that remain closed to ensure self-pollination?",
+                options: [
+                    "Chasmogamous",
+                    "Cleistogamous",
+                    "Dioecious",
+                    "Monoecious"
+                ],
+                correct: 1,
+                answer: "Cleistogamous flowers remain closed to ensure self-pollination."
+            },
+            {
+                question: "Which of the following is an example of parthenocarpy?",
+                options: [
+                    "Seedless grapes",
+                    "Mango with multiple seeds",
+                    "Citrus with multiple embryos",
+                    "Wheat with endosperm"
+                ],
+                correct: 0,
+                answer: "Seedless grapes are an example of parthenocarpy, fruit without fertilization."
+            },
+            {
+                question: "What is the function of the cotyledons in a seed?",
+                options: [
+                    "Protect the seed",
+                    "Store food for the embryo",
+                    "Form the fruit",
+                    "Guide the pollen tube"
+                ],
+                correct: 1,
+                answer: "Cotyledons store food for the embryo during germination."
+            },
+            {
+                question: "Which type of pollination is common in grasses?",
+                options: [
+                    "Entomophily",
+                    "Anemophily",
+                    "Hydrophily",
+                    "Chiropterophily"
+                ],
+                correct: 1,
+                answer: "Anemophily, or wind pollination, is common in grasses."
+            },
+            {
+                question: "What is the role of the polar nuclei in the embryo sac?",
+                options: [
+                    "Form the egg cell",
+                    "Guide the pollen tube",
+                    "Form the endosperm",
+                    "Protect the ovule"
+                ],
+                correct: 2,
+                answer: "The polar nuclei fuse with a sperm cell to form the endosperm."
+            },
+            {
+                question: "Which of the following is a post-fertilization event?",
+                options: [
+                    "Pollen germination",
+                    "Development of the seed coat",
+                    "Pollen tube growth",
+                    "Ovule formation"
+                ],
+                correct: 1,
+                answer: "Development of the seed coat occurs after fertilization."
+            },
+            {
+                question: "What is the term for plants with both male and female flowers on the same plant?",
+                options: [
+                    "Dioecious",
+                    "Monoecious",
+                    "Cleistogamous",
+                    "Chasmogamous"
+                ],
+                correct: 1,
+                answer: "Monoecious plants have both male and female flowers on the same plant."
+            },
+            {
+                question: "Which structure in the seed protects the embryo from mechanical damage?",
+                options: [
+                    "Endosperm",
+                    "Seed coat",
+                    "Cotyledons",
+                    "Pericarp"
+                ],
+                correct: 1,
+                answer: "The seed coat protects the embryo from mechanical damage and desiccation."
+            },
+            {
+                question: "What is the primary pollinator for flowers with a strong nocturnal fragrance?",
+                options: [
+                    "Bees",
+                    "Birds",
+                    "Bats",
+                    "Wind"
+                ],
+                correct: 2,
+                answer: "Bats are the primary pollinators for flowers with strong nocturnal fragrance."
+            },
+            {
+                question: "Which of the following is an example of polyembryony?",
+                options: [
+                    "Seedless watermelon",
+                    "Citrus with multiple embryos",
+                    "Banana without seeds",
+                    "Wheat with single embryo"
+                ],
+                correct: 1,
+                answer: "Citrus fruits often exhibit polyembryony, with multiple embryos in one seed."
+            },
+            {
+                question: "What is the role of the pericarp in a fruit?",
+                options: [
+                    "Protects the seed",
+                    "Forms the embryo",
+                    "Produces pollen",
+                    "Guides the pollen tube"
+                ],
+                correct: 0,
+                answer: "The pericarp, the fruit wall, protects the seeds and aids in dispersal."
+            },
+            {
+                question: "Which of the following prevents self-pollination in some plants?",
+                options: [
+                    "Homogamy",
+                    "Dichogamy",
+                    "Cleistogamy",
+                    "Geitonogamy"
+                ],
+                correct: 1,
+                answer: "Dichogamy, the temporal separation of anther and stigma maturity, prevents self-pollination."
+            },
+            {
+                question: "What is the primary function of the pollen tube?",
+                options: [
+                    "Produce pollen",
+                    "Deliver sperm to the ovule",
+                    "Protect the ovule",
+                    "Attract pollinators"
+                ],
+                correct: 1,
+                answer: "The pollen tube delivers sperm cells to the ovule for fertilization."
+            },
+            {
+                question: "Which structure in the flower develops into the fruit?",
+                options: [
+                    "Stigma",
+                    "Ovary",
+                    "Anther",
+                    "Sepal"
+                ],
+                correct: 1,
+                answer: "The ovary develops into the fruit after fertilization."
+            },
+            {
+                question: "What is the significance of the embryo in a seed?",
+                options: [
+                    "Stores nutrients",
+                    "Protects the seed",
+                    "Develops into the new plant",
+                    "Forms the fruit"
+                ],
+                correct: 2,
+                answer: "The embryo develops into the new plant during germination."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerText = `Q${currentQuestion + 1}: ${q.question}`;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((option, index) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                optionEl.innerText = option;
+                optionEl.onclick = () => selectOption(index, q.correct);
+                optionsDiv.appendChild(optionEl);
+            });
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function selectOption(selected, correct) {
+            const options = document.querySelectorAll('.option');
+            options[correct].classList.add('correct');
+            document.getElementById('answer').innerText = questions[currentQuestion].answer;
+            document.getElementById('answer').style.display = 'block';
+            options.forEach(option => option.onclick = null); // Disable further clicks
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            loadQuestion();
+        }
+
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>
